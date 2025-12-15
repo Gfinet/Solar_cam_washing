@@ -3,7 +3,7 @@
 const express = require('express')
 
 const app = express()
-const port = 4243
+const port = 9000
 
 i = 0
 msg = ""
@@ -13,7 +13,8 @@ while (i < 10)
     i++;
 }
 
-app.get('/', (req, res) => res.send(msg))
+app.get('/', (req, res) => {res.send(res)})
+console.log(res)
 
 app.listen(port, () => console.log('Notre app demarre sur http://localhost:',port))
 

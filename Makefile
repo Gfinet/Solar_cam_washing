@@ -1,23 +1,23 @@
-ALL: Transcendance
+ALL: transcendance
 
-Transcendance:
+transcendance:
 	# mkdir -p ~/data
 	# mkdir -p ~/data/mariadb
 	# mkdir -p ~/data/wordpress
-	sudo docker build -t base:bullseye srcs/requirements/base
-	sudo docker-compose -f srcs/docker-compose.yml -p Transcendance up --build
+	docker build -t base:bullseye gears/base
+	docker-compose -f docker-compose.yml -p transcendance up --build
 
 
 clean:
-	sudo docker-compose -f srcs/docker-compose.yml -p Transcendance down -v
-	sudo docker images -q | xargs -r sudo docker rmi -f
+	docker-compose -f docker-compose.yml -p transcendance down -v
+	docker images -q | xargs -r docker rmi -f
 
-	#sudo docker image rmi -f $(docker images -q)
+	#docker image rmi -f $(docker images -q)
 
 fclean:	clean
-	sudo rm -rf ~/data
+	rm -rf ~/data
 	
-re: fclean Transcendance
+re: fclean transcendance
 
 
 

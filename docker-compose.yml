@@ -10,9 +10,11 @@ services:
         networks:
             - transcendance
         ports:
-            - 4243:4243
-            - 8080:8080
+            - 4243:443
+            - 8080:80
         restart: on-failure
+        depends_on:
+            - webapp
 
     webapp:
         build: 
@@ -22,8 +24,10 @@ services:
         image:  webapp
         networks:
             - transcendance
+        # ports:
+        #     - 9000:9000
         expose:
-            - "9000" 
+            - "9000"
         # volumes:
         #     - webapp:/var/www/webapp
         restart: on-failure
