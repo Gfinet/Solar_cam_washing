@@ -1,8 +1,10 @@
 # FROM base:bullseye
-FROM node:lts-bullseye-slim
+FROM node:lts-bullseye
 
 # RUN apt install -y nodejs
 # RUN apt install -y npm
+
+RUN apt install -y python3
 
 COPY ./src/ /usr/local/src
 WORKDIR /usr/local/src
