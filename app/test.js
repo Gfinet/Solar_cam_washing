@@ -22,6 +22,20 @@ app.use(express.static(staticPath));
 app.get('/', (req, res) => {
     res.sendFile(path.join(staticPath, 'index.html'));
 });
+
+const { exec } = require('child_process');
+const pat1 = path.join('python3 ', staticPath);
+const pat = path.join(pat1, 'cgi/puissance4.py');
+
+app.get('/cgi', (req, res) => {
+    exec(pat, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Erreur d'exécution: ${error.message}`);
+            return res.status(500).send(stderr || 'Erreur interne');
+        }
+        res.send(stdout);
+    });
+});
 // console.log(res)
 
 app.listen(port, () => console.log('Notre app demarre sur http://localhost:',port))
