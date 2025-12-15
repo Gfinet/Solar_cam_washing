@@ -1,19 +1,13 @@
-FROM base:bullseye
+# FROM base:bullseye
+FROM node:lts-bullseye-slim
 
-# FROM debian:bullseye-slim
-
-# RUN apt update -y
-# RUN apt upgrade -y
-
-RUN apt install -y nodejs
-RUN apt install -y npm
-# RUN npm install
-# RUN apt install -y
-# RUN apt install -y
+# RUN apt install -y nodejs
+# RUN apt install -y npm
 
 COPY ./src/ /usr/local/src
 WORKDIR /usr/local/src
 
+RUN npm install
 RUN npm install express --save
 # RUN npm install --save-dev nodemon
 

@@ -1,10 +1,5 @@
 FROM base:bullseye
 
-# FROM debian:bullseye-slim
-
-# RUN apt update -y
-# RUN apt upgrade -y
-
 RUN apt install -y nginx
 RUN apt install openssl -y
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
