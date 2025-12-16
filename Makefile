@@ -25,7 +25,7 @@ re: fclean transcendance
 
 add:
 	git add app/ gears/ docker-compose.yml Makefile README.md
-	git commit -m $(MSG)
 	git status
+	git commit -m $(MSG)
 
 .PHONY: all clean re add
