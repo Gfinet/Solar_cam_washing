@@ -1,10 +1,19 @@
 version: "3.7"
 
 services:
+
+    # base:
+    #     build:
+    #         context: gears/base/.
+    #         dockerfile: Dockerfile
+    #     image: base:bullseye
+
     nginx:
         build:
             context: gears/nginx/.
             dockerfile: Dockerfile
+            additional_contexts:
+                base_image: gears/base
         container_name: nginx_t
         image: nginx_t:0.0.1 
         networks:
@@ -15,6 +24,7 @@ services:
         restart: on-failure
         depends_on:
             - webapp
+        
 
     webapp:
         build: 
@@ -24,21 +34,9 @@ services:
         image:  webapp
         networks:
             - transcendance
-        # ports:
-        #     - 9000:9000
         expose:
             - "9000"
-        # volumes:
-        #     - webapp:/var/www/webapp
         restart: on-failure
-
-# volumes:
-#     webapp:
-#         driver: local
-#         driver_opts:
-#             type: 'none'
-#             o: 'bind'
-#             device: '/home/gfinet/Desktop/transcendance/gears/webapp/'
 
 networks:
     transcendance:
