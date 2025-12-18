@@ -4,7 +4,8 @@
   "description": "Transcendence",
   "main": "test.js",
   "scripts": {
-    "start": "node test.js"
+    "start": "node test.js",
+    "dev":  "nodemon test.js"
   },
   "author": "Gfinet",
   "license": "ISC",

@@ -97,6 +97,7 @@ app.post('/cgi:scriptName', (req, res) => {
     const pythonProcess = spawn('python3', [fullPath], { env });
     stdout = '';
     stderr = '';
+    console.log(postData)
     pythonProcess.stdin.write(postData);
     pythonProcess.stdin.end();
     pythonProcess.stdout.on('data', (data) => stdout += data);
@@ -138,7 +139,7 @@ app.post('/cgi:scriptName', (req, res) => {
         });
         // 2. Si le script n'a pas mis de ligne vide, stdout contient peut-être tout
         if (!headerEnded) htmlContent = stdout;
-        // console.log(htmlContent);
+        console.log(stdout);
         res.send(htmlContent);
     });
 });

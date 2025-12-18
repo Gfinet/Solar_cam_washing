@@ -2,11 +2,11 @@ version: "3.7"
 
 services:
 
-    # base:
-    #     build:
-    #         context: gears/base/.
-    #         dockerfile: Dockerfile
-    #     image: base:bullseye
+    base:
+        build:
+            context: gears/base/.
+            dockerfile: Dockerfile
+        image: base:bullseye
 
     nginx:
         build:
@@ -23,6 +23,7 @@ services:
             - 8080:80
         restart: on-failure
         depends_on:
+            - base
             - webapp
         
 
@@ -32,6 +33,9 @@ services:
             dockerfile: Dockerfile
         container_name: webapp
         image:  webapp
+        volumes:
+            - ./gears/webapp/src:/usr/local/src
+            - /usr/local/src/node_modules
         networks:
             - transcendance
         expose:
@@ -41,3 +45,11 @@ services:
 networks:
     transcendance:
         driver: bridge
+
+# volumes:
+#     webapp:
+#         driver: local
+#         driver_opts:
+#             type: none
+#             o: 'bind'
+#             device: './gears/webapp/src'
