@@ -1,19 +1,19 @@
-version: "3.7"
+# version: "3.7"
 
 services:
 
-    base:
-        build:
-            context: gears/base/.
-            dockerfile: Dockerfile
-        image: base:bullseye
+    # base:
+    #     build:
+    #         context: gears/base/.
+    #         dockerfile: Dockerfile
+    #     image: base:bullseye
 
     nginx:
         build:
             context: gears/nginx/.
             dockerfile: Dockerfile
-            additional_contexts:
-                base_image: gears/base
+            # additional_contexts:
+            #     base_image: gears/base
         container_name: nginx_t
         image: nginx_t:0.0.1 
         networks:
@@ -23,7 +23,7 @@ services:
             - 8080:80
         restart: on-failure
         depends_on:
-            - base
+            # - base
             - webapp
         
 
@@ -39,7 +39,7 @@ services:
         networks:
             - transcendance
         expose:
-            - "9000"
+            - "3000"
         restart: on-failure
 
 networks:
