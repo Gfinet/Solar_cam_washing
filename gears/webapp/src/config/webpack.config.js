@@ -1,0 +1,152 @@
+const path = require("path");
+
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+//const DotenvPlugin = require('dotenv-webpack')
+const HTMLWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+//const { DefinePlugin } = require('webpack')
+
+function getPath(file) {
+	return path.resolve(__dirname, "..", file);
+}
+
+module.exports = function (env, argv) {
+	/** @type {import("webpack-cli").WebpackConfiguration} */
+	const config = {
+		devtool: process.env.mode === "production" ? "hidden-source-map" : "source-map",
+		entry: {
+			main: getPath("frontend/src/main.js"),
+		},
+		output: {
+			path: getPath("frontend/dist/app"),
+			publicPath: "/app/",
+			assetModuleFilename: "./assets/[hash][ext][query]",
+			filename: "[name].[contenthash].js",
+			clean: true,
+		},
+		module: {
+			rules: [
+				{
+					test: /\.js$/,
+					exclude: /node_modules/,
+					use: {
+						loader: "babel-loader",
+					},
+				},
+				{
+					test: /\.vue$/,
+					loader: "vue-loader",
+				},
+				{
+					test: /\.css$/i,
+					include: getPath("frontend/src"),
+					use: [
+						{
+							loader: MiniCssExtractPlugin.loader,
+							options: {},
+						},
+						{
+							loader: "css-loader",
+							options: { importLoaders: 1 },
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								postcssOptions: {
+									config: path.resolve(__dirname, "postcss.config.js"),
+								},
+							},
+						},
+					],
+				},
+				{
+					test: /\.css$/i,
+					exclude: getPath("frontend/src"),
+					use: [
+						{
+							loader: "style-loader",
+							options: {},
+						},
+						{
+							loader: "css-loader",
+							options: { importLoaders: 1 },
+						},
+					],
+				},
+				{
+					test: /\.scss$/,
+					use: [
+						"style-loader",
+						{
+							loader: "css-loader",
+							options: { import: true, url: true },
+						},
+						{
+							loader: "sass-loader",
+							options: {
+								additionalData:
+									'@import "@/ui-components/stylesheets/ff-colors.scss";@import "@/ui-components/stylesheets/ff-utility.scss";',
+							},
+						},
+					],
+				},
+				{
+					test: /\.(png|jpe?g|gif|webm|mp4|svg)$/,
+					type: "asset",
+				},
+			],
+		},
+		plugins: [
+			new VueLoaderPlugin(),
+			new CleanWebpackPlugin(),
+			new HTMLWebpackPlugin({
+				title: "Transcendence",
+				template: getPath("frontend/src/index.html"),
+				favicon: getPath("frontend/public/favicon.ico"),
+				filename: getPath("frontend/dist/index.html"),
+				chunks: ["main"],
+			}),
+			new MiniCssExtractPlugin({
+				filename: "[name].[contenthash].css",
+			}),
+			new CopyPlugin({
+				patterns: [{ from: getPath("frontend/public"), to: ".." }],
+				options: {
+					concurrency: 100,
+				},
+			}),
+		],
+		optimization: {
+			moduleIds: "deterministic",
+			runtimeChunk: "single",
+			splitChunks: {
+				cacheGroups: {
+					vendor: {
+						test: /[\\/]node_modules[\\/]/,
+						name: "vendors",
+						priority: -10,
+						chunks: "initial",
+					},
+					async: {
+						test: /[\\/]node_modules[\\/]/,
+						name: "async-vendors",
+						priority: -10,
+						chunks: "async",
+					},
+				},
+			},
+		},
+		resolve: {
+			alias: {
+				// Use vue with the runtime compiler (needed for template strings)
+				// To-do: Remove use of template strings, https://github.com/FlowFuse/flowfuse/issues/3290
+				vue: "vue/dist/vue.esm-bundler.js",
+				"@": path.resolve("frontend/src"),
+			},
+		},
+	};
+
+	return config;
+};

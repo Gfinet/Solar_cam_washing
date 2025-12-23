@@ -5,9 +5,9 @@ MSG="default msg"
 ALL: transcendance
 
 transcendance:
-	# mkdir -p ~/data
-	# mkdir -p ~/data/mariadb
-	# mkdir -p ~/data/wordpress
+# 	mkdir -p ~/data
+# 	mkdir -p ~/data/mariadb
+# 	mkdir -p ~/data/wordpress
 # 	docker build -t base:bullseye gears/base
 	docker-compose -f docker-compose.yml -p transcendance up --build
 
