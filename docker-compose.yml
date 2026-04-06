@@ -1,4 +1,4 @@
-# version: "3.7"
+version: "3.7"
 
 services:
 
@@ -12,8 +12,8 @@ services:
         build:
             context: gears/nginx/.
             dockerfile: Dockerfile
-            # additional_contexts:
-            #     base_image: gears/base
+            additional_contexts:
+                base_image: gears/base
         container_name: nginx_t
         image: nginx_t:0.0.1 
         networks:
@@ -23,7 +23,6 @@ services:
             - 8080:80
         restart: on-failure
         depends_on:
-            # - base
             - webapp
         
 
@@ -33,23 +32,12 @@ services:
             dockerfile: Dockerfile
         container_name: webapp
         image:  webapp
-        volumes:
-            - ./gears/webapp/src:/usr/local/src
-            - /usr/local/src/node_modules
         networks:
             - transcendance
         expose:
-            - "3000"
+            - "9000"
         restart: on-failure
 
 networks:
     transcendance:
         driver: bridge
-
-# volumes:
-#     webapp:
-#         driver: local
-#         driver_opts:
-#             type: none
-#             o: 'bind'
-#             device: './gears/webapp/src'
