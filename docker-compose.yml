@@ -6,15 +6,13 @@ services:
         build:
             context: gears/nginx/.
             dockerfile: Dockerfile
-            additional_contexts:
-                base_image: gears/base
         container_name: nginx_t
         image: nginx_t:0.0.1 
         networks:
             - transcendance
         ports:
-            - 4243:443
             - 8080:80
+            - 3000:3000
         restart: on-failure
         depends_on:
             - webapp
@@ -25,43 +23,44 @@ services:
             dockerfile: Dockerfile
         container_name: webapp
         volumes:
-            - ./webapp:/data
-            - /data/etc
+            - ./gears/webapp:/data
             - /data/node_modules
+        environment:
+            - APP_MODE=${APP_MODE}
         image:  webapp
-        networks:
-            - transcendance
-        expose:
-            - "5000"
-        restart: on-failure
-
-    frontend:
-        build: 
-            context : gears/frontend/.
-            dockerfile: Dockerfile
-        container_name: frontend
-        volumes:
-            - ./frontend/src:/data
-        image:  frontend
         networks:
             - transcendance
         expose:
             - "3000"
         restart: on-failure
 
-    DB:
-        build: 
-            context : gears/DB/.
-            dockerfile: Dockerfile
-        container_name: DB
-        volumes:
-            - ./DB/src:/data
-        image:  DB
-        networks:
-            - transcendance
-        expose:
-            - "9000"
-        restart: on-failure
+    # frontend:
+    #     build: 
+    #         context : gears/frontend/.
+    #         dockerfile: Dockerfile
+    #     container_name: frontend
+    #     volumes:
+    #         - ./frontend/src:/data
+    #     image:  frontend
+    #     networks:
+    #         - transcendance
+    #     expose:
+    #         - "5000"
+    #     restart: on-failure
+
+    # db:
+    #     build: 
+    #         context : gears/db/.
+    #         dockerfile: Dockerfile
+    #     container_name: db
+    #     volumes:
+    #         - ./db/src:/data
+    #     image:  db
+    #     networks:
+    #         - transcendance
+    #     expose:
+    #         - "9000"
+    #     restart: on-failure
 
 networks:
     transcendance:

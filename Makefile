@@ -5,7 +5,7 @@ MSG="default msg"
 ALL: transcendance
 
 transcendance:
-	docker-compose -f docker-compose.yml -p transcendance up --build
+	APP_MODE="prod" docker-compose -f docker-compose.yml -p transcendence up --build
 
 
 clean:
@@ -14,8 +14,10 @@ clean:
 
 	#docker image rmi -f $(docker images -q)
 
+dev:
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p transcendence up --build
+
 fclean:	clean
-	rm -rf ~/data
 	
 re: fclean transcendance
 
