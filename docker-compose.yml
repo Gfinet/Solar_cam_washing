@@ -2,12 +2,6 @@ version: "3.7"
 
 services:
 
-    # base:
-    #     build:
-    #         context: gears/base/.
-    #         dockerfile: Dockerfile
-    #     image: base:bullseye
-
     nginx:
         build:
             context: gears/nginx/.
@@ -24,14 +18,45 @@ services:
         restart: on-failure
         depends_on:
             - webapp
-        
 
     webapp:
         build: 
             context : gears/webapp/.
             dockerfile: Dockerfile
         container_name: webapp
+        volumes:
+            - ./webapp:/data
+            - /data/etc
+            - /data/node_modules
         image:  webapp
+        networks:
+            - transcendance
+        expose:
+            - "5000"
+        restart: on-failure
+
+    frontend:
+        build: 
+            context : gears/frontend/.
+            dockerfile: Dockerfile
+        container_name: frontend
+        volumes:
+            - ./frontend/src:/data
+        image:  frontend
+        networks:
+            - transcendance
+        expose:
+            - "3000"
+        restart: on-failure
+
+    DB:
+        build: 
+            context : gears/DB/.
+            dockerfile: Dockerfile
+        container_name: DB
+        volumes:
+            - ./DB/src:/data
+        image:  DB
         networks:
             - transcendance
         expose:

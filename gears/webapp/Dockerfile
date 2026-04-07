@@ -1,16 +1,13 @@
-# FROM base:bullseye
-FROM node:lts-bullseye
-
-# RUN apt install -y nodejs
-# RUN apt install -y npm
+FROM node:20-slim
 
 RUN apt install -y python3
 
-COPY ./src/ /usr/local/src
+COPY ./backend/ /usr/local/src
 WORKDIR /usr/local/src
 
-RUN npm install
-RUN npm install express --save
-# RUN npm install --save-dev nodemon
+EXPOSE 5000
 
-ENTRYPOINT ["bash", "-c", "npm run start"]
+COPY launch.sh /launch.sh
+RUN chmod +x /launch.sh
+
+ENTRYPOINT ["bash", "-c", "/launch.sh"]
