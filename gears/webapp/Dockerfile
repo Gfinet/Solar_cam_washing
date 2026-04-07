@@ -1,9 +1,9 @@
 FROM node:20-slim
 
-RUN apt install -y python3
+# RUN apt install -y python3
 
-COPY ./backend/ /usr/local/src
-WORKDIR /usr/local/src
+COPY ./ /data
+WORKDIR /data
 
 EXPOSE 5000
 
