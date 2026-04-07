@@ -5,10 +5,6 @@ MSG="default msg"
 ALL: transcendance
 
 transcendance:
-	# mkdir -p ~/data
-	# mkdir -p ~/data/mariadb
-	# mkdir -p ~/data/wordpress
-# 	docker build -t base:bullseye gears/base
 	docker-compose -f docker-compose.yml -p transcendance up --build
 
 
@@ -24,8 +20,8 @@ fclean:	clean
 re: fclean transcendance
 
 add:
-	git add app/ gears/ docker-compose.yml Makefile README.md
+	git add gears/ docker-compose.yml Makefile README.md
 	git status
-	git commit -m $(MSG)
+	git commit -m "$(MSG)"
 
 .PHONY: all clean re add
