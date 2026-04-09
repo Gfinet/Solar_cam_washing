@@ -2,3 +2,4 @@
 .vscode/
 gears/backend/package-lock.json
 gears/backend/src/package-lock.json
+gears/backend/node_modules

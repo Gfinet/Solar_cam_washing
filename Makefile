@@ -5,7 +5,8 @@ MSG="default msg"
 ALL: transcendance
 
 transcendance:
-	APP_MODE="prod" docker-compose -f docker-compose.yml -p transcendence up --build
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p transcendence up --build
+# MODE="prod"
 
 
 clean:

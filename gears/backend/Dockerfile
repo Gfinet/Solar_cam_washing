@@ -1,7 +1,5 @@
 FROM node:20-slim
 
-# RUN apt install -y python3
-
 COPY ./ /data
 WORKDIR /data
 
