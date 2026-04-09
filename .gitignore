@@ -1,2 +1,4 @@
 .DS_Store
 .vscode/
+gears/backend/package-lock.json
+gears/backend/src/package-lock.json

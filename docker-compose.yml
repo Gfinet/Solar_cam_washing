@@ -15,19 +15,19 @@ services:
             - 3000:3000
         restart: on-failure
         depends_on:
-            - webapp
+            - backend
 
-    webapp:
+    backend:
         build: 
-            context : gears/webapp/.
+            context : gears/backend/.
             dockerfile: Dockerfile
-        container_name: webapp
+        container_name: backend
         volumes:
-            - ./gears/webapp:/data
+            - ./gears/backend:/data
             - /data/node_modules
         environment:
             - APP_MODE=${APP_MODE}
-        image:  webapp
+        image:  backend
         networks:
             - transcendance
         expose:

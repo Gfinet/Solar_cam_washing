@@ -13,8 +13,8 @@ if [ "$APP_MODE" = "dev" ]; then
 	exec npm run dev;
 elif [ "$APP_MODE" = "prod" ]; then
 	echo "START";
-	if [ -d "app/frontend/dist" ]; then
-		rm -rf "app/frontend/dist";
-	fi
+	# if [ -d "app/frontend/dist" ]; then
+	# 	rm -rf "app/frontend/dist";
+	# fi
 	exec npm start;
 fi

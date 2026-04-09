@@ -2,10 +2,10 @@
   "name": "src",
   "version": "1.0.0",
   "description": "Transcendence",
-  "main": "./backend/test.js",
+  "main": "./src/test.js",
   "scripts": {
-    "start": "node ./backend/test.js",
-    "start-watch": "cross-env NODE_ENV=development nodemon -w backend backend/test.js",
+    "start": "node ./src/test.js",
+    "start-watch": "cross-env NODE_ENV=development nodemon -w src src/test.js",
     "dev": "npm-run-all --parallel start-watch"
   },
   "author": "Gfinet",
