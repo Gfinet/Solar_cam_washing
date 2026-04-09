@@ -12,10 +12,11 @@ services:
             - transcendance
         ports:
             - 8080:80
-            - 3000:3000
+            - 3000:443
         restart: on-failure
         depends_on:
             - backend
+            - frontend
 
     backend:
         build: 
@@ -34,19 +35,22 @@ services:
             - "3000"
         restart: on-failure
 
-    # frontend:
-    #     build: 
-    #         context : gears/frontend/.
-    #         dockerfile: Dockerfile
-    #     container_name: frontend
-    #     volumes:
-    #         - ./frontend/src:/data
-    #     image:  frontend
-    #     networks:
-    #         - transcendance
-    #     expose:
-    #         - "5000"
-    #     restart: on-failure
+    frontend:
+        build: 
+            context : gears/frontend/.
+            dockerfile: Dockerfile
+        container_name: frontend
+        volumes:
+            - ./gears/frontend/src:/data 
+            - /data/node_modules
+        environment:
+            - APP_MODE=${APP_MODE}
+        image:  frontend
+        networks:
+            - transcendance
+        expose:
+            - "5173"
+        restart: on-failure
 
     # db:
     #     build: 

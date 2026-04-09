@@ -13,7 +13,13 @@ while (i < 10)
     i++;
 }
 
-app.get('/', (req, res) => {res.send(res)})
+app.get('/api', (req, res) => {
+    res.json({ 
+        status: "success", 
+        message: "Hello World" 
+    });
+    // res.send("Hello World")}
+})
 // app.get('/html/index.html', (req, res) => {res.send(res.sendFile('/home/gfinet/Desktop/trans/app/html/index.html'))})
 
 const staticPath = path.join("/usr/local/src", 'html');
