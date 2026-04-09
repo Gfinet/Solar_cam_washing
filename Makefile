@@ -22,7 +22,7 @@ fclean:	clean
 re: fclean transcendance
 
 add:
-	git add gears/ docker-compose.yml Makefile README.md
+	git add gears/ docker-compose.yml Makefile README.md .gitignore
 	git status
 	git commit -m "$(MSG)"
 
