@@ -26,11 +26,14 @@ services:
             - /data/node_modules
         environment:
             - APP_MODE=${APP_MODE}
+            - DATABASE_URL=postgresql://user_admin:mon_password_secret@db:5432/db?schema=public
         image:  backend
         networks:
             - Solar_Cam
         expose:
             - "3000"
+        ports:
+            - "5555:5555"
         restart: on-failure
 
     frontend:
