@@ -1,11 +1,11 @@
--- Création de la table utilisateur
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    password_hash TEXT NOT NULL
 );
 
--- Insertion d'un utilisateur de test (password: 'password123' - en réel on hash !)
+-- On insère LE seul et unique compte autorisé
+-- Remplace 'parents' et 'chocolat' par ce que tu veux
 INSERT INTO users (username, password_hash) 
-VALUES ('admin', 'password123');
+VALUES ('parents', 'chocolat')
+ON CONFLICT DO NOTHING;
