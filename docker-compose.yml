@@ -57,6 +57,12 @@ services:
         container_name : db 
         volumes:
             - ./gears/db/data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=user_admin
+            - POSTGRES_PASSWORD=mon_password_secret
+            - POSTGRES_DB=db
+        networks:
+            - Solar_Cam
         expose:
             - "5432"
         restart: always

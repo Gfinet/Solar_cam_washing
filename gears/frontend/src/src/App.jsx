@@ -5,7 +5,7 @@ import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
-  const [credentials, setCredentials] = useState({ login: '', password: '' });
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -15,8 +15,32 @@ function App() {
     e.preventDefault();
     console.log("Tentative de connexion avec :", credentials);
     
-    // C'est ici que tu feras ton fetch('/api/login', ...) plus tard
-    alert(`Connexion de ${credentials.login}`);
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials), // Envoie { username: '...', password: '...' }
+      })
+
+      const data = await response.json();
+
+      if (response.ok) 
+      {
+        alert("Connexion réussie ! Bonjour " + data.message);
+      } 
+      else 
+      {
+        alert("Erreur : " + data.message);
+      }
+  } catch (error) {
+    // Si le serveur est éteint ou si Nginx plante
+    console.error("Erreur réseau :", error);
+    alert("Impossible de contacter le serveur.");
+  }
+
   };
 
   return (
@@ -25,11 +49,11 @@ function App() {
         <h2>Connexion</h2>
         
         <div style={styles.inputGroup}>
-          <label>login</label>
+          <label>username</label>
           <input 
-            type="login" 
-            name="login" 
-            value={credentials.login} 
+            type="text" 
+            name="username" 
+            value={credentials.username} 
             onChange={handleChange} 
             required 
             style={styles.input}

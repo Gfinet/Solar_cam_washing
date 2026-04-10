@@ -2,25 +2,28 @@
 MSG="default msg"
 
 
-ALL: transcendance
+ALL: solar_cam
 
-transcendance:
-	APP_MODE="dev" docker-compose -f docker-compose.yml -p transcendence up --build
+solar_cam:
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
 # MODE="prod"
 
 
 clean:
-	docker-compose -f docker-compose.yml -p transcendance down -v
+	docker-compose -f docker-compose.yml -p solar_cam down -v
 	docker images -q | xargs -r docker rmi -f
 
 	#docker image rmi -f $(docker images -q)
 
 dev:
-	APP_MODE="dev" docker-compose -f docker-compose.yml -p transcendence up --build
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
 
 fclean:	clean
 	
-re: fclean transcendance
+re: fclean solar_cam
+
+stop:
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
 
 add:
 	git add gears/ docker-compose.yml Makefile README.md .gitignore
