@@ -1,8 +1,12 @@
 #!/bin/sh
 
+rm -f package-lock.json
+###DELETE
+
 npm i 
 npm update
 
+npx prisma generate
 
 # echo "URL:" $URL
 

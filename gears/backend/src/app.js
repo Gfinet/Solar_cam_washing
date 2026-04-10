@@ -1,7 +1,9 @@
 import Fastify from 'fastify'
+import pkg from '@prisma/client';
+const { PrismaClient } = pkg;
 import pg from 'pg'
 
-
+const prisma = new PrismaClient();
 const { Client } = pg
 
 const fastify = Fastify({
@@ -45,24 +47,25 @@ const start = async () => {
 }
 
 fastify.post('/api/login', async (request, reply) => {
- const { username, password } = request.body; 
+    const { username, password } = request.body; 
 
-  try {
-    const res = await client.query(
-      'SELECT username FROM users WHERE username = $1 AND password_hash = $2',
-      [username, password]
-    );
+    try {
+        const res = await client.query(
+        'SELECT username FROM users WHERE username = $1 AND password_hash = $2',
+        [username, password]
+        );
 
-    if (res.rows.length > 0) {
-      return { 
-        success: true, 
-        message: `Bienvenue ${res.rows[0].username} !` 
-      };
-    } else {
-      reply.code(401);
-      return { success: false, message: "Accès refusé : Identifiants incorrects" };
-    }
-  } catch (err) {
+        if (res.rows.length > 0) {
+        return { 
+            success: true, 
+            message: `Bienvenue ${res.rows[0].username} !` 
+        };
+        } else {
+        reply.code(401);
+        return { success: false, message: "Accès refusé : Identifiants incorrects" };
+        }
+  } 
+  catch (err) {
     fastify.log.error(err);
     reply.code(500);
     return { error: "Erreur technique" };
