@@ -7,3 +7,5 @@ gears/backend/node_modules
 
 gears/frontend/src/package-lock.json
 gears/frontend/node_modules
+
+gears/db/data/
