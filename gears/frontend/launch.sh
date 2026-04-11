@@ -1,10 +1,7 @@
 #!/bin/sh
 
-# if [ -f "package-lock.json" ]; then
-# 	npm ci;
-# else
-	npm i ;
-# fi
+npm i 
+npm update
 
 # echo "URL:" $URL
 
