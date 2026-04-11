@@ -2,30 +2,32 @@
 MSG="default msg"
 
 
-ALL: transcendance
+ALL: solar_cam
 
-transcendance:
-	# mkdir -p ~/data
-	# mkdir -p ~/data/mariadb
-	# mkdir -p ~/data/wordpress
-# 	docker build -t base:bullseye gears/base
-	docker-compose -f docker-compose.yml -p transcendance up --build
+solar_cam:
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
+# MODE="prod"
 
 
 clean:
-	docker-compose -f docker-compose.yml -p transcendance down -v
+	docker-compose -f docker-compose.yml -p solar_cam down -v
 	docker images -q | xargs -r docker rmi -f
 
 	#docker image rmi -f $(docker images -q)
 
+dev:
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
+
 fclean:	clean
-	rm -rf ~/data
 	
-re: fclean transcendance
+re: fclean solar_cam
+
+stop:
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
 
 add:
-	git add app/ gears/ docker-compose.yml Makefile README.md
+	git add gears/ docker-compose.yml Makefile README.md .gitignore
 	git status
-	git commit -m $(MSG)
+	git commit -m "$(MSG)"
 
 .PHONY: all clean re add
