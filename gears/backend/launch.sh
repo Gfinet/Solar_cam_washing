@@ -7,6 +7,7 @@ npm i
 npm update
 
 npx prisma generate
+npx prisma db push
 
 # echo "URL:" $URL
 
