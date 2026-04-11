@@ -1,6 +1,5 @@
 import Fastify from 'fastify'
 import pkg from '@prisma/client';
-import pg from 'pg'
 
 
 
@@ -10,39 +9,25 @@ const fastify = Fastify({
 
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient({ log: ["query", "info"] })
-const countUsers = await prisma.user.count({})
-console.log(countUsers)
 
-const { Client } = pg
+prisma.$on("query", (e) => {
+  console.log(e);
+});
+
+// const countUsers = await prisma.user.count({})
+// console.log(countUsers)
 
 // Declare a route
 fastify.get('/api', function (request, reply) {
   reply.send({ hello: 'world' })
 })
 
-const client = new Client({connectionString :'postgresql://user_admin:mon_password_secret@db:5432/postgres'})
-
-
 
 // Connexion à la DB au démarrage du serveur
 const start = async () => {
   try {
-    await client.connect()
-    console.log('Connecté à la base de données PostgreSQL')
-    fastify.log.info();
-    
-    await client.query(`
-    CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        username VARCHAR(50) UNIQUE NOT NULL,
-        password_hash TEXT NOT NULL
-    );
-    
-    INSERT INTO users (username, password_hash) 
-    VALUES ('parents', 'chocolat') 
-    ON CONFLICT DO NOTHING;
-    `);
 
+    console.log("server listening on localhost:3000")
     await fastify.listen({ port: 3000, host: '0.0.0.0' })
   } catch (err) {
     fastify.log.error(err)
@@ -50,45 +35,19 @@ const start = async () => {
   }
 }
 
-// fastify.post('/api/login', async (request, reply) => {
-//     const { username, password } = request.body; 
-
-//     try {
-//         const res = await client.query(
-//         'SELECT username FROM users WHERE username = $1 AND password_hash = $2',
-//         [username, password]
-//         );
-
-//         if (res.rows.length > 0) {
-//         return { 
-//             success: true, 
-//             message: `Bienvenue ${res.rows[0].username} !` 
-//         };
-//         } else {
-//         reply.code(401);
-//         return { success: false, message: "Accès refusé : Identifiants incorrects" };
-//         }
-//   } 
-//   catch (err) {
-//     fastify.log.error(err);
-//     reply.code(500);
-//     return { error: "Erreur technique" };
-//   }
-// })
-
 fastify.post('/api/login', async (request, reply) => {
-  const { username, password } = request.body
+    const { username, password } = request.body
 
-  const user = await prisma.user.findUnique({
-    where: { username: username },
-  })
-
-  if (user && user.password_hash === password) {
-    return { success: true, message: user.username }
-  } else {
-    reply.code(401)
-    return { success: false, message: "Mauvais mot de passe" }
-  }
+    const user = await prisma.user.findUnique({
+        where: { username: username },
+        })
+    
+    if (user && user.password_hash === password) {
+        return { success: true, message: user.username }
+    } else {
+        reply.code(401)
+        return { success: false, message: "Mauvais mot de passe" }
+    }
 })
 
 // Une route pour tester si la DB répond

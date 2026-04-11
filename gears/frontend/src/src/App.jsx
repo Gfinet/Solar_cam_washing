@@ -80,7 +80,7 @@ function App() {
 
 const styles = {
   container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' },
-  form: { padding: '2rem', border: '1px solid #ccc', borderRadius: '10px', width: '300px', background: '#f9f9f9' },
+  form: { padding: '2rem', border: '1px solid #ccc', borderRadius: '10px', width: '300px', background: '#000' },
   inputGroup: { marginBottom: '1rem', textAlign: 'left' },
   input: { width: '100%', padding: '8px', marginTop: '5px', boxSizing: 'border-box' },
   button: { width: '100%', padding: '10px', background: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }
