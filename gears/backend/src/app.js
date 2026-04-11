@@ -1,59 +1,45 @@
 import Fastify from 'fastify'
 import pkg from '@prisma/client';
 
+import serverOn from './server.js'
 
-
-const fastify = Fastify({
-  logger: true
-})
-
-const { PrismaClient } = pkg;
-const prisma = new PrismaClient({ log: ["query", "info"] })
-
-prisma.$on("query", (e) => {
-  console.log(e);
-});
-
-// const countUsers = await prisma.user.count({})
-// console.log(countUsers)
-
-// Declare a route
-fastify.get('/api', function (request, reply) {
-  reply.send({ hello: 'world' })
-})
 
 
 // Connexion à la DB au démarrage du serveur
 const start = async () => {
-  try {
+    let server;
+    try 
+    {
+        server = await serverOn();
+        console.log("serv listening on localhost:3000")
+        let stopping = false
+		async function exitWhenStopped() 
+        {
+			if (!stopping) 
+            {
+				stopping = true
+				server.log.info('Stopping Transcendence platform')
+				await server.close()
+				server.log.info('Transcendence platform stopped')
+				// eslint-disable-next-line n/no-process-exit
+				process.exit(0)
+			}
+		}
 
-    console.log("server listening on localhost:3000")
-    await fastify.listen({ port: 3000, host: '0.0.0.0' })
-  } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
-  }
-}
-
-fastify.post('/api/login', async (request, reply) => {
-    const { username, password } = request.body
-
-    const user = await prisma.user.findUnique({
-        where: { username: username },
-        })
-    
-    if (user && user.password_hash === password) {
-        return { success: true, message: user.username }
-    } else {
-        reply.code(401)
-        return { success: false, message: "Mauvais mot de passe" }
+		process.on('SIGINT', exitWhenStopped)
+		process.on('SIGTERM', exitWhenStopped)
+		process.on('SIGHUP', exitWhenStopped)
+		process.on('SIGUSR2', exitWhenStopped) // for nodemon restart
+		process.on('SIGBREAK', exitWhenStopped)
+		process.on('message', function (m) { if (m === 'shutdown') exitWhenStopped()})
+        
+        await server.listen({ port: 3000, host: '0.0.0.0' })
+    } 
+    catch (err) 
+    {
+        console.log(err)
+        process.exit(1)
     }
-})
-
-// Une route pour tester si la DB répond
-fastify.get('/api/db-test', async (request, reply) => {
-  const res = await client.query('SELECT NOW()') // Demande l'heure à la DB
-  return { now: res.rows[0] }
-})
+}
 
 start()
