@@ -12,6 +12,7 @@ This is a personnal project wich will link Solar Panels (MARQUE) with washing ma
 ## Frontend
 
 - React 
+- React router `npm install react-router-dom`
 
 ## DB
 
