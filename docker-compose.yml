@@ -4,7 +4,7 @@ services:
         build:
             context: gears/nginx/.
             dockerfile: Dockerfile
-        container_name: nginx_t
+        container_name: nginx
         image: nginx_t:0.0.1 
         networks:
             - Solar_Cam

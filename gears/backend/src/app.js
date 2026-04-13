@@ -1,6 +1,3 @@
-import Fastify from 'fastify'
-import pkg from '@prisma/client';
-
 import serverOn from './server.js'
 
 
