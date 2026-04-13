@@ -12,6 +12,7 @@ createRoot(document.getElementById('root')).render(
         <Route element={<Layout />}>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/sma" />
         </Route>
       </Routes>
     </BrowserRouter>,
