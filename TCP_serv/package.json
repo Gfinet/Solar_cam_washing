@@ -1,0 +1,9 @@
+{
+  "name": "tcp-simulator",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "jsmodbus": "^4.0.10",
+    "net": "^1.0.2"
+  }
+}

@@ -6,15 +6,16 @@ import net from 'net'
 
 export default fp(async (server) => {
     const option = {
-        'host' : "0.0.0.0", //ip ondulateur 
-        'port' : 'xxx'
+        'host' : "192.168.122.1", //ip ondulateur 
+        'port' : 5020
     }
-    const socket = new net.Socket(option)
+    const socket = new net.Socket()
     const mb = new Modbus.client.TCP(socket)
+    socket.connect(option)
     
     server.decorate('mb', mb)
     server.addHook('onClose', async (server) => {
-        await server.mb.$disconnect()
+        socket.end()
     })
 })
 
