@@ -1,4 +1,5 @@
 import auth from './auth.js'
+import SMA from './SMA.js'
 
 
 
