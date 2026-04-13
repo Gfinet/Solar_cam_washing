@@ -4,7 +4,7 @@ rm -f package-lock.json
 ###DELETE
 
 npm i 
-npm update
+# npm update
 
 npx prisma generate
 npx prisma db push

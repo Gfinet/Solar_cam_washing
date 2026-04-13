@@ -7,8 +7,7 @@ import net from 'net'
 
 export default async function modbus(server)
 {
-    socket.on('connect', async () =>
-    {
+    server.get('/mb',  async (request, reply)=>{
         console.log('connecté à l\'ondulateur')
         try {
             const response = await server.mb.readInputRegisters(30775, 2)
@@ -20,6 +19,6 @@ export default async function modbus(server)
         {
             console.error("erreur :", err)
         }
+        return puissance
     })
-    socket.end();
 }

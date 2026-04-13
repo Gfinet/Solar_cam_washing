@@ -1,7 +1,7 @@
 #!/bin/sh
 
 npm i 
-npm update
+# npm update
 
 # echo "URL:" $URL
 

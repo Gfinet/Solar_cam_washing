@@ -1,11 +1,8 @@
 .DS_Store
 .vscode/
 
-gears/backend/package-lock.json
-gears/backend/src/package-lock.json
-gears/backend/node_modules
+*/package-lock.json
+*/node_modules
 
-gears/frontend/src/package-lock.json
-gears/frontend/node_modules
 
 gears/db/data/
