@@ -1,8 +1,3 @@
-import fp from 'fastify-plugin' // Aide à rendre prisma accessible partout
-import Modbus from 'jsmodbus'
-import net from 'net'
-
-
 
 
 export default async function modbus(server)
@@ -10,15 +5,18 @@ export default async function modbus(server)
     server.get('/mb',  async (request, reply)=>{
         console.log('connecté à l\'ondulateur')
         try {
-            const response = await server.mb.readInputRegisters(30775, 2)
+            const response = await server.mb.readInputRegisters(100, 2)
 
-            const puissance = response.response.body.valuesAsBuffer.readUInt32BE(0)
-            console.log(`Production :, ${puissance} Watts`)
+            const buffer = response.response.body.valuesAsBuffer;
+            const power = buffer.readUInt32BE(0)
+    
+            console.log(`Production : ${power} Watts`)
+            return {success : true, message: power}
         }
         catch (err)
         {
             console.error("erreur :", err)
+            return {success : false, message: "fail to log"}
         }
-        return puissance
     })
 }
