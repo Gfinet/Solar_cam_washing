@@ -6,6 +6,7 @@ rm -f package-lock.json
 npm i 
 # npm update
 
+sleep 5
 npx prisma generate
 npx prisma db push
 

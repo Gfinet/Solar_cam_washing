@@ -26,7 +26,7 @@ services:
             - /data/node_modules
         environment:
             - APP_MODE=${APP_MODE}
-            - DATABASE_URL=postgresql://user_admin:mon_password_secret@db:5432/db?schema=public
+            - DATABASE_URL=postgresql://user_admin:mon_password_secret@db:5432/db
         image:  backend
         networks:
             - Solar_Cam
@@ -61,6 +61,7 @@ services:
             context : gears/db/.
             dockerfile : Dockerfile
         container_name : db 
+        command: -c timezone=Europe/Paris
         volumes:
             - ./gears/db/data:/var/lib/postgresql/data
         environment:
