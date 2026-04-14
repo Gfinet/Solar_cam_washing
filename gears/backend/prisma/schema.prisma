@@ -18,3 +18,9 @@ model User {
   password_hash String
   createdAt     DateTime @default(now())
 }
+
+model Solar_Data {
+  id            Int       @id @default(autoincrement())
+  hour          DateTime  @default(dbgenerated("now() AT TIME ZONE 'Europe/Paris' + INTERVAL '2 hours'"))
+  Watts         Int
+}
