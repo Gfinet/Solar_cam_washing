@@ -19,13 +19,12 @@ const Layout = () => {
 const styles = {
   wrapper: { minHeight: '100vh', display: 'flex', flexDirection: 'column' },
   header: { 
-    padding: '1rem', 
     background: '#1a1a1a', 
     color: '#007bff', 
     textAlign: 'center',
     borderBottom: '1px solid #333'
   },
-  content: { flex: 1 }
+  content: { flex: 1, padding: '20px' }
 };
 
 export default Layout;
