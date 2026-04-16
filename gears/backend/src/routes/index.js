@@ -10,6 +10,7 @@ export default async function (server, opts) {
   await server.register(auth)
   await server.register(SMA)
   await server.register(mb)
+  await server.register
 
   // Toutes les routes dans tables.js commenceront par /tables
 //   await server.register(table, { prefix: '/tables' })
