@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"workspaces": [
-		"src"
+		"/data"
 	],
 	"scripts": {
 		"dev": "npm run dev -ws",

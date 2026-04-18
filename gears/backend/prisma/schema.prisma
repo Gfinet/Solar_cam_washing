@@ -28,6 +28,6 @@ model WeatherForecast {
 
 model Solar_Data {
   id            Int       @id @default(autoincrement())
-  hour          DateTime  @default(now())
+  hour          DateTime  @default(now()) @db.Timestamptz(3)
   Watts         Int
 }

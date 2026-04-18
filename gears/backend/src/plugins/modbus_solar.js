@@ -39,7 +39,7 @@ export default fp(async (server) => {
             console.error("erreur :", err)
             // return {success : false, message: 0}
         }
-        if (socket.readyState !== 'open' && power > 0)
+        if (socket.readyState === 'open' && power > 0)
             await server.prisma.Solar_Data.create({data: {Watts: power }})
     }
     // timer = setInterval(fetchSolarData, 1000)

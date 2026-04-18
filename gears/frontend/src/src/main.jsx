@@ -2,9 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import './index.css'
-import Layout from './layout.jsx';
-import Login from './login.jsx'
-import Dashboard from './dashboard.jsx';
+import Layout from './models/layout.jsx';
+import Login from './models/login.jsx'
+import Dashboard from './models/dashboard.jsx';
+import Table from './models/table.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -13,8 +14,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/param" element={<Dashboard />} />
-          <Route path="/table" element={<Dashboard />} />
-          <Route path="/sma" />
+          <Route path="/table" element={<Table />} />
         </Route>
       </Routes>
     </BrowserRouter>,
