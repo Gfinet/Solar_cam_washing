@@ -23,6 +23,7 @@ model WeatherForecast {
   id          Int      @id @default(autoincrement())
   time        DateTime @unique // L'heure précise de la prévision
   temp        Float
+  SolarRay    Float?
   updatedAt   DateTime @updatedAt
 }
 

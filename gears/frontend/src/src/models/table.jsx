@@ -22,7 +22,7 @@ function Table() {
     navigate('/');
   }
   const [temp, setTemp] = useState([]);
-  const [watt, setWatt] = useState([])
+  const [watt, setWatt] = useState([]);
 
   useEffect(() => {
     fetch('/api/temptoday',{
@@ -32,15 +32,15 @@ function Table() {
     }})
     .then(res => res.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       const val = Array(data.message.length)
       for (let i=0; i<data.message.length; i++)
       {
         const time = new Date(data.message[i].time)
-        const timestr = time.getUTCHours() + "h"; //hour.toString() + "h";
         val[i] = {
-          time : timestr,
-          temp : data.message[i].temp
+          time : time.getUTCHours() + "h",
+          temperature : data.message[i].temp,
+          sun  : data.message[i].SolarRay
         }
       }
       setTemp(val);
@@ -62,7 +62,7 @@ function Table() {
         const timestr = hour + "h";
         val[i] = {
           time : timestr,
-          temp : data.message[i].watts + "w"
+          temperature : data.message[i].watts
         }
       }
       setWatt(val);
@@ -70,20 +70,42 @@ function Table() {
   }, []);
   return (
     
-    <div style={{ padding: '2rem', textAlign: 'center', flexDirection:'row' }}>
+    <div style={{ padding: '2rem', textAlign: 'center'}}>
       <h1>Bienvenue sur l'espace Parents</h1>
+      <div style={{display:"flex", gap:"1rem", padding: '1rem', justifyContent: 'center', alignItems: 'center'}}>
       <button style={styles.button} onClick={goToDash}>Revenir à l'acceuil</button>
+      <button style={styles.button} onClick={goToparam}>Paramètres du compte</button>
+      <button style={styles.button} onClick={Logout}>Se Déconnecter</button>
+      </div>
       <div style={{display: 'flex', maxWidth: '1400px', margin: '0 auto', flexDirection: 'row' }}>
           <MyBarChart
             data={temp} 
             valx="time"    
-            valy="temp"   
+            valy="temperature"
+            unit="°"
             color="#fbbf24" 
           />
           <MyBarChart
             data={watt} 
             valx="time"    
-            valy="temp"   
+            valy="temperature"
+            unit="w"
+            color="#fbbf24" 
+          />
+      </div>
+      <div style={{display: 'flex', maxWidth: '1400px', margin: '0 auto', flexDirection: 'row' }}>
+          <MyBarChart
+            data={temp} 
+            valx="time"    
+            valy="sun"
+            unit="w/m2"
+            color="#fbbf24" 
+          />
+          <MyBarChart
+            data={temp} 
+            valx="time"    
+            valy="sun"   
+            unit="w/m2"
             color="#fbbf24" 
           />
       </div>
@@ -94,9 +116,7 @@ function Table() {
         maxWidth: '300px', 
         margin: '0 auto' 
         }}>
-        <button style={styles.button} onClick={goToDash}>Voir les tableaux de données</button>
-        <button style={styles.button} onClick={goToparam}>Paramètres du compte</button>
-        <button style={styles.button} onClick={Logout}>Se Déconnecter</button>
+        
       </div>
     </div>
   );
@@ -110,7 +130,7 @@ const styles = {
     border: 'none', 
     borderRadius: '5px', 
     cursor: 'pointer',
-    maxheight: '100px'
+    height: '50px'
   }
 };
 

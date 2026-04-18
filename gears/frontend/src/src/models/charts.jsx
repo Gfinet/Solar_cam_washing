@@ -2,7 +2,7 @@
 import { LabelList, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Outlet } from 'react-router-dom';
 
-export function MyBarChart ({data, valx, valy})
+export function MyBarChart ({data, valx, valy, unit})
 {
   return (
     <div style={styles.chart}>
@@ -18,7 +18,7 @@ export function MyBarChart ({data, valx, valy})
               position="top"   // Place la valeur au-dessus de la barre
               offset={10}      // Petit espace entre la barre et le texte
               style={{ fontSize: '10px', fill: '#666', fontWeight: 'bold' }}
-              formatter={(value) => `${value}°`} // Ajoute l'unité si tu veux
+              formatter={(value) => `${value}${unit}`} // Ajoute l'unité si tu veux
             />
             </Bar>
         </BarChart>

@@ -19,7 +19,7 @@ export default fp(async (server) => {
     });
 
     async function fetchWeatherData(server) {
-        const url = "https://api.open-meteo.com/v1/forecast?latitude=50.89&longitude=4.37&hourly=temperature_2m"; //&timezone=Europe/Paris
+        const url = "https://api.open-meteo.com/v1/forecast?latitude=50.89&longitude=4.37&hourly=temperature_2m,shortwave_radiation&timezone=Europe/Paris";
         const response = await fetch(url);
         if (!response.ok) throw new Error(data.error || 'Failed to fetch weather data');
 
@@ -34,7 +34,8 @@ export default fp(async (server) => {
                 },
                 create: {
                     time: new Date(data.hourly.time[i]),
-                    temp: data.hourly.temperature_2m[i]
+                    temp: data.hourly.temperature_2m[i],
+                    SolarRay: data.hourly.shortwave_radiation[i]
                 }
             });
         }
