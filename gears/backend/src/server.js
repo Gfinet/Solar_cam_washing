@@ -1,9 +1,10 @@
 import Fastify from 'fastify'
 import prisma from './plugins/prisma.js'
 import mb from './plugins/modbus_solar.js'
-import weather from './plugins/meteo.js'
+import weather from './plugins/weather.js'
 
 import routes from './routes/index.js'
+
 
 
 
@@ -15,6 +16,7 @@ const serverOn = async () => {
     await server.register(prisma);
     await server.register(mb);
     await server.register(weather);
+    
 
     // fetchSolarData()
     const user = await server.prisma.user.findUnique({ where: { username: "parents" }})
