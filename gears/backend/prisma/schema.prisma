@@ -19,8 +19,15 @@ model User {
   createdAt     DateTime @default(now())
 }
 
+model WeatherForecast {
+  id          Int      @id @default(autoincrement())
+  time        DateTime @unique // L'heure précise de la prévision
+  temp        Float
+  updatedAt   DateTime @updatedAt
+}
+
 model Solar_Data {
   id            Int       @id @default(autoincrement())
-  hour          DateTime  @default(dbgenerated("now() AT TIME ZONE 'Europe/Paris' + INTERVAL '2 hours'"))
+  hour          DateTime  @default(now())
   Watts         Int
 }
