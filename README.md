@@ -21,3 +21,11 @@ This is a personnal project wich will link Solar Panels (MARQUE) with washing ma
 ## Proxy
 
 - Nginx
+
+
+
+# Commande importantes
+
+- pour afficher la db
+npx prisma studio --url="postgresql://user_admin:mon_password_secret@localhost:5432/db"
+
