@@ -58,7 +58,8 @@ function Dashboard() {
             data={temp} 
             valx="time"    
             valy="temp"   
-            color="#fbbf24" 
+            color="#fbbf24"
+            unit='°'
           />
         </div>
 
