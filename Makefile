@@ -5,7 +5,7 @@ MSG="default msg"
 ALL: solar_cam
 
 solar_cam:
-	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build 
 # MODE="prod"
 
 
@@ -23,7 +23,7 @@ fclean:	clean
 re: fclean solar_cam
 
 stop:
-	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --build
+	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam up --down
 
 add:
 	git add gears/ TCP_serv/ docker-compose.yml Makefile README.md .gitignore

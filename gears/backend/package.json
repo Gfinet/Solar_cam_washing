@@ -6,8 +6,7 @@
   "main": "./src/app.js",
   "scripts": {
     "start": "node ./src/app.js",
-    "start-watch": "cross-env NODE_ENV=development nodemon -w src src/app.js",
-    "dev": "npm-run-all --parallel start-watch"
+    "dev": "nodemon -w src src/app.js"
   },
   "author": "Gfinet",
   "license": "ISC",
