@@ -15,9 +15,9 @@ const start = async () => {
 			if (!stopping) 
             {
 				stopping = true
-				server.log.info('Stopping Transcendence platform')
+				server.log.info('Stopping Solar\'s_Cam platform')
 				await server.close()
-				server.log.info('Transcendence platform stopped')
+				server.log.info('Solar\'s_Cam platform stopped')
 				// eslint-disable-next-line n/no-process-exit
 				process.exit(0)
 			}
