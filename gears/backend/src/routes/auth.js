@@ -6,16 +6,19 @@ export default async function auth(server) {
     server.post('/login', async (request, reply) => {
         const { username, password } = request.body
         const user = await server.prisma.user.findUnique({ where: { username: username }})
-        const mdp = await bcrypt.hash(password, 12)
-        console.log(mdp, password, user.password_hash)
-        if (user && user.password_hash === mdp) {
-            return { success: true, message: user.username }
-        } 
-        else 
+        if (user)
         {
-            reply.code(401)
-            return { success: false, message: "Mauvais mot de passe" }
+            if (bcrypt.compare(user.password_hash, password))
+                return { success: true, message: username }
+            else 
+            {
+                reply.code(401)
+                return { success: false, message: "Mauvais mot de passe" }
+            }
         }
+        else
+            return { success: false, message: "Utilisateur inexistant" }
+        
     })
 }
 

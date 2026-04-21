@@ -17,14 +17,13 @@ const serverOn = async () => {
     await server.register(prisma);
     await server.register(mb);
     await server.register(weather);
-    // await server.register(bcrypt, {saltWorkFactor: 12})
+    // await server.register(bcrypt.hash)
     
 
     // fetchSolarData()
-    const user = await server.prisma.user.findUnique({ where: { username: "parents" }})
+    const user = await server.prisma.user.findUnique({ where: { username: "Parents" }})
     if (server.prisma && !user)
     {
-        console.l
         const mdp = await bcrypt.hash("chocolat", 12)
         await server.prisma.User.create({data: {username: "Parents", password_hash: mdp }})
     }
