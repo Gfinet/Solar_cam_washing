@@ -82,10 +82,10 @@ function Table() {
             data={temp} 
             valx="time"    
             valy="temperature"
-            unit="°"
+            unit='°'
             color="#fbbf24" 
           />
-          <MyBarChart
+          <MyLineChart
             data={watt} 
             valx="time"    
             valy="temperature"

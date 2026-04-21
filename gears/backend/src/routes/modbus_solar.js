@@ -27,6 +27,7 @@ export default async function modbus(server)
         const today = await server.prisma.Solar_Data.findMany({ where: { hour: {gte : start, lte: now}}, orderBy: {hour: 'asc'}})
         // console.log("Waza",start, end, today)
         const hourMid = [];
+        const sec = []
         let hour = -1;
         let mid = 0;
         let j = 1;
@@ -45,9 +46,11 @@ export default async function modbus(server)
             }
             mid += today[i].Watts;
             countPerHour++;
+            sec.push({id : i, time : today[i].hour, watts : today[i].Watts})
         }
         if (mid !== 0 && countPerHour !== 0) hourMid.push({id : j, time : hour, watts : mid / countPerHour})
         else hourMid.push({id : j, time : hour, watts : 0})
-        return {success : true, message: hourMid}
+        // return {success : true, message: hourMid}
+        return {success : true, message: sec}
     })
 }
