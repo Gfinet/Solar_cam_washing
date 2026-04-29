@@ -1,21 +1,23 @@
 import { useState, useEffect } from 'react'
 import { MyLineChart, MyBarChart } from '../models/charts'
 import { AppNavigation } from '../models/navigation';
-import { Fetches } from '../models/fetchTableData';
+import { Fetches } from '../models/fetchData';
 
 import '../App.css'
 
 function Schedule() {
   
   const {goToDash, goToTable, Logout} = AppNavigation();
-  const {fetchTemp, fetchWatt} = Fetches()
+  const {fetchTemp, fetchWatt, fetchWashingProg} = Fetches()
 
   const [temp, setTemp] = useState([]);
   const [watt, setWatt] = useState([]);
+  const [wash, setWash] = useState([])
   
   useEffect(() => {
     fetchTemp(setTemp);
     fetchWatt(setWatt);
+    fetchWashingProg(setWash);
   }, []);
   
   return (
@@ -43,15 +45,52 @@ function Schedule() {
             color="#fbbf24" 
           />
       </div>
-      
+
+      {wash.slice(0, 5).map((program) => (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          padding: '10px 15px', 
+          borderBottom: '1px solid #eee',
+          backgroundColor: '#fff',
+          borderRadius: '8px',
+          marginBottom: '8px',
+          maxWidth : "50%"
+        }}>
+          {/* Date et Heure formatée */}
+          <span style={{ color: '#888', fontSize: '0.9rem' }}>
+            {new Date(program.time).toLocaleString('fr-FR', { 
+              day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' 
+            })}
+          </span>
+
+          {/* Type de programme avec une petite icône ou un badge */}
+          <span style={{ fontWeight: 'bold', color: '#555' }}>
+            Type {program.type}
+          </span>
+
+          {/* Statut avec couleur dynamique */}
+          <span style={{ 
+            padding: '4px 8px', 
+            borderRadius: '12px', 
+            fontSize: '0.8rem',
+            backgroundColor: program.finished ? '#d4edda' : '#fff3cd',
+            color: program.finished ? '#155724' : '#856404'
+          }}>
+            {wash[0].finished ? 'Terminé' : 'En cours'}
+          </span>
+        </div>
+      ))}
+
       <div style={{ 
         display: 'flex', 
         flexDirection: 'row', 
-        gap: '1rem', 
+        justifyContent : 'center',
         maxWidth: '300px', 
         margin: '0 auto' 
         }}>
-        
+      <button style={styles.button} >Programmer une machine</button>
       </div>
     </div>
   );

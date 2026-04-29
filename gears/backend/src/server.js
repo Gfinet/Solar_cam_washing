@@ -17,6 +17,7 @@ const serverOn = async () => {
     await server.register(prisma);
     await server.register(mb);
     await server.register(weather);
+    // await server.register(miele);
     // await server.register(bcrypt.hash)
     
 
@@ -26,6 +27,17 @@ const serverOn = async () => {
     {
         const mdp = await bcrypt.hash("chocolat", 12)
         await server.prisma.User.create({data: {username: "Parents", password_hash: mdp }})
+    }
+    const washProg = await server.prisma.washing_Program.count();
+    if (server.prisma && !washProg)
+    {
+        for (let i = 0; i < 10; i++)
+        {
+            await server.prisma.washing_Program.create({
+                data: {
+                    type: i%3, 
+                    time: new Date() }})
+        }
     }
 
     server.get('/api', function (request, reply) {
