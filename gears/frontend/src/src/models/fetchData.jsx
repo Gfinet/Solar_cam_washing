@@ -45,8 +45,21 @@ export const Fetches = () => {
       setWatt(val);
     })}
 
+
+    const fetchWashingProg = (setWash) => {
+      fetch('/api/wash/list', {
+        method: 'POST',
+        body: 5,
+        headers: {
+          'Content-Type': 'application/json',
+        }})
+        .then(res => res.json())
+        .then(data => {console.log("message", data.message);setWash(data.message)})
+    }
+
     return {
         fetchTemp,
-        fetchWatt
+        fetchWatt,
+        fetchWashingProg
     };
 }

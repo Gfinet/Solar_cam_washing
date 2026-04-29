@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MyLineChart, MyBarChart } from '../models/charts'
 import { AppNavigation } from '../models/navigation';
-import { Fetches } from '../models/fetchTableData';
+import { Fetches } from '../models/fetchData';
 
 import '../App.css'
 
