@@ -49,13 +49,15 @@ function Schedule() {
       {wash.slice(0, 5).map((program) => (
         <div style={{ 
           display: 'flex', 
-          justifyContent: 'space-between', 
+          justifyContent: 'space-between',
+          textAlign: 'center',
           alignItems: 'center', 
           padding: '10px 15px', 
           borderBottom: '1px solid #eee',
           backgroundColor: '#fff',
           borderRadius: '8px',
           marginBottom: '8px',
+          margin: '0 auto',
           maxWidth : "50%"
         }}>
           {/* Date et Heure formatée */}
