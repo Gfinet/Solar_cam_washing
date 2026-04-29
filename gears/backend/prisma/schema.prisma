@@ -32,3 +32,10 @@ model Solar_Data {
   hour          DateTime  @default(now()) @db.Timestamptz(3)
   Watts         Int
 }
+
+model Washing_Program {
+  id            Int       @id @default(autoincrement())
+  type          Int
+  time          DateTime  @default(now()) @db.Timestamptz(3)
+  finished      bool      @default(false)
+}
