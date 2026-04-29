@@ -7,7 +7,7 @@ import '../App.css'
 
 function Schedule() {
   
-  const {goToDash, goToSchedule, Logout} = AppNavigation();
+  const {goToDash, goToTable, Logout} = AppNavigation();
   const {fetchTemp, fetchWatt} = Fetches()
 
   const [temp, setTemp] = useState([]);
@@ -24,7 +24,7 @@ function Schedule() {
       <h1>Bienvenue sur l'espace Parents</h1>
       <div style={{display:"flex", gap:"1rem", padding: '1rem', justifyContent: 'center', alignItems: 'center'}}>
       <button style={styles.button} onClick={goToDash}>Revenir à l'acceuil</button>
-      <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
+      <button style={styles.button} onClick={goToTable}>Voir les tableaux de donnéese</button>
       <button style={styles.button} onClick={Logout}>Se Déconnecter</button>
       </div>
       <div style={{display: 'flex', maxWidth: '1400px', margin: '0 auto', flexDirection: 'row' }}>
