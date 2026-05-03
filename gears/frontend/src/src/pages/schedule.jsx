@@ -19,6 +19,14 @@ function Schedule() {
     fetchWatt(setWatt);
     fetchWashingProg(setWash);
   }, []);
+
+  const MieleConnect = () => {
+  const clientId = "c89f097a-b3cf-40f0-964e-cd85f5a75038";
+  const redirectUri = encodeURIComponent("https://localhost:3000/api/miele/callback");
+  
+  const authUrl = `https://api.mcs3.miele.com/thirdparty/login?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=all`;
+  window.location.href = authUrl;
+};
   
   return (
     
@@ -45,9 +53,48 @@ function Schedule() {
             color="#fbbf24" 
           />
       </div>
+        
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between',
+        textAlign: 'center',
+        alignItems: 'center', 
+        padding: '10px 15px', 
+        borderBottom: '1px solid #eee',
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        marginBottom: '8px',
+        margin: '0 auto',
+        maxWidth : "50%"
+      }}>
+        
+        <span style={{ color: '#000000', fontWeight: 'bold', fontSize: '0.9rem' }}>
+            Date
+          </span>
+
+          {/* Type de programme avec une petite icône ou un badge */}
+          <span style={{ fontWeight: 'bold', color: '#000000' }}>
+            Type de programme
+          </span>
+
+          <span style={{ fontWeight: 'bold', color: '#000000' }}>
+            Autheur
+          </span>
+
+          {/* Statut avec couleur dynamique */}
+          <span style={{ 
+            padding: '4px 8px', 
+            borderRadius: '12px', 
+            fontSize: '0.8rem',
+            fontWeight: 'bold',
+            color: '#000000'
+          }}>
+            Terminé?
+          </span>
+      </div>
 
       {wash.slice(0, 5).map((program) => (
-        <div style={{ 
+        <div key={program.id} style={{ 
           display: 'flex', 
           justifyContent: 'space-between',
           textAlign: 'center',
@@ -72,6 +119,10 @@ function Schedule() {
             Type {program.type}
           </span>
 
+          <span style={{ fontWeight: 'bold', color: '#555' }}>
+            par: {program.author.username}
+          </span>
+
           {/* Statut avec couleur dynamique */}
           <span style={{ 
             padding: '4px 8px', 
@@ -92,6 +143,7 @@ function Schedule() {
         maxWidth: '300px', 
         margin: '0 auto' 
         }}>
+      <button style={styles.button} onClick={MieleConnect}>Conexion a Miele</button>
       <button style={styles.button} >Programmer une machine</button>
       </div>
     </div>

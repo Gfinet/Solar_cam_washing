@@ -4,7 +4,7 @@ import cron from 'node-cron';
 
 
 export default fp(async (server) => {
-    const count = await server.prisma.weatherForecast.count();
+    const count = await server.prisma.weather_Forecast.count();
     if (count === 0)
     {
         console.log("FIRST")
@@ -22,10 +22,11 @@ export default fp(async (server) => {
         const url = "https://api.open-meteo.com/v1/forecast?latitude=50.89&longitude=4.37&hourly=temperature_2m,shortwave_radiation&timezone=Europe/Paris";
         const response = await fetch(url);
         if (!response.ok) throw new Error(data.error || 'Failed to fetch weather data');
+        else console.log("connection to open-meteo ok");
 
         const data = await response.json();
         for (let i = 0; i < data.hourly.time.length; i++) {
-            await server.prisma.weatherForecast.upsert({
+            await server.prisma.weather_Forecast.upsert({
                 where: { 
                     time: new Date(data.hourly.time[i]) 
                 },

@@ -13,13 +13,15 @@ datasource db {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  username      String   @unique
-  password_hash String
-  createdAt     DateTime @default(now())
+  id              Int      @id @default(autoincrement())
+  username        String   @unique
+  password_hash   String
+  washingPrograms Washing_Program[]
+  mieleToken      Miele_Token?
+  createdAt       DateTime @default(now())
 }
 
-model WeatherForecast {
+model Weather_Forecast {
   id          Int      @id @default(autoincrement())
   time        DateTime @unique // L'heure précise de la prévision
   temp        Float
@@ -38,4 +40,15 @@ model Washing_Program {
   type          Int
   time          DateTime  @default(now()) @db.Timestamptz(3)
   finished      Boolean   @default(false)
+  authorId      Int
+  author        User   @relation(fields: [authorId], references: [id])
+}
+
+model Miele_Token {
+  id           Int      @id @default(autoincrement())
+  accessToken  String   @db.Text
+  refreshToken String   @db.Text
+  expiresAt    DateTime
+  userId       Int      @unique
+  user         User     @relation(fields: [userId], references: [id])
 }
