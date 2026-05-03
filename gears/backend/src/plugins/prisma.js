@@ -10,7 +10,7 @@ export default fp(async (server) => {
     { emit: 'stdout', level: 'error' },] })
   
   prisma.$on('query', (e) => {
-    console.log(`\x1b[35m-PRISMA QUERY\x1b[0m: ${e.query.substring(0, 100)}`)
+    console.log(`\x1b[90m[${new Date().toLocaleTimeString('fr-FR', {timeZone: 'Europe/Paris'})}]\x1b[0m \x1b[35mPRISMA\x1b[0m: ${e.query.substring(0, 100)}`)
     console.log(`\x1b[36m-Params\x1b[0m: ${e.params}`)
     console.log(`\x1b[36m-Duration\x1b[0m: ${e.duration}ms`)
   })

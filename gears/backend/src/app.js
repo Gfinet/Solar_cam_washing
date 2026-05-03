@@ -8,9 +8,8 @@ const start = async () => {
     try 
     {
         server = await serverOn();
-        console.log("serv listening on localhost:3000")
         let stopping = false
-		async function exitWhenStopped() 
+		async function exitWhenStopped()
         {
 			if (!stopping) 
             {

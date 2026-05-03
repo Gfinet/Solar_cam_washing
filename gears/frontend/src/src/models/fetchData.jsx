@@ -54,7 +54,7 @@ export const Fetches = () => {
           'Content-Type': 'application/json',
         }})
         .then(res => res.json())
-        .then(data => {console.log("message", data.message);setWash(data.message)})
+        .then(data => setWash(data.message))
     }
 
     return {

@@ -1,5 +1,7 @@
 import Fastify from 'fastify'
 import bcrypt from 'bcrypt'
+import 'dotenv/config';
+
 import prisma from './plugins/prisma.js'
 import mb from './plugins/modbus_solar.js'
 import weather from './plugins/weather.js'
@@ -7,11 +9,34 @@ import weather from './plugins/weather.js'
 import routes from './routes/index.js'
 
 
+const customStream = {
+  write: (logString) => {
+    const log = JSON.parse(logString)
+    
+    // On définit des couleurs ANSI (comme tes \x1b...)
+    const gray = '\x1b[90m'
+    const blue = '\x1b[34m'
+    const reset = '\x1b[0m'
 
+    // Formatage manuel du message
+    if (log.msg) {
+      console.log(`${gray}[${new Date(log.time).toLocaleTimeString('fr-FR', {timeZone: 'Europe/Paris'})}]${reset}`,
+      `${blue}FASTIFY${reset}: ${log.msg}`)
+    }
+  }
+}
 
 
 const serverOn = async () => {
-    const server = Fastify()//{logger: true}
+
+    const MieleId = process.env.MIELE_ID;
+    const MieleSecret = process.env.MIELE_SECRET;
+    // const DbUrl = process.env.DATABASE_URL
+
+    const server = Fastify({logger: {
+      level: 'info',
+      stream: customStream // On branche ton "intercepteur" ici
+    }})
 
     await server.register(routes, { prefix: '/api' });
     await server.register(prisma);
@@ -36,7 +61,8 @@ const serverOn = async () => {
             await server.prisma.washing_Program.create({
                 data: {
                     type: i%3, 
-                    time: new Date() }})
+                    time: new Date(),
+                    authorId: 1 }})
         }
     }
 

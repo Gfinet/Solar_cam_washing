@@ -6,3 +6,5 @@
 gears/backend/package-lock.json
 
 gears/db/data/
+
+*/.env
