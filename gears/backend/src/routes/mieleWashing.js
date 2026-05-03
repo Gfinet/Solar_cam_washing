@@ -47,7 +47,7 @@ export default async function miele(server) {
         const today = new Date()
         today.setHours(today.getHours() + 2)
         await server.prisma.miele_Token.upsert({
-            where: { userId: 1 }, // L'ID de l'utilisateur "Parents" dans ta DB
+            where: { userId: 1 }, //TODO changer userId en Id utilisateur
             update: {
             accessToken: tokens.access_token,
             refreshToken: tokens.refresh_token,
@@ -67,8 +67,8 @@ export default async function miele(server) {
     server.get('/miele/devices', async (request, reply) => {
         // 1. Récupère le token en DB via Prisma
         const tokenData = await server.prisma.miele_Token.findFirst();
+        //TO DO pas le premier mais celui lier a l'utilisateur
         
-        // 2. Demande la liste à Miele
         const response = await fetch('https://api.mcs3.miele.com/v1/devices', {
             method: 'GET',
             headers: {
