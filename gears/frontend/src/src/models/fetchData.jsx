@@ -1,10 +1,13 @@
+const token = localStorage.getItem('token');
+
 export const Fetches = () => {
 
     const fetchTemp = (setTemp) => {
         fetch('/api/temptoday',{
       method: 'GET',
       headers: {
-      'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
     }})
     .then(res => res.json())
     .then(data => {
@@ -26,7 +29,8 @@ export const Fetches = () => {
         fetch('/api/mbtoday',{
       method: 'GET',
       headers: {
-      'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
     }})
     .then(res => res.json())
     .then(data => {
@@ -51,6 +55,7 @@ export const Fetches = () => {
         method: 'POST',
         body: 5,
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         }})
         .then(res => res.json())

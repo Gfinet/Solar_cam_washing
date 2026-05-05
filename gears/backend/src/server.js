@@ -1,10 +1,12 @@
 import Fastify from 'fastify'
 import bcrypt from 'bcrypt'
+import fastifyJwt from '@fastify/jwt';
 import 'dotenv/config';
 
 import prisma from './plugins/prisma.js'
 import mb from './plugins/modbus_solar.js'
 import weather from './plugins/weather.js'
+import jwt from './plugins/jwt_auth.js'
 
 import routes from './routes/index.js'
 
@@ -29,8 +31,8 @@ const customStream = {
 
 const serverOn = async () => {
 
-    const MieleId = process.env.MIELE_ID;
-    const MieleSecret = process.env.MIELE_SECRET;
+    // const MieleId = process.env.MIELE_ID;
+    // const MieleSecret = process.env.MIELE_SECRET;
     // const DbUrl = process.env.DATABASE_URL
 
     const server = Fastify({logger: {
@@ -38,6 +40,10 @@ const serverOn = async () => {
       stream: customStream // On branche ton "intercepteur" ici
     }})
 
+    await server.register(fastifyJwt, {secret: process.env.JWT_SECRET });
+
+
+    await server.register(jwt);
     await server.register(routes, { prefix: '/api' });
     await server.register(prisma);
     await server.register(mb);

@@ -9,7 +9,11 @@ export default async function auth(server) {
         if (user)
         {
             if (bcrypt.compare(user.password_hash, password))
-                return { success: true, message: username }
+            {
+                const token = server.jwt.sign({ id: user.id, name: user.username },{ expiresIn: '7d' });
+                return { success: true, token: token }
+                // return { token };
+            }
             else 
             {
                 reply.code(401)

@@ -10,8 +10,7 @@ export const AppNavigation = () => {
     const goToSchedule = () => navigate('/schedule');
     const goToTable = () => navigate('/table');
     const Logout = () =>  {
-        localStorage.removeItem('isAuthenticated');
-        localStorage.removeItem('username');
+        localStorage.removeItem('token');
         navigate('/');
     };
 

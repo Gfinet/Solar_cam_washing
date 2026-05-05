@@ -9,8 +9,8 @@ function Login() {
 
     const handleChange = (e) => { setCredentials({ ...credentials, [e.target.name]: e.target.value }) };
     useEffect(() => {
-        const auth = localStorage.getItem('isAuthenticated');
-        if (auth === 'true') navigate('/dashboard'); 
+        const token = localStorage.getItem('token');
+        if (token) navigate('/dashboard');
     }, [navigate]);
 
     const handleSubmit = async (e) => {
@@ -31,8 +31,9 @@ function Login() {
 
             if (response.ok && data.success)
             {
-                localStorage.setItem('isAuthenticated', 'true');
-                localStorage.setItem('username', data.message);
+                localStorage.setItem('token', data.token);
+                // localStorage.setItem('isAuthenticated', 'true');
+                // localStorage.setItem('username', data.message);
                 navigate('/dashboard')
             } 
             else alert("Erreur : " + data.message);
