@@ -39,7 +39,7 @@ function Login() {
             else alert("Erreur : " + data.message);
         } 
         catch (error) {
-        // Si le serveur est éteint ou si Nginx plante
+        // Si le back plante
             console.error("Erreur réseau :", error);
             alert("Impossible de contacter le serveur.");
         }
