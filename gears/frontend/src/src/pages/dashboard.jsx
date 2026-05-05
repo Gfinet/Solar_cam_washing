@@ -33,17 +33,41 @@ function Dashboard() {
 
         {/* 2. Les Boutons rangés en colonne (ou en ligne) */}
         <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          gap: '1rem', 
-          maxWidth: '300px', 
-          margin: '0 auto' 
+            display: 'flex', 
+            flexDirection: 'column',
+            // justifyContent: 'center',
+            textAlign: 'center',
+            gap: '1rem'
           }}>
-          <button style={styles.button} onClick={goToTable}>Voir les tableaux de données</button>
-          <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
-          <button style={styles.button} onClick={Logout}>Se Déconnecter</button>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'row', 
+            gap: '1rem', 
+            width: '300px', 
+            margin: '0 auto' 
+            }}>
+            <button style={styles.button} onClick={goToTable}>Voir les tableaux de données</button>
+            <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'row', 
+            gap: '1rem', 
+            width: '300px', 
+            margin: '0 auto' 
+            }}>
+            <button style={styles.button} onClick={goToTable}>Voir les tableaux de données</button>
+            <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            width: '300px', 
+            margin: '0 auto' 
+            }}>
+            <button style={styles.button} onClick={Logout}>Se Déconnecter</button>
+          </div>
         </div>
-
       </div>
     </div>
   );
@@ -56,6 +80,7 @@ const styles = {
     color: 'white', 
     border: 'none', 
     borderRadius: '5px', 
+    width: '300px', 
     cursor: 'pointer' 
   }
 };
