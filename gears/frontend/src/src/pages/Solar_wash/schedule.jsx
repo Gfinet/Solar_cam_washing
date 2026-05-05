@@ -20,12 +20,15 @@ function Schedule() {
     fetchWashingProg(setWash);
   }, []);
 
-  const MieleConnect = () => {
-    const clientId = "c89f097a-b3cf-40f0-964e-cd85f5a75038";
-    const redirectUri = encodeURIComponent("https://localhost:3000/api/miele/callback");
-    
-    const authUrl = `https://api.mcs3.miele.com/thirdparty/login?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=all`;
-    window.location.href = authUrl;
+  const MieleConnect = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch('/api/miele/connect', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+    }})
+    const data = await response.json();
+    window.location.href = data.url;
   };
   
   return (
@@ -141,7 +144,8 @@ function Schedule() {
         flexDirection: 'row', 
         justifyContent : 'center',
         maxWidth: '300px', 
-        margin: '0 auto' 
+        margin: '0 auto',
+        gap: '1rem'
         }}>
       <button style={styles.button} onClick={MieleConnect}>Conexion a Miele</button>
       <button style={styles.button} >Programmer une machine</button>
@@ -154,6 +158,7 @@ const styles = {
   button: { 
     padding: '10px', 
     background: '#007bff', 
+    width: '300px', 
     color: 'white', 
     border: 'none', 
     borderRadius: '5px', 

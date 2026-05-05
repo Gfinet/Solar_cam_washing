@@ -19,12 +19,12 @@ export default async function miele(server) {
     })
 
     server.get('/miele/callback', 
-    { preHandler: [server.auth] }, 
     async (request, reply) =>{
-        const {code} = request.query
-        const userId = request.user.id;
+        const {code, state} = request.query
+        
 
-        console.log("CODE", code)
+        const decoded = server.jwt.verify(state);
+        const userId = decoded.id;
 
         if (!code) return reply.status(400).send({ error: "Code manquant" });
         
@@ -87,6 +87,25 @@ export default async function miele(server) {
         const devices = await response.json();
         return devices;
     });
+
+    server.get('/miele/connect', 
+    { preHandler: [server.auth] }, 
+    async (request, reply) => {
+        try {
+            const stateToken = server.jwt.sign(
+            { id: request.user.id, purpose: 'miele-auth' }, 
+            { expiresIn: '15m' }
+            );
+            const clientId = process.env.MIELE_ID;
+            const redirectUri = encodeURIComponent("https://localhost:3000/api/miele/callback");
+            const authUrl = `https://api.mcs3.miele.com/thirdparty/login?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&state=${stateToken}&scope=all`;
+            return {url :authUrl};
+        } 
+        catch (error) {
+            return {url : '/dashboard', message : "Error"}
+        }
+        
+    })
 
     // server.put('https://api.mcs3.miele.com/v1/devices/){deviceId}/actions', async (request, reply) => {
 
