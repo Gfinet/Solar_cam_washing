@@ -3,7 +3,7 @@ import { MyLineChart, MyBarChart } from '../../models/charts'
 import { AppNavigation } from '../../models/navigation';
 import { Fetches } from '../../models/fetchData';
 
-import '../App.css'
+import '../../App.css'
 
 function Schedule() {
   

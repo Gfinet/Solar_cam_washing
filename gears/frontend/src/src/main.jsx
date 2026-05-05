@@ -8,8 +8,8 @@ import Layout from './models/layout.jsx';
 
 import Login from './pages/login.jsx'
 import Dashboard from './pages/dashboard.jsx';
-import Table from './pages/table.jsx'
-import Schedule from './pages/schedule.jsx'
+import Table from './pages/Solar_wash/table.jsx'
+import Schedule from './pages/Solar_wash/schedule.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
