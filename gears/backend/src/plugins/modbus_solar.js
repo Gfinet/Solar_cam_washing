@@ -1,4 +1,4 @@
-import fp from 'fastify-plugin' // Aide à rendre prisma accessible partout
+import fp from 'fastify-plugin'
 import Modbus from 'jsmodbus'
 import net from 'net'
 

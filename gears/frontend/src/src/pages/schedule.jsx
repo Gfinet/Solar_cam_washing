@@ -21,12 +21,12 @@ function Schedule() {
   }, []);
 
   const MieleConnect = () => {
-  const clientId = "c89f097a-b3cf-40f0-964e-cd85f5a75038";
-  const redirectUri = encodeURIComponent("https://localhost:3000/api/miele/callback");
-  
-  const authUrl = `https://api.mcs3.miele.com/thirdparty/login?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=all`;
-  window.location.href = authUrl;
-};
+    const clientId = "c89f097a-b3cf-40f0-964e-cd85f5a75038";
+    const redirectUri = encodeURIComponent("https://localhost:3000/api/miele/callback");
+    
+    const authUrl = `https://api.mcs3.miele.com/thirdparty/login?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=all`;
+    window.location.href = authUrl;
+  };
   
   return (
     

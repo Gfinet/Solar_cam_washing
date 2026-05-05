@@ -11,7 +11,6 @@ export default async function miele(server) {
             return { success: false, message: "No Data" }
     })
     server.get('/wash/list', async (request, reply) =>{
-        const number = request.body
         const line = await server.prisma.washing_Program.findMany( {take: 5, orderBy: { time: 'desc'}, include: {author: {select: {username: true}}}})
         if (line)
             return { success: true, message: line }
@@ -19,8 +18,11 @@ export default async function miele(server) {
             return { success: false, message: "No Data" }
     })
 
-    server.get('/miele/callback', async (request, reply) =>{
+    server.get('/miele/callback', 
+    { preHandler: [server.auth] }, 
+    async (request, reply) =>{
         const {code} = request.query
+        const userId = request.user.id;
 
         console.log("CODE", code)
 
@@ -38,7 +40,7 @@ export default async function miele(server) {
         })
         });
         const tokens = await response.json();
-        console.log("tok tok", tokens, "\n", process.env.MIELE_ID, "\n", process.env.MIELE_SECRET)
+        // console.log("tok tok", tokens, "\n", process.env.MIELE_ID, "\n", process.env.MIELE_SECRET)
         if (tokens.error)
         {
             console.log(tokens.message + " - " + tokens.error)
@@ -47,14 +49,14 @@ export default async function miele(server) {
         const today = new Date()
         today.setHours(today.getHours() + 2)
         await server.prisma.miele_Token.upsert({
-            where: { userId: 1 }, //TODO changer userId en Id utilisateur
+            where: { userId: userId }, //TO DO changer userId en Id utilisateur
             update: {
             accessToken: tokens.access_token,
             refreshToken: tokens.refresh_token,
             expiresAt: new Date(today + tokens.expires_in * 1000)
             },
             create: {
-            userId: 1,
+            userId: userId,
             accessToken: tokens.access_token,
             refreshToken: tokens.refresh_token,
             expiresAt: new Date(today + tokens.expires_in * 1000)
@@ -64,9 +66,13 @@ export default async function miele(server) {
         return reply.redirect('https://localhost:3000/schedule?miele=success');
     })
 
-    server.get('/miele/devices', async (request, reply) => {
+    server.get('/miele/devices', 
+    { preHandler: [server.auth] }, 
+    async (request, reply) => {
         // 1. Récupère le token en DB via Prisma
-        const tokenData = await server.prisma.miele_Token.findFirst();
+        const userId = request.user.id;
+        // const tokenData = await server.prisma.miele_Token.findFirst();
+        const tokenData = await server.prisma.miele_Token.findUnique({ where: { id : userId }})
         //TO DO pas le premier mais celui lier a l'utilisateur
         
         const response = await fetch('https://api.mcs3.miele.com/v1/devices', {
