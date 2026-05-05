@@ -8,8 +8,11 @@ import Layout from './models/layout.jsx';
 
 import Login from './pages/login.jsx'
 import Dashboard from './pages/dashboard.jsx';
+
 import Table from './pages/Solar_wash/table.jsx'
 import Schedule from './pages/Solar_wash/schedule.jsx'
+
+import Cams from './pages/Door_cam/Cams.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -19,6 +22,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/schedule" element={<ProtectedRoute><Schedule /></ProtectedRoute>} />
           <Route path="/table" element={<ProtectedRoute><Table /></ProtectedRoute>} />
+          <Route path="/cams" element={<ProtectedRoute><Cams /></ProtectedRoute>} />
         </Route>
       </Routes>
     </BrowserRouter>,

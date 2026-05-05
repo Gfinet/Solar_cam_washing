@@ -6,6 +6,7 @@ const Layout = () => {
     <div style={styles.wrapper}>
       <header style={styles.header}>
         <h1>Solar'Cams</h1>
+        <script src="https://open.ezvizlife.com/sdk/js/4.3/ezuikit.js"></script>
       </header>
       
       <main style={styles.content}>

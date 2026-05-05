@@ -6,7 +6,7 @@ import { Fetches } from '../models/fetchData';
 import '../App.css'
 
 function Dashboard() {
-  const {goToTable, goToSchedule, Logout} = AppNavigation();
+  const {goToTable, goToSchedule, goToCams, Logout} = AppNavigation();
   const {fetchTemp, fetchWatt} = Fetches();
 
   const [temp, setTemp] = useState([]);
@@ -56,7 +56,7 @@ function Dashboard() {
             width: '300px', 
             margin: '0 auto' 
             }}>
-            <button style={styles.button} onClick={goToTable}>Voir les tableaux de données</button>
+            <button style={styles.button} onClick={goToCams}>Voir la camera</button>
             <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
           </div>
           <div style={{ 

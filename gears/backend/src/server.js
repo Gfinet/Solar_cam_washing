@@ -7,6 +7,7 @@ import prisma from './plugins/prisma.js'
 import mb from './plugins/modbus_solar.js'
 import weather from './plugins/weather.js'
 import jwt from './plugins/jwt_auth.js'
+import ezviz from './plugins/ezviz_cam.js'
 
 import routes from './routes/index.js'
 
