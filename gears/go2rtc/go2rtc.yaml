@@ -1,0 +1,5 @@
+streams:
+  camera_parents: 
+    - rtsp://host.docker.internal:8554/camera_test
+  # rtsp://admin:MOT_DE_PASSE@IP_CAMERA:554/ch1/main
+    - - "ffmpeg:camera_parents#audio=opus"
