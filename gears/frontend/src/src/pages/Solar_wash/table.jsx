@@ -54,7 +54,7 @@ function Table() {
             color="#fbbf24" 
           />
           <MyBarChart
-            title="Electricite des panneaux"
+            title="Rayonnement solaire"
             data={temp} 
             valx="time"    
             valy="sun"   
