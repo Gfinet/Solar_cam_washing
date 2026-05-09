@@ -78,6 +78,13 @@ services:
         container_name: go2rtc
         networks:
             - Solar_Cam
+        env_file:
+            - gears/go2rtc/.env  # Ceci charge automatiquement toutes les variables du .env
+        # environment:
+        #     - GARAGE_USER=${GARAGE_USER}
+        #     - GARAGE_CODE=${GARAGE_CODE}
+        #     - GARAGE_IP=${GARAGE_IP}
+        #     - GARAGE_PORT=${GARAGE_PORT}
         ports:
             # - "8554:8554"
             - "1984:1984"
