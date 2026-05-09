@@ -8,5 +8,6 @@ gears/backend/package-lock.json
 gears/db/data/
 
 */.env
+gears/go2rtc/.env
 
 ffmpeg_serv

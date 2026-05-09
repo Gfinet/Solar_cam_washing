@@ -6,7 +6,7 @@ import net from 'net'
 const realTimeRegister = 100;
 
 export default fp(async (server) => {
-    const option = {'host' : "192.168.0.230" /*ip ondulateur*/, 'port' : 5020} //10.19.1.163
+    const option = {'host' : "192.168.0.230" /*ip ondulateur*/, 'port' : 5020} //502
     const socket = new net.Socket()
     const mb = new Modbus.client.TCP(socket)
     let timer;

@@ -8,7 +8,15 @@ import '../../App.css'
 
 function Cams()
 {
-    const streamUrl = "/go2rtc/webrtc.html?src=camera_parents";
+    const getCameras = async () => {
+        const response = await fetch('/go2rtc/api/streams');
+        const data = await response.json();
+        console.log(data)
+        // data ressemblera à : [{ "name": "garage", "status": "online", ... }, { "name": "maison", ... }]
+        return data;
+    };
+    const streamGarage = "/go2rtc/webrtc.html?src=garage";
+    const streamSonette="/go2rtc/webrtc.html?src=sonette"
     const {goToDash, goToTable, Logout} = AppNavigation();
 
     const OpenDoor = () => {console.log("Porte ouverte")};
@@ -30,7 +38,28 @@ function Cams()
             boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
         }}>
             <iframe
-            src={streamUrl}
+            src={streamGarage}
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                border: 'none'
+            }}
+            allow="autoplay"
+            />
+        </div>
+        <div style={{ 
+            position: 'relative', 
+            paddingBottom: '56.25%', // Ratio 16:9
+            height: 0, 
+            overflow: 'hidden',
+            borderRadius: '12px',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+        }}>
+            <iframe
+            src={streamSonette}
             style={{
                 position: 'absolute',
                 top: 0,
@@ -56,7 +85,7 @@ function Cams()
                 textAlign: 'center',
                 position: 'center'
             }}>
-                <button style={{...styles.button, background: '#00ff33'}} onClick={OpenDoor}>Ouvrir la porte</button>
+                <button style={{...styles.button, background: '#00ff33'}} onClick={getCameras}>Ouvrir la porte</button>
                 <button style={{...styles.button, background: '#007bff'}} onClick={goToDash}>Revenir à l'acceuil</button>
             </div>
         </div>
