@@ -49,6 +49,7 @@ export const Fetches = () => {
       setWatt(val);
     })}
 
+   
 
     const fetchWashingProg = (setWash) => {
       fetch('/api/wash/list', {
