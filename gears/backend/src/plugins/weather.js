@@ -10,8 +10,8 @@ export default fp(async (server) => {
         console.log("FIRST")
         await fetchWeatherData(server);
     }
-    cron.schedule('0 12 * * *', async () => {
-        console.log('Il est midi ! Récupération de la météo...');
+    cron.schedule('0 6 * * *', async () => {
+        console.log('Il est 6h ! Récupération de la météo...');
         await fetchWeatherData(server);
         }, 
         {
