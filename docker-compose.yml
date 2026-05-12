@@ -72,6 +72,22 @@ services:
         ports:
             - "5432:5432"
         restart: always
+
+    tailscale:
+        image: tailscale/tailscale:latest
+        container_name: tailscale
+        hostname: Solar'Cams
+        environment:
+            - TS_STATE_DIR=/var/lib/tailscale
+            - TS_USERSPACE=false
+        volumes:
+            - ./gears/tailscale/tailscale_data:/var/lib/tailscale
+            - /dev/net/tun:/dev/net/tun
+        cap_add:
+            - NET_ADMIN
+            - SYS_MODULE
+        restart: unless-stopped
+        
     
     go2rtc:
         image: alexxit/go2rtc
@@ -79,14 +95,8 @@ services:
         networks:
             - Solar_Cam
         env_file:
-            - gears/go2rtc/.env  # Ceci charge automatiquement toutes les variables du .env
-        # environment:
-        #     - GARAGE_USER=${GARAGE_USER}
-        #     - GARAGE_CODE=${GARAGE_CODE}
-        #     - GARAGE_IP=${GARAGE_IP}
-        #     - GARAGE_PORT=${GARAGE_PORT}
+            - gears/go2rtc/.env
         ports:
-            # - "8554:8554"
             - "1984:1984"
             - "8555:8555"
         volumes:
