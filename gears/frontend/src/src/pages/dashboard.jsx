@@ -1,0 +1,88 @@
+import { useState, useEffect } from 'react'
+import { MyBarChart } from '../models/charts'
+import { AppNavigation } from '../models/navigation';
+import { Fetches } from '../models/fetchData';
+
+import '../App.css'
+
+function Dashboard() {
+  const {goToTable, goToSchedule, goToCams, Logout} = AppNavigation();
+  const {fetchTemp, fetchWatt} = Fetches();
+
+  const [temp, setTemp] = useState([]);
+
+  useEffect(() => {
+    fetchTemp(setTemp);
+  }, []);
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <h1>Bienvenue sur l'espace Parents</h1>
+      <div style={{ maxWidth: 600, margin: '0 auto' }}>
+    
+        {/* 1. Le Graphique prend toute la largeur du conteneur */}
+        <div>
+          <MyBarChart
+            data={temp} 
+            valx="time"    
+            valy="temperature"   
+            color="#fbbf24"
+            unit='°'
+          />
+        </div>
+
+        {/* 2. Les Boutons rangés en colonne (ou en ligne) */}
+        <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            // justifyContent: 'center',
+            textAlign: 'center',
+            gap: '1rem'
+          }}>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'row', 
+            gap: '1rem', 
+            width: '300px', 
+            margin: '0 auto' 
+            }}>
+            <button style={styles.button} onClick={goToTable}>Voir les tableaux de données</button>
+            <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'row', 
+            gap: '1rem', 
+            width: '300px', 
+            margin: '0 auto' 
+            }}>
+            <button style={styles.button} onClick={goToCams}>Voir la camera</button>
+            <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            width: '300px', 
+            margin: '0 auto' 
+            }}>
+            <button style={styles.button} onClick={Logout}>Se Déconnecter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  button: { 
+    padding: '10px', 
+    background: '#007bff', 
+    color: 'white', 
+    border: 'none', 
+    borderRadius: '5px', 
+    width: '300px', 
+    cursor: 'pointer' 
+  }
+};
+
+export default Dashboard

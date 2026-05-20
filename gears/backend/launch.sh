@@ -4,10 +4,12 @@ rm -f package-lock.json
 ###DELETE
 
 npm i 
-npm update
+# npm update
 
+sleep 5
 npx prisma generate
-npx prisma db push
+npx prisma db push --accept-data-loss
+sleep 5
 
 # echo "URL:" $URL
 
