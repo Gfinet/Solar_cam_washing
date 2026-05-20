@@ -4,7 +4,7 @@ services:
         build:
             context: gears/nginx/.
             dockerfile: Dockerfile
-        container_name: nginx_t
+        container_name: nginx
         image: nginx_t:0.0.1 
         networks:
             - Solar_Cam
@@ -26,7 +26,7 @@ services:
             - /data/node_modules
         environment:
             - APP_MODE=${APP_MODE}
-            - DATABASE_URL=postgresql://user_admin:mon_password_secret@db:5432/db?schema=public
+            - DATABASE_URL=postgresql://user_admin:mon_password_secret@db:5432/db
         image:  backend
         networks:
             - Solar_Cam
@@ -71,6 +71,36 @@ services:
             - Solar_Cam
         ports:
             - "5432:5432"
+        restart: always
+
+    tailscale:
+        image: tailscale/tailscale:latest
+        container_name: tailscale
+        hostname: Solar'Cams
+        environment:
+            - TS_STATE_DIR=/var/lib/tailscale
+            - TS_USERSPACE=false
+        volumes:
+            - ./gears/tailscale/tailscale_data:/var/lib/tailscale
+            - /dev/net/tun:/dev/net/tun
+        cap_add:
+            - NET_ADMIN
+            - SYS_MODULE
+        restart: unless-stopped
+        
+    
+    go2rtc:
+        image: alexxit/go2rtc
+        container_name: go2rtc
+        networks:
+            - Solar_Cam
+        env_file:
+            - gears/go2rtc/.env
+        ports:
+            - "1984:1984"
+            - "8555:8555"
+        volumes:
+            - ./gears/go2rtc/go2rtc.yaml:/config/go2rtc.yaml
         restart: always
     
 

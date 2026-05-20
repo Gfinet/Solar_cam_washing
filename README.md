@@ -12,6 +12,7 @@ This is a personnal project wich will link Solar Panels (MARQUE) with washing ma
 ## Frontend
 
 - React 
+- React router `npm install react-router-dom`
 
 ## DB
 
@@ -20,3 +21,12 @@ This is a personnal project wich will link Solar Panels (MARQUE) with washing ma
 ## Proxy
 
 - Nginx
+
+
+
+# Commande importantes
+
+- Pour afficher la db
+	npx prisma studio --url="postgresql://user_admin:mon_password_secret@localhost:5432/db"
+- Pour lancer le flux rts avec ffmpeg
+	ffmpeg -re -f lavfi -i testsrc=size=1280x720:rate=30 -c:v libx264 -preset ultrafast -tune zerolatency -pix_fmt yuv420p -an -g 30 -f rtsp rtsp://localhost:8554/camera_test

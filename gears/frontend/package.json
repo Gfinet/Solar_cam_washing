@@ -1,0 +1,10 @@
+{
+	"private": true,
+	"workspaces": [
+		"/data"
+	],
+	"scripts": {
+		"dev": "npm run dev -ws",
+		"start": "npm run start -ws"
+	}
+}
