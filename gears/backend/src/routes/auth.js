@@ -5,10 +5,11 @@ export default async function auth(server) {
 
     server.post('/login', async (request, reply) => {
         const { username, password } = request.body
+        // console.log("user", username, password)
         const user = await server.prisma.user.findUnique({ where: { username: username }})
         if (user)
         {
-            if (bcrypt.compare(user.password_hash, password))
+            if (await bcrypt.compare(password, user.password_hash))
             {
                 const token = server.jwt.sign({ id: user.id, name: user.username },{ expiresIn: '7d' });
                 return { success: true, token: token }

@@ -4,8 +4,11 @@ import cron from 'node-cron';
 
 
 export default fp(async (server) => {
-    const count = await server.prisma.weather_Forecast.count();
-    if (count === 0)
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+
+    const dataToday = await server.prisma.weather_Forecast.findMany({where: {time: {gte: todayStart}}});
+    if (dataToday.length === 0)
     {
         console.log("FIRST")
         await fetchWeatherData(server);

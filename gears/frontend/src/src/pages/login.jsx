@@ -15,7 +15,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Tentative de connexion avec :", credentials);
+        console.log("Tentative de connexion avec :", credentials, JSON.stringify(credentials));
         
 
         try {
