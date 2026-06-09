@@ -1,8 +1,7 @@
-const token = localStorage.getItem('token');
-
 export const Fetches = () => {
 
     const fetchTemp = (setTemp) => {
+      const token = localStorage.getItem('token');
         fetch('/api/temptoday',{
       method: 'GET',
       headers: {
@@ -26,6 +25,7 @@ export const Fetches = () => {
     })}
 
     const fetchWatt = (setWatt) => {
+      const token = localStorage.getItem('token');
         fetch('/api/mbtoday',{
       method: 'GET',
       headers: {
@@ -52,6 +52,7 @@ export const Fetches = () => {
    
 
     const fetchWashingProg = (setWash) => {
+      const token = localStorage.getItem('token');
       fetch('/api/wash/list', {
         method: 'POST',
         body: 5,

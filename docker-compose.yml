@@ -6,12 +6,8 @@ services:
             dockerfile: Dockerfile
         container_name: nginx
         image: nginx_t:0.0.1 
-        networks:
-            - Solar_Cam
-        ports:
-            - 8080:80
-            - 3000:443
         restart: on-failure
+        network_mode: "service:tailscale" 
         depends_on:
             - backend
             - frontend
@@ -76,16 +72,16 @@ services:
     tailscale:
         image: tailscale/tailscale:latest
         container_name: tailscale
-        hostname: Solar'Cams
-        environment:
-            - TS_STATE_DIR=/var/lib/tailscale
-            - TS_USERSPACE=false
+        hostname: Solar-Cams
+        env_file: gears/tailscale/.env
         volumes:
             - ./gears/tailscale/tailscale_data:/var/lib/tailscale
             - /dev/net/tun:/dev/net/tun
         cap_add:
             - NET_ADMIN
             - SYS_MODULE
+        networks:
+            - Solar_Cam
         restart: unless-stopped
         
     

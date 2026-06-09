@@ -11,7 +11,7 @@ export default async function auth(server) {
         end.setHours(23, 0, 0, 0);
         // console.log(now, start, end, "\n", now.getDate())
         const today = await server.prisma.weather_Forecast.findMany({ where: { time: {gte : start, lte: end }}, orderBy: {time: 'asc'}})
-        // console.log("Waza", today)
+        console.log("Waza", today)
         return {success : true, message: today}
     })
 }
