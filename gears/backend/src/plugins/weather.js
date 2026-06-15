@@ -10,16 +10,9 @@ export default fp(async (server) => {
     const dataToday = await server.prisma.weather_Forecast.findMany({where: {time: {gte: todayStart}}});
     if (dataToday.length === 0)
     {
-        console.log("FIRST")
+        console.log("Getting new weather data")
         await fetchWeatherData(server);
     }
-    cron.schedule('0 6 * * *', async () => {
-        console.log('Il est 6h ! Récupération de la météo...');
-        await fetchWeatherData(server);
-        }, 
-        {
-            timezone: "Europe/Paris" // Très important pour le changement d'heure !
-    });
 
     async function fetchWeatherData(server) {
         const url = "https://api.open-meteo.com/v1/forecast?latitude=50.89&longitude=4.37&hourly=temperature_2m,shortwave_radiation&timezone=Europe/Paris";

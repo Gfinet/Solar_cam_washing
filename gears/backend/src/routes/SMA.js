@@ -10,10 +10,11 @@ let uri = "v1/devices/14496865/lean"
 export default async function getVal(server)
 {
     server.get('/sma', async (request, reply)=>
-    {    
+    {  
+        let data = {};  
         try
         {
-            const response = fetch (base_url, {
+            const response = await fetch (base_url, {
                 method: 'GET',
                 headers: {
                 'Authorization': 'Bearer test1234', // À récupérer sur le Swagger
@@ -24,7 +25,7 @@ export default async function getVal(server)
                 throw new Error(`Erreur: ${response.status}`);
             }
 
-            const data = await response.json();
+            data = await response.json();
             console.log("Installations trouvées :", data);
         } 
         catch (error) 

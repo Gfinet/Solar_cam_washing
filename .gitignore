@@ -6,7 +6,7 @@
 gears/backend/package-lock.json
 
 gears/db/data/
-
+gears/nginx/crt/*
 */.env
 */*/.env
 gears/go2rtc/.env
