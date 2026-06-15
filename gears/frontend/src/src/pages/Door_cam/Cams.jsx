@@ -15,8 +15,8 @@ function Cams()
         // data ressemblera à : [{ "name": "garage", "status": "online", ... }, { "name": "maison", ... }]
         return data;
     };
-    const streamGarage = "/go2rtc/webrtc.html?src=garage";
-    const streamSonette="/go2rtc/webrtc.html?src=sonette"
+    const streamGarage = "/go2rtc/webrtc.html?src=garage&mode=ws";
+    const streamSonette="/go2rtc/webrtc.html?src=sonette&mode=ws"
     const {goToDash, goToTable, Logout} = AppNavigation();
 
     const OpenDoor = () => {console.log("Porte ouverte")};

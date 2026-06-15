@@ -1,3 +1,9 @@
+webrtc:
+  listen: ":8555"
+  candidates:
+    - 100.86.53.87
+    - lan
+
 streams:
   sonette: 
     - "rtsp://${USER}:${SONETTE_CODE}@${SONETTE_IP}:${PORT}/h264/ch1/main/av_stream"

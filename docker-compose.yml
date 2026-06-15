@@ -88,13 +88,12 @@ services:
     go2rtc:
         image: alexxit/go2rtc
         container_name: go2rtc
-        networks:
-            - Solar_Cam
+        network_mode: "service:tailscale"
         env_file:
             - gears/go2rtc/.env
-        ports:
-            - "1984:1984"
-            - "8555:8555"
+        # ports:
+        #     - "1984:1984"
+        #     - "8555:8555"
         volumes:
             - ./gears/go2rtc/go2rtc.yaml:/config/go2rtc.yaml
         restart: always

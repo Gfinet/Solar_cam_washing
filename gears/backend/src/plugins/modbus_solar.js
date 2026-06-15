@@ -24,21 +24,35 @@ export default fp (async (server) =>
             body : JSON.stringify({"destDev":[],"keys":["6100_40263F00", "6400_00262200", "6380_40251E00"]})
         })
         const data = await response.json();
+        console.log("DATA ", process.env.SMA_ID, data.result)
+        /*
+        DATA  {
+            '0156-76BCCE5E': {
+                '6100_40263F00': { '1': [Array] },
+                '6400_00262200': { '1': [Array] },
+                '6380_40251E00': { '1': [Array] }
+                }
+backend    | }
+        */
         if (data.err)
             return data
         const volt = data.result[process.env.SMA_ID]["6100_40263F00"]["1"];
         const Val = {
             total : data.result[process.env.SMA_ID]["6400_00262200"]["1"][0].val,
             instant : data.result[process.env.SMA_ID]["6100_40263F00"]["1"][0].val,
-            volt : [volt[0].val, volt[1].val]
+            volt : [volt[0].val, volt[1]]
         }
+        console.log("Val", Val)
         return Val
     }
 
     let sid = null
-    const count = await server.prisma.weather_Forecast.count();
-    if (count === 0)
-        await fetchSolarData(server);
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const count = await server.prisma.solar_Data.findMany({where: {hour: {gte: todayStart}}});
+      
+    // if (count.length === 0)
+    await fetchSolarData(server);
     
     cron.schedule('0 * * * *', async () => {
         await fetchSolarData(server);
@@ -47,13 +61,16 @@ export default fp (async (server) =>
     async function fetchSolarData(server)
     {
         try {
-            const lastRecord = await server.prisma.Solar_Data.findFirst({orderBy: { timestamp: 'desc' } })
+            const lastRecord = await server.prisma.Solar_Data.findFirst({orderBy: { hour: 'desc' } })
             const lastWatt = lastRecord?.total || 0
+            
+            console.log("WATT", lastWatt, lastRecord)
 
             let data = await getValuesSMA(sid);
             if(!data || data.err)
             {
                 sid = await connectSMA();
+                console.log("sid", sid)
                 data = await getValuesSMA(sid);
             }
 

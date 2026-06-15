@@ -45,6 +45,21 @@ function Login() {
         }
     };
 
+
+    
+    // Exemple d'utilisation dans ton code Front (ex: au clic sur un bouton "Activer les alertes")
+    // const options = {
+    // userVisibleOnly: true,
+    // applicationServerKey: urlBase64ToUint8Array('MALE_CLE_PUBLIQUE_VAPID_SUPER_LONGUE_GENEREE_PAR_LE_BACK')
+    // };
+
+    // registration.pushManager.subscribe(options)
+    // .then((subscription) => {
+    //     // C'est cet objet "subscription" qu'il faut envoyer à ton Fastify via un fetch POST 
+    //     // pour le sauvegarder dans ta base PostgreSQL.
+    //     console.log("Abonnement réussi ! Voici l'objet à envoyer au Back :", JSON.stringify(subscription));
+    // });
+
     return (
         
         <div style={styles.container}>
