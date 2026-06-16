@@ -29,7 +29,7 @@ const styles = {
     textAlign: 'center',
     borderBottom: '1px solid #333'
   },
-  content: { flex: 1, padding: '20px' }
+  content: { flex: 1 }
 };
 
 export default Layout;
