@@ -1,4 +1,0 @@
-{"logtail":{"client_time":"2026-06-16T15:24:10.567011713Z","proc_id":1037310007,"proc_seq":2164},"v":2,"text":"wg: [U0Qo5] - Receiving keepalive packet\n"}
-{"logtail":{"client_time":"2026-06-16T15:24:10.567391296Z","proc_id":1037310007,"proc_seq":2165},"v":2,"text":"wg: [U0Qo5] - Received handshake initiation\n"}
-{"logtail":{"client_time":"2026-06-16T15:24:10.567581796Z","proc_id":1037310007,"proc_seq":2166},"v":2,"text":"wg: [U0Qo5] - Sending handshake response\n"}
-{"logtail":{"client_time":"2026-06-16T15:24:10.570054046Z","proc_id":1037310007,"proc_seq":2167},"v":2,"text":"wg: [U0Qo5] - Receiving keepalive packet\n"}
