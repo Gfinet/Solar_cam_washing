@@ -46,10 +46,10 @@ function Schedule() {
       </div>
         
       <div style={washHeaderDiv}>
-        <span style={washHeaderCell}>Date</span>
-        <span style={washHeaderCell}>Type de programme</span>
-        <span style={washHeaderCell}>Autheur</span>
-        <span style={washHeaderCell}>Terminé?</span>
+        <span style={{...washHeaderCell, width:'20%'}}>Date</span>
+        <span style={{...washHeaderCell, width:'30%'}}>Programme</span>
+        <span style={{...washHeaderCell, width:'30%'}}>Autheur</span>
+        <span style={{...washHeaderCell, width:'20%', justifyContent:'flex-end'}}>Terminé?</span>
       </div>
 
       {wash.slice(0, 5).map((program) => (
@@ -63,7 +63,7 @@ function Schedule() {
             Type {program.type}
           </span>
           <span style={{ fontWeight: 'bold', color: '#555' }}>
-            par: {program.author.username}
+            {program.author.username}
           </span>
           <span style={{ 
             padding: '4px 8px', 
@@ -97,7 +97,7 @@ const washRowDiv = {
   borderRadius: '8px',
   marginBottom: '8px',
   margin: '0 auto',
-  width: '50%',
+  width: '90%',
 };
 
 const washHeaderDiv = {

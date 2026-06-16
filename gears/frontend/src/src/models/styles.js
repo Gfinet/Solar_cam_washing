@@ -4,7 +4,7 @@
 export const globalDiv = {
   display: 'flex',
   flexDirection: 'column',
-  padding: '2rem',
+  padding: '1rem',
 };
 
 export const buttonDiv = {
