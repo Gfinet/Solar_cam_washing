@@ -18,7 +18,11 @@ const Layout = () => {
 };
 
 const styles = {
-  wrapper: { minHeight: '100vh', display: 'flex', flexDirection: 'column' },
+  wrapper: { 
+    minHeight: '100vh', 
+    display: 'flex', 
+    flexDirection: 'column' 
+  },
   header: { 
     background: '#1a1a1a', 
     color: '#ffffff', 
