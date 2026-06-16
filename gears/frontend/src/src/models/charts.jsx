@@ -1,6 +1,5 @@
 // src/Chart.jsx
 import { LabelList, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Outlet } from 'react-router-dom';
 
 export function MyBarChart({title, data, valx, valy, unit})
 {
