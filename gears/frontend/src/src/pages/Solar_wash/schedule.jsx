@@ -71,7 +71,7 @@ function Schedule() {
         maxWidth : "50%"
       }}>
         
-        <span style={{ color: '#000000', fontWeight: 'bold', fontSize: '0.9rem' }}>
+        <span style={{ fontWeight: 'bold', color: '#000000',  fontSize: '0.9rem' }}>
             Date
           </span>
 
@@ -164,7 +164,8 @@ const styles = {
     borderRadius: '5px', 
     cursor: 'pointer',
     height: '50px'
-  }
+  },
+  
 };
 
 export default Schedule

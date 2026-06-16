@@ -18,13 +18,21 @@ export default fp (async (server) =>
         return sid
     }
     const getValuesSMA = async (sid) => {
-        const response = await fetch(`http://192.168.0.194/dyn/getValues.json?sid=${sid}`, {
-            method : 'POST',
-            headers : {"Content-Type": "application/json"},
-            body : JSON.stringify({"destDev":[],"keys":["6100_40263F00", "6400_00262200", "6380_40251E00"]})
-        })
-        const data = await response.json();
-        console.log("DATA ", process.env.SMA_ID, data.result)
+        try {
+            const response = await fetch(`http://192.168.0.194/dyn/getValues.json?sid=${sid}`, {
+                method : 'POST',
+                headers : {"Content-Type": "application/json"},
+                body : JSON.stringify({"destDev":[],"keys":["6100_40263F00", "6400_00262200", "6380_40251E00"]})
+            })
+            console.log("RESP ", response)
+            const data = await response.json();
+            console.log("DATA ", process.env.SMA_ID, data.result)
+        } catch (error) {
+            console.error('Erreur lors de la connexion SMA:\n\t', error.cause.message);
+            return null
+        }
+        
+        
         /*
         DATA  {
             '0156-76BCCE5E': {
@@ -32,7 +40,7 @@ export default fp (async (server) =>
                 '6400_00262200': { '1': [Array] },
                 '6380_40251E00': { '1': [Array] }
                 }
-backend    | }
+            }
         */
         if (data.err)
             return data
@@ -51,11 +59,11 @@ backend    | }
     todayStart.setHours(0, 0, 0, 0);
     const count = await server.prisma.solar_Data.findMany({where: {hour: {gte: todayStart}}});
       
-    // if (count.length === 0)
-    await fetchSolarData(server);
-    
+    // Lance le fetch initial sans bloquer l'initialisation du plugin
+    fetchSolarData(server).catch(err => console.error('Fetch solaire initial échoué:', err.cause.message));
+
     cron.schedule('0 * * * *', async () => {
-        await fetchSolarData(server);
+        fetchSolarData(server).catch(err => console.error('Fetch solaire échoué:', err.cause.message));
     })
 
     async function fetchSolarData(server)
@@ -67,7 +75,8 @@ backend    | }
             console.log("WATT", lastWatt, lastRecord)
 
             let data = await getValuesSMA(sid);
-            if(!data || data.err)
+            if(!data)   return;
+            if(data.err)
             {
                 sid = await connectSMA();
                 console.log("sid", sid)
