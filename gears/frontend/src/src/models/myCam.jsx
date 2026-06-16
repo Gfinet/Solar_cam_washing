@@ -1,3 +1,12 @@
+export function MyCam({source})
+{
+	return (
+		<div style = {styles.cam}>
+			<iframe src={source} style={styles.iframe} allow="autoplay"/>
+		</div>
+	)
+}
+
 const styles = {
 	cam : {
 	position: 'relative', 
@@ -15,13 +24,4 @@ const styles = {
 		height: '100%',
 		border: 'none'
 	},
-	}
-
-export function MyCam({source})
-{
-	return (
-		<div style = {styles.cam}>
-			<iframe src={source} style={styles.iframe} allow="autoplay"/>
-		</div>
-	)
 }

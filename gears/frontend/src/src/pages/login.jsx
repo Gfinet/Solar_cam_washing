@@ -17,7 +17,6 @@ function Login() {
         e.preventDefault();
         console.log("Tentative de connexion avec :", credentials, JSON.stringify(credentials));
         
-
         try {
             const response = await fetch('/api/login', {
                 method: 'POST',
@@ -26,7 +25,6 @@ function Login() {
                 },
                 body: JSON.stringify(credentials),
             })
-
             const data = await response.json();
 
             if (response.ok && data.success)
@@ -44,21 +42,6 @@ function Login() {
             alert("Impossible de contacter le serveur.");
         }
     };
-
-
-    
-    // Exemple d'utilisation dans ton code Front (ex: au clic sur un bouton "Activer les alertes")
-    // const options = {
-    // userVisibleOnly: true,
-    // applicationServerKey: urlBase64ToUint8Array('MALE_CLE_PUBLIQUE_VAPID_SUPER_LONGUE_GENEREE_PAR_LE_BACK')
-    // };
-
-    // registration.pushManager.subscribe(options)
-    // .then((subscription) => {
-    //     // C'est cet objet "subscription" qu'il faut envoyer à ton Fastify via un fetch POST 
-    //     // pour le sauvegarder dans ta base PostgreSQL.
-    //     console.log("Abonnement réussi ! Voici l'objet à envoyer au Back :", JSON.stringify(subscription));
-    // });
 
     return (
         
@@ -97,12 +80,44 @@ function Login() {
 }
 
 const styles = {
-  title : {display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' },
-  container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' },
-  form: { padding: '2rem', border: '1px solid #ccc', borderRadius: '10px', width: '300px', background: '#000' },
-  inputGroup: { marginBottom: '1rem', textAlign: 'left' },
-  input: { width: '100%', padding: '8px', marginTop: '5px', boxSizing: 'border-box' },
-  button: { width: '100%', padding: '10px', background: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }
+    title : {
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '80vh' 
+    },
+    container: { 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '80vh' 
+        },
+    form: { 
+        padding: '2rem', 
+        border: '1px solid #ccc', 
+        borderRadius: '10px', 
+        width: '300px', 
+        background: '#000' 
+        },
+    inputGroup: { 
+        marginBottom: '1rem', 
+        textAlign: 'left' 
+        },
+    input: { 
+        width: '100%', 
+        padding: '8px', 
+        marginTop: '5px', 
+        boxSizing: 'border-box' 
+        },
+    button: { 
+        width: '100%', 
+        padding: '10px', 
+        background: '#007bff', 
+        color: 'white', 
+        border: 'none', 
+        borderRadius: '5px', 
+        cursor: 'pointer' 
+    },
 };
 
 
