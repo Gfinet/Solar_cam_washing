@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { MyLineChart, MyBarChart } from '../../models/charts'
+import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
 import { AppNavigation } from '../../models/navigation';
 import { Fetches } from '../../models/fetchData';
 import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton } from '../../models/styles';
@@ -14,12 +14,34 @@ function Schedule() {
   const [temp, setTemp] = useState([]);
   const [watt, setWatt] = useState([]);
   const [wash, setWash] = useState([])
-  
+
+  const WINDOW = 4; // ±6 points de chaque côté
+  const [tempCenter, setTempCenter] = useState(WINDOW);
+  const [wattCenter, setWattCenter] = useState(WINDOW);
+
   useEffect(() => {
-    fetchTemp(setTemp);
-    fetchWatt(setWatt);
+    fetchTemp(data => {
+      setTemp(data);
+      const idx14 = data.findIndex(d => d.time.startsWith('14'));
+        setTempCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+    });
+    fetchWatt(data => {
+      setWatt(data);
+      const idx14 = data.findIndex(d => d.time.startsWith('14'));
+      setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+    });
     fetchWashingProg(setWash);
   }, []);
+
+  const tempSlice = temp.slice(
+    Math.max(0, tempCenter - WINDOW),
+    Math.min(temp.length, tempCenter + WINDOW + 1)
+  );
+  const wattSlice = watt.slice(
+    Math.max(0, wattCenter - WINDOW),
+    Math.min(watt.length, wattCenter + WINDOW + 1)
+  );
+  
 
   const MieleConnect = async () => {
     const token = localStorage.getItem('token');
@@ -31,18 +53,32 @@ function Schedule() {
     const data = await response.json();
     window.location.href = data.url;
   };
+
+  const chartData = {
+        //title       data     valx      valy              unit
+    w : {t : "Meteo", d: tempSlice, x:"time", y: "temperature", u:'°'},
+    e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w'},
+    r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w/m2'}
+  }
+  const c = "#fbbf24"
   
   return (
     <div style={globalDiv}>
       <h1>Bienvenue sur l'espace Parents</h1>
       <div style={buttonDiv}>
         <button style={blueButton} onClick={goToDash}>Revenir à l'acceuil</button>
-        <button style={blueButton} onClick={goToTable}>Voir les tableaux de donnéese</button>
+        <button style={blueButton} onClick={goToTable}>Tableaux de données</button>
         <button style={greyButton} onClick={Logout}>Se Déconnecter</button>
       </div>
+
+      <TimeSlider
+        data={temp} center={tempCenter}
+        onCenterChange={setTempCenter} windowSize={WINDOW}
+        label="Météo & Rayonnement"
+      />
       <div style={chartDiv}>
-        <MyBarChart  data={temp} valx="time" valy="sun"         unit="w/m2" color="#fbbf24" />
-        <MyLineChart data={watt} valx="time" valy="temperature" unit="w"    color="#fbbf24" />
+        <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
+        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} />
       </div>
         
       <div style={washHeaderDiv}>
@@ -72,7 +108,7 @@ function Schedule() {
             backgroundColor: program.finished ? '#d4edda' : '#fff3cd',
             color: program.finished ? '#155724' : '#856404'
           }}>
-            {wash[0].finished ? 'Terminé' : 'En cours'}
+            {program.finished ? 'Terminé' : 'En cours'}
           </span>
         </div>
       ))}

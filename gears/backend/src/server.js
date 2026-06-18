@@ -69,7 +69,8 @@ const serverOn = async () => {
                 data: {
                     type: i%3, 
                     time: new Date(),
-                    authorId: 1 }})
+                    authorId: 1,
+                    finished: (i%2 === 0) }})
         }
     }
 

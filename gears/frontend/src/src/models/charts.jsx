@@ -1,6 +1,7 @@
 // src/Chart.jsx
 import { LabelList, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+
 export function MyBarChart({title, data, valx, valy, unit})
 {
   return (
@@ -50,6 +51,47 @@ export function MyLineChart ({title, data, valx, valy})
     </div>
   )
 }
+
+export function TimeSlider({ data, center, onCenterChange, windowSize, label }) {
+  if (!data || data.length === 0) return null;
+  return (
+    <div style={sliderContainer}>
+      <span style={sliderLabel}>{label}</span>
+      <div style={sliderRow}>
+        <span style={sliderBound}>{data[0]?.time}</span>
+        <input
+          type="range"
+          min={windowSize}
+          max={data.length - (windowSize + 1)}
+          value={center}
+          onChange={e => onCenterChange(Number(e.target.value))}
+          style={sliderInput}
+        />
+        <span style={sliderBound}>{data[data.length - 1]?.time}</span>
+      </div>
+      <span style={sliderCurrent}>
+        Centré sur {data[center]?.time} · ±{windowSize}h
+      </span>
+    </div>
+  );
+}
+
+const sliderContainer = {
+  display: 'flex', flexDirection: 'column', alignItems: 'center',
+  padding: '0.5rem 1rem', margin: '0.5rem 0',
+  backgroundColor: '#5b5959ff', borderRadius: '8px',
+  width: '90%', alignSelf: 'center',
+};
+const sliderRow = {
+  display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%',
+};
+const sliderInput = {
+  flex: 1, accentColor: '#007bff',
+  height: '6px', cursor: 'pointer',
+};
+const sliderLabel  = { fontWeight: 'bold', color: '#000000ff', marginBottom: '4px' };
+const sliderBound  = { fontSize: '0.8rem', color: '#000000ff', whiteSpace: 'nowrap' };
+const sliderCurrent = { fontSize: '0.85rem', color: '#000000ff', marginTop: '4px' };
 
 const styles = {
   chart: { width: "100%", height: 300 }

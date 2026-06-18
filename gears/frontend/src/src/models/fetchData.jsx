@@ -16,7 +16,7 @@ export const Fetches = () => {
     {
       const time = new Date(data.message[i].time)
       val[i] = {
-        time : time.getUTCHours() + "h",
+        time : time.toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' }), //getUTCHours() + "h",
         temperature : data.message[i].temp,
         sun  : data.message[i].SolarRay
       }
@@ -37,7 +37,7 @@ export const Fetches = () => {
     const val = Array(data.message.length)
     for (let i=0; i<data.message.length; i++)
     {
-      let hour = data.message[i].time + 2
+      let hour = data.message[i].toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' })
       if (hour >= 24)
         hour = hour -24
       const timestr = hour + "h";
