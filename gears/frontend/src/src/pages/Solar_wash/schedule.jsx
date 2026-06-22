@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
 import { AppNavigation } from '../../models/navigation';
 import { Fetches } from '../../models/fetchData';
-import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton } from '../../models/styles';
+import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton, greenButton } from '../../models/styles';
 
 import '../../App.css'
 
@@ -17,13 +17,15 @@ function Schedule() {
   const [devices, setDevices] = useState([]);
   const [devInfo, setDevInfo] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState('/');
+  const [selectedProgram, setSelectedProgram] = useState('/');
+  const [heureCible, setHeureCible] = useState('00:00')
 
   const WIN = 4; // ±6 points de chaque côté
   const [tempCenter, setTempCenter] = useState(WIN);
   const [wattCenter, setWattCenter] = useState(WIN);
 
 
-  const handleChange = (e) =>{
+  const changeDevice = (e) =>{
     // console.log("E", e.target.value)
     setSelectedDevice(e.target.value);
     // console.log("target",selectedDevice)
@@ -33,6 +35,21 @@ function Schedule() {
       setDevInfo(null)
     console.log("devInfo",devInfo)
   };
+
+  const changeProgram = (e) => {
+    // console.log("prgm", e.target.value)
+    setSelectedProgram(e.target.value)
+  }
+
+  const handleTimeChange = (e) => {
+    console.log("time", e.target.value)
+    setHeureCible(e.target.value)
+  }
+
+  const savePrgm = () => {
+    if (selectedProgram !== "/")
+      console.log("program", selectedProgram ,"added", heureCible)
+  }
 
   useEffect(() => {
     fetchTemp(data => {
@@ -147,9 +164,9 @@ function Schedule() {
 
       <div style={formDiv}>
         <h2 style={{textAlign:'flex-start'}}> Sélectionner la machine à lancer</h2>
-        <select id="device-select" value={selectedDevice} onChange={handleChange}style={selectStyle}>
+        <select id="device-select" value={selectedDevice} onChange={changeDevice} style={selectStyle}>
           
-          <option value="/">"Num de serie - Nom - Type"</option>
+          <option value="/">Num de serie - Nom - Type</option>
           {devices.map((device) => (
             <option key={device.fabNumber} value={device.fabNumber}> 
               {device.fabNumber} - "{device.name}" - ({device.type})
@@ -158,33 +175,60 @@ function Schedule() {
         </select>
         {(selectedDevice !== "/" && devInfo !== null) && (
           <div style={Table}>
-            <div style={Cell}>
+            <div style={Row}>
               <h2 style={txt}>Infos:</h2></div>
-            <div style={Cell}>
+            <div style={Row}>
               <h2 style={txt}>Status:</h2>
               <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
             </div>
             
-            {(devInfo.state.status.value_raw > 2 &&  devInfo.state.status.value_raw < 8 )&&(
+            {(devInfo.state.status.value_raw > 1 &&  devInfo.state.status.value_raw < 8 )&&(
             <>
-              <div style={Cell}>
+              <div style={Row}>
                 <h2 style={txt}>Programme :</h2>
                 <h2 style={txt}>{devInfo.state.ProgramID.value_localized}</h2>
               </div>
               {(devInfo.state.status.value_raw === 4 && devInfo.state.startTime[0] > 0) && (
-              <>
-                <div style={Cell}>
+              //Waiting to start
+                <div style={Row}>
                   <h2 style={txt}>Temps avant lancement:</h2>
                   <h2 style={txt}>{devInfo.state.startTime[0]}h{devInfo.state.startTime[1]}</h2>
                 </div>
-              </>
               )}
               {(devInfo.state.status.value_raw === 5) && (
-              <>
-              <div style={Cell}>
+              //Running
+              <div style={Row}>
                 <h2 style={txt}>Temps restant:</h2>
                 <h2 style={txt}>{devInfo.state.remainingTime[0]}h{devInfo.state.remainingTime[1]}</h2>
               </div>
+              )}
+              {(devInfo.state.status.value_raw === 2) && (
+              //On
+              <>
+              <div style={Row}>
+                <h2 style={txt}>Choisir un programme:</h2>
+                <select id="program-select" value={selectedProgram} onChange={changeProgram}style={selectStyle}>
+                  <option value="/">Programme</option>
+                  <option>Cotons</option>
+                  <option>Synthetique</option>
+                  <option>Delicat</option>
+                  <option>Laine</option>
+                  <option>Soie</option>
+                  <option>Express 20</option>
+                  <option>Chemise</option>
+                  <option>Foncé / Jean</option>
+                  <option>Eco 40-60</option>
+                  <option>Couette</option>
+                  <option>Imperméabilisation</option>
+                </select>
+              </div>
+              <div style={Row}>
+                <h2 style={txt}>Temps avant lancement :</h2>
+                <input type="time"value={heureCible} onChange={handleTimeChange}></input>
+              </div>
+              <div style={{justifySelf :'center'}}>
+                <button style={{...greenButton, height:'10%', width:'100%'}} onClick={savePrgm}>Confirmer</button>
+                </div>
               </>
               )}
             </>
@@ -226,6 +270,7 @@ const formDiv = {
   display : 'flex',
   width : '90%',
   flexDirection: 'column',
+  justifyContent: 'center',
   textAlign : 'left'
 }
 
@@ -238,14 +283,16 @@ const selectStyle = {
 const Table = {
   width: '97%',
   backgroundColor:'grey',
+  justifyContent: 'space-between',
   borderRadius: '5px',
 }
 
-const Cell ={
+const Row ={
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  width : '100%'
+  width : 'auto',
+  height : 'auto'
 
 }
 
@@ -270,4 +317,17 @@ Miele washing machine status
 9	Programme interrupted / Interrompu
 10	Idle / Inactif
 
+
+ID Programme MieleDescription
+1 Cotons (Cottons)Le programme standard pour le linge de lit, serviettes, t-shirts.
+2 Synthétique / Froissage minimal (Minimum iron)Pour les fibres synthétiques ou mélangées.
+3 Délicat (Delicates)Pour les jupes, chemisiers, textiles fragiles.
+4 Laine (Woollens)Cycle très doux pour éviter le feutrage de la laine (lavable en machine).
+6 Soie (Silks)Pour les textiles très fragiles contenant de la soie.
+7 Express 20 Un cycle ultra-rapide (20 min) pour rafraîchir du linge peu sale.
+8 Chemises (Shirts)Réduit le froissage pour faciliter le repassage.
+9 Foncé / Jeans (Dark garments / Denim)Protège la couleur des jeans et vêtements sombres.
+10 Eco 40-60 Le programme réglementaire européen, optimisé pour l'énergie.
+21 Couettes (Down duvets)Pour les grands articles ou duvets en plumes.
+23 Imperméabilisation (Proofing)Traitement thermique pour réactiver l'effet déperlant (vêtements de sport).
 */

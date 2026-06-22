@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { getValidMieleToken } from '../plugins/mieleWashing.js';
 
 export default async function miele(server) {
     
@@ -88,16 +89,13 @@ export default async function miele(server) {
     server.get('/miele/devices', 
     { preHandler: [server.auth] }, 
     async (request, reply) => {
-        // 1. Récupère le token en DB via Prisma
         const userId = request.user.id;
-        // const tokenData = await server.prisma.miele_Token.findFirst();
-        const tokenData = await server.prisma.miele_Token.findUnique({ where: { id : userId }})
-        //TO DO pas le premier mais celui lier a l'utilisateur
+        const tokenData = await getValidMieleToken(userId, server)
         
         const response = await fetch('https://api.mcs3.miele.com/v1/short/devices?language=fr', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${tokenData.accessToken}`,
+                'Authorization': `Bearer ${tokenData}`,
                 'Content-Type': 'application/json',
                 'Accept-Language': 'fr-FR' // Pour avoir les noms des programmes en français !
             }
@@ -126,21 +124,19 @@ export default async function miele(server) {
     async (request, reply) => {
 
         //TODO quand la machine est enregistrée
-        // const userId = request.user.id;
-        // // const tokenData = await server.prisma.miele_Token.findFirst();
-        // const tokenData = await server.prisma.miele_Token.findUnique({ where: { id : userId }})
-        // //TO DO pas le premier mais celui lier a l'utilisateur
+        const userId = request.user.id;
+        const tokenData = await getValidMieleToken(userId, server)        
         
-        // const response = await fetch(`https://api.mcs3.miele.com/v1/device/${deviceId}?language=fr`, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Authorization': `Bearer ${tokenData.accessToken}`,
-        //         'Content-Type': 'application/json',
-        //         'Accept-Language': 'fr-FR' // Pour avoir les noms des programmes en français !
-        //     }
-        // });
+        const response = await fetch(`https://api.mcs3.miele.com/v1/device/${deviceId}?language=fr`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${tokenData}`,
+                'Content-Type': 'application/json',
+                'Accept-Language': 'fr-FR' // Pour avoir les noms des programmes en français !
+            }
+        });
 
-        // const devices = await response.json();
+        const devices = await response.json();
         return testDeviceMiele;
     });
 
@@ -176,7 +172,7 @@ export default async function miele(server) {
                 "key_localized": "Program name"
             },
             "status": {
-                "value_raw": 4,//"value_raw": 5,
+                "value_raw": 2,//"value_raw": 5,
                 "value_localized": "Waiting to start",//"value_localized": "Running",
                 "key_localized": "status"
             },
