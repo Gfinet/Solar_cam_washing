@@ -9,15 +9,30 @@ import '../../App.css'
 function Schedule() {
   
   const {goToDash, goToTable, Logout} = AppNavigation();
-  const {fetchTemp, fetchWatt, fetchWashingProg} = Fetches()
+  const {fetchTemp, fetchWatt, fetchWashingProg, fetchWashDevices, fetchDevInfo} = Fetches()
 
   const [temp, setTemp] = useState([]);
   const [watt, setWatt] = useState([]);
-  const [wash, setWash] = useState([])
+  const [wash, setWash] = useState([]);
+  const [devices, setDevices] = useState([]);
+  const [devInfo, setDevInfo] = useState(null);
+  const [selectedDevice, setSelectedDevice] = useState('/');
 
-  const WINDOW = 4; // ±6 points de chaque côté
-  const [tempCenter, setTempCenter] = useState(WINDOW);
-  const [wattCenter, setWattCenter] = useState(WINDOW);
+  const WIN = 4; // ±6 points de chaque côté
+  const [tempCenter, setTempCenter] = useState(WIN);
+  const [wattCenter, setWattCenter] = useState(WIN);
+
+
+  const handleChange = (e) =>{
+    // console.log("E", e.target.value)
+    setSelectedDevice(e.target.value);
+    // console.log("target",selectedDevice)
+    if (e.target.value !== "/")
+      fetchDevInfo(setDevInfo, e.target.value);
+    else
+      setDevInfo(null)
+    console.log("devInfo",devInfo)
+  };
 
   useEffect(() => {
     fetchTemp(data => {
@@ -31,28 +46,17 @@ function Schedule() {
       setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
     });
     fetchWashingProg(setWash);
+    fetchWashDevices(setDevices);
   }, []);
 
   const tempSlice = temp.slice(
-    Math.max(0, tempCenter - WINDOW),
-    Math.min(temp.length, tempCenter + WINDOW + 1)
+    Math.max(0, tempCenter - WIN),
+    Math.min(temp.length, tempCenter + WIN + 1)
   );
   const wattSlice = watt.slice(
-    Math.max(0, wattCenter - WINDOW),
-    Math.min(watt.length, wattCenter + WINDOW + 1)
+    Math.max(0, wattCenter - WIN),
+    Math.min(watt.length, wattCenter + WIN + 1)
   );
-  
-
-  const MieleConnect = async () => {
-    const token = localStorage.getItem('token');
-    const response = await fetch('/api/miele/connect', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-    }})
-    const data = await response.json();
-    window.location.href = data.url;
-  };
 
   const chartData = {
         //title       data     valx      valy              unit
@@ -62,6 +66,29 @@ function Schedule() {
   }
   const c = "#fbbf24"
   
+
+  const MieleConnect = async () => {
+    const token = localStorage.getItem('token');
+    console.log("tok", token)
+    const response = await fetch('/api/miele/connect', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+    }})
+    const data = await response.json();
+    window.location.href = data.url;
+  };
+
+  const scheduleProgram = () =>{
+
+    console.log("check Connect to Miele")
+    console.log("check connect to machine")
+    console.log("selecting programs")
+    console.log("adding program to db")
+    console.log("confirmation")
+    console.log("program added")
+  }
+  
   return (
     <div style={globalDiv}>
       <h1>Bienvenue sur l'espace Parents</h1>
@@ -69,16 +96,6 @@ function Schedule() {
         <button style={blueButton} onClick={goToDash}>Revenir à l'acceuil</button>
         <button style={blueButton} onClick={goToTable}>Tableaux de données</button>
         <button style={greyButton} onClick={Logout}>Se Déconnecter</button>
-      </div>
-
-      <TimeSlider
-        data={temp} center={tempCenter}
-        onCenterChange={setTempCenter} windowSize={WINDOW}
-        label="Météo & Rayonnement"
-      />
-      <div style={chartDiv}>
-        <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
-        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} />
       </div>
         
       <div style={washHeaderDiv}>
@@ -115,12 +132,70 @@ function Schedule() {
 
       <div style={{...buttonDiv, marginTop: '1rem'}}>
         <button style={blueButton} onClick={MieleConnect}>Conexion a Miele</button>
-        <button style={blueButton}>Programmer une machine</button>
+        <button style={blueButton} onClick={scheduleProgram}>Programmer une machine</button>
+      </div>
+
+      <TimeSlider
+        data={temp} center={tempCenter}
+        onCenterChange={setTempCenter} windowSize={WIN}
+        label="Météo & Rayonnement"
+      />
+      <div style={chartDiv}>
+        <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
+        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} />
+      </div>
+
+      <div style={formDiv}>
+        <h2 style={{textAlign:'flex-start'}}> Sélectionner la machine à lancer</h2>
+        <select id="device-select" value={selectedDevice} onChange={handleChange}style={selectStyle}>
+          
+          <option value="/">"Num de serie - Nom - Type"</option>
+          {devices.map((device) => (
+            <option key={device.fabNumber} value={device.fabNumber}> 
+              {device.fabNumber} - "{device.name}" - ({device.type})
+            </option>
+          ))}
+        </select>
+        {(selectedDevice !== "/" && devInfo !== null) && (
+          <div style={Table}>
+            <div style={Cell}>
+              <h2 style={txt}>Infos:</h2></div>
+            <div style={Cell}>
+              <h2 style={txt}>Status:</h2>
+              <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
+            </div>
+            
+            {(devInfo.state.status.value_raw > 2 &&  devInfo.state.status.value_raw < 8 )&&(
+            <>
+              <div style={Cell}>
+                <h2 style={txt}>Programme :</h2>
+                <h2 style={txt}>{devInfo.state.ProgramID.value_localized}</h2>
+              </div>
+              {(devInfo.state.status.value_raw === 4 && devInfo.state.startTime[0] > 0) && (
+              <>
+                <div style={Cell}>
+                  <h2 style={txt}>Temps avant lancement:</h2>
+                  <h2 style={txt}>{devInfo.state.startTime[0]}h{devInfo.state.startTime[1]}</h2>
+                </div>
+              </>
+              )}
+              {(devInfo.state.status.value_raw === 5) && (
+              <>
+              <div style={Cell}>
+                <h2 style={txt}>Temps restant:</h2>
+                <h2 style={txt}>{devInfo.state.remainingTime[0]}h{devInfo.state.remainingTime[1]}</h2>
+              </div>
+              </>
+              )}
+            </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
+//${devInfo.state.ProgramID.value_localized}
 // Spécifiques à schedule
 const washRowDiv = {
   display: 'flex', 
@@ -147,4 +222,52 @@ const washHeaderCell = {
   fontSize: '0.9rem',
 };
 
+const formDiv = {
+  display : 'flex',
+  width : '90%',
+  flexDirection: 'column',
+  textAlign : 'left'
+}
+
+const selectStyle = { 
+  padding: '8px',
+  width: '100%',
+  maxWidth: '300px' 
+}
+
+const Table = {
+  width: '97%',
+  backgroundColor:'grey',
+  borderRadius: '5px',
+}
+
+const Cell ={
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width : '100%'
+
+}
+
+const txt = {
+  color:'black',
+  fontSize: '15px'
+}
+
 export default Schedule
+
+
+/*
+Miele washing machine status
+1	Off / Arrêt
+2	On / Marche
+3	Program selected / Programme sélectionné	
+4	Waiting for start / En attente de démarrage	
+5	Running / En cours	
+6	Pause / Pause	
+7	End / Fin	
+8	Failure / Erreur
+9	Programme interrupted / Interrompu
+10	Idle / Inactif
+
+*/

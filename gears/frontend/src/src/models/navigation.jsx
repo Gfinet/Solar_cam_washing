@@ -10,6 +10,7 @@ export const AppNavigation = () => {
     const goToSchedule = () => navigate('/schedule');
     const goToTable = () => navigate('/table');
     const goToCams = () => navigate('/cams');
+    const goToSetPrgm = () => navigate('/setPrgm')
     const Logout = () =>  {
         localStorage.removeItem('token');
         navigate('/');
@@ -20,6 +21,7 @@ export const AppNavigation = () => {
         goToSchedule,
         goToTable,
         goToCams,
+        goToSetPrgm,
         Logout,
     };
 }
