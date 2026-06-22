@@ -1,5 +1,6 @@
 export const Fetches = () => {
 
+  ////Open-meteo
   const fetchTemp = (setTemp) => {
     const token = localStorage.getItem('token');
       fetch('/api/temptoday',{
@@ -24,9 +25,10 @@ export const Fetches = () => {
     setTemp(val);
   })}
 
+  ////Sunny-boy Onduleur
   const fetchWatt = (setWatt) => {
     const token = localStorage.getItem('token');
-      fetch('/api/mbtoday',{
+    fetch('/api/mbtoday',{
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -49,6 +51,7 @@ export const Fetches = () => {
     setWatt(val);
   })}
 
+  ////Db Washing Prog
   const fetchWashingProg = (setWash) => {
     const token = localStorage.getItem('token');
     fetch('/api/wash/list', {
@@ -58,14 +61,40 @@ export const Fetches = () => {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       }
-    })
-    .then(res => res.json())
-    .then(data => setWash(data.message))
+    }).then(res => res.json())
+    .then(data => {setWash(data.message)})
   }
+
+  ////Miele devices
+  const fetchWashDevices = (setDevices) => {
+    const token = localStorage.getItem('token');
+    fetch('/api/miele/devices', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res =>res.json())
+    .then(data => {setDevices(data)})//; console.log("DEVICES",data)})
+    }
+
+  const fetchDevInfo = (setDevInfo, device) => {
+    const token = localStorage.getItem('token');
+    fetch(`/api/miele/device/${device}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res =>res.json())
+    .then(data => {setDevInfo(data); console.log("DEV",data)})
+    }
 
   return {
     fetchTemp,
     fetchWatt,
-    fetchWashingProg
+    fetchWashingProg, 
+    fetchWashDevices,
+    fetchDevInfo
   };
 }

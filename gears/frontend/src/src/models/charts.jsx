@@ -1,13 +1,12 @@
 // src/Chart.jsx
 import { LabelList, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-
 export function MyBarChart({title, data, valx, valy, unit})
 {
   return (
     <div style={styles.chart}>
       <h2>{title}</h2>
-      <ResponsiveContainer>
+      <ResponsiveContainer height={250}>
         <BarChart data = {data} margin={{ top: 0, right: 0, left: -25, bottom: 25 }}>
           <XAxis dataKey={valx} interval={1} tick={{ fontSize: "15px" }} />
           <YAxis dataKey={valy} tick={{ fontSize: "10px" }}/>{/* 3. La bulle qui apparaît au survol */}
@@ -32,7 +31,7 @@ export function MyLineChart ({title, data, valx, valy})
   return (
     <div style={styles.chart}>
       <h2>{title}</h2>
-      <ResponsiveContainer>
+      <ResponsiveContainer height={250}>
         <LineChart data = {data} margin={{ top: 0, right: 0, left: -25, bottom: 25 }}>
           <XAxis dataKey={valx} interval={238} tick={{ fontSize: "15px" }} />
           <YAxis dataKey={valy} tick={{ fontSize: "10px" }}/>{/* 3. La bulle qui apparaît au survol */}
@@ -79,7 +78,7 @@ export function TimeSlider({ data, center, onCenterChange, windowSize, label }) 
 const sliderContainer = {
   display: 'flex', flexDirection: 'column', alignItems: 'center',
   padding: '0.5rem 1rem', margin: '0.5rem 0',
-  backgroundColor: '#5b5959ff', borderRadius: '8px',
+  backgroundColor: '#8c8c8cff', borderRadius: '8px',
   width: '90%', alignSelf: 'center',
 };
 const sliderRow = {
@@ -93,7 +92,8 @@ const sliderLabel  = { fontWeight: 'bold', color: '#000000ff', marginBottom: '4p
 const sliderBound  = { fontSize: '0.8rem', color: '#000000ff', whiteSpace: 'nowrap' };
 const sliderCurrent = { fontSize: '0.85rem', color: '#000000ff', marginTop: '4px' };
 
+
 const styles = {
-  chart: { width: "100%", height: 300 }
+  chart: { width: "100%" }
 };
 
