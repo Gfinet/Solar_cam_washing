@@ -33,7 +33,6 @@ model Solar_Data {
   id            Int       @id @default(autoincrement())
   hour          DateTime  @default(now()) @db.Timestamptz(3)
   Watts         Int
-  total         Int
 }
 
 model Washing_Program {

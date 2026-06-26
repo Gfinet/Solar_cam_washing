@@ -39,12 +39,9 @@ export const Fetches = () => {
     const val = Array(data.message.length)
     for (let i=0; i<data.message.length; i++)
     {
-      let hour = data.message[i].toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' })
-      if (hour >= 24)
-        hour = hour -24
-      const timestr = hour + "h";
+      let hour = data.message[i].time.toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' })
       val[i] = {
-        time : timestr,
+        time : hour,
         watt : data.message[i].watts
       }
     }
