@@ -16,6 +16,7 @@ function Schedule() {
   const [wash, setWash] = useState([]);
   const [devices, setDevices] = useState([]);
   const [devInfo, setDevInfo] = useState(null);
+  const [mieleConnected, setMieleConnected] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState('/');
   const [selectedProgram, setSelectedProgram] = useState('/');
   const [heureCible, setHeureCible] = useState('00:00')
@@ -62,8 +63,19 @@ function Schedule() {
       const idx14 = data.findIndex(d => d.time.startsWith('14'));
       setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
     });
+    console.log("getting db Progrm")
     fetchWashingProg(setWash);
-    fetchWashDevices(setDevices);
+    console.log("getting devices")
+    const params = new URLSearchParams(window.location.search);
+    const mieleResult = params.get('miele');
+    if (mieleResult === 'success')
+    {
+      setMieleConnected(1)
+      console.log("yay")
+      fetchWashDevices(setDevices);
+    }
+    else
+      console.log("oooh")
   }, []);
 
   const tempSlice = temp.slice(
@@ -162,80 +174,93 @@ function Schedule() {
         <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} />
       </div>
 
-      <div style={formDiv}>
-        <h2 style={{textAlign:'flex-start'}}> Sélectionner la machine à lancer</h2>
-        <select id="device-select" value={selectedDevice} onChange={changeDevice} style={selectStyle}>
-          
-          <option value="/">Num de serie - Nom - Type</option>
-          {devices.map((device) => (
-            <option key={device.fabNumber} value={device.fabNumber}> 
-              {device.fabNumber} - "{device.name}" - ({device.type})
-            </option>
-          ))}
-        </select>
-        {(selectedDevice !== "/" && devInfo !== null) && (
-          <div style={Table}>
-            <div style={Row}>
-              <h2 style={txt}>Infos:</h2></div>
-            <div style={Row}>
-              <h2 style={txt}>Status:</h2>
-              <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
-            </div>
+      {(mieleConnected === null) ? (
+        <>
+        <h2>Veuillez vous connecter à Miele pour lancer une machine</h2>
+        </>
+      ): 
+      (
+        <div style={formDiv}>
+          <h2 style={{textAlign:'flex-start'}}> Sélectionner la machine à lancer</h2>
+          <select id="device-select" value={selectedDevice} onChange={changeDevice} style={selectStyle}>
             
-            {(devInfo.state.status.value_raw > 1 &&  devInfo.state.status.value_raw < 8 )&&(
-            <>
+            <option value="/">Num de serie - Nom - Type</option>
+            {devices.map((device) => (
+              <option key={device.fabNumber} value={device.fabNumber}> 
+                {device.fabNumber} - "{device.name}" - ({device.type})
+              </option>
+            ))}
+          </select>
+          {(selectedDevice !== "/" && devInfo !== null) ? (
+            <div style={Table}>
               <div style={Row}>
-                <h2 style={txt}>Programme :</h2>
-                <h2 style={txt}>{devInfo.state.ProgramID.value_localized}</h2>
-              </div>
-              {(devInfo.state.status.value_raw === 4 && devInfo.state.startTime[0] > 0) && (
-              //Waiting to start
-                <div style={Row}>
-                  <h2 style={txt}>Temps avant lancement:</h2>
-                  <h2 style={txt}>{devInfo.state.startTime[0]}h{devInfo.state.startTime[1]}</h2>
-                </div>
-              )}
-              {(devInfo.state.status.value_raw === 5) && (
-              //Running
+                <h2 style={txt}>Infos:</h2></div>
               <div style={Row}>
-                <h2 style={txt}>Temps restant:</h2>
-                <h2 style={txt}>{devInfo.state.remainingTime[0]}h{devInfo.state.remainingTime[1]}</h2>
+                <h2 style={txt}>Status:</h2>
+                <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
               </div>
-              )}
-              {(devInfo.state.status.value_raw === 2) && (
-              //On
+              
+              {(devInfo.state.status.value_raw > 1 &&  devInfo.state.status.value_raw < 8 )&&(
               <>
-              <div style={Row}>
-                <h2 style={txt}>Choisir un programme:</h2>
-                <select id="program-select" value={selectedProgram} onChange={changeProgram}style={selectStyle}>
-                  <option value="/">Programme</option>
-                  <option>Cotons</option>
-                  <option>Synthetique</option>
-                  <option>Delicat</option>
-                  <option>Laine</option>
-                  <option>Soie</option>
-                  <option>Express 20</option>
-                  <option>Chemise</option>
-                  <option>Foncé / Jean</option>
-                  <option>Eco 40-60</option>
-                  <option>Couette</option>
-                  <option>Imperméabilisation</option>
-                </select>
-              </div>
-              <div style={Row}>
-                <h2 style={txt}>Temps avant lancement :</h2>
-                <input type="time"value={heureCible} onChange={handleTimeChange}></input>
-              </div>
-              <div style={{justifySelf :'center'}}>
-                <button style={{...greenButton, height:'10%', width:'100%'}} onClick={savePrgm}>Confirmer</button>
+                <div style={Row}>
+                  <h2 style={txt}>Programme :</h2>
+                  <h2 style={txt}>{devInfo.state.ProgramID.value_localized}</h2>
                 </div>
+                {(devInfo.state.status.value_raw === 4 && devInfo.state.startTime[0] > 0) && (
+                //Waiting to start
+                  <div style={Row}>
+                    <h2 style={txt}>Temps avant lancement:</h2>
+                    <h2 style={txt}>{devInfo.state.startTime[0]}h{devInfo.state.startTime[1]}</h2>
+                  </div>
+                )}
+                {(devInfo.state.status.value_raw === 5) && (
+                //Running
+                <div style={Row}>
+                  <h2 style={txt}>Temps restant:</h2>
+                  <h2 style={txt}>{devInfo.state.remainingTime[0]}h{devInfo.state.remainingTime[1]}</h2>
+                </div>
+                )}
+                {(devInfo.state.status.value_raw === 2) && (
+                //On
+                <>
+                <div style={Row}>
+                  <h2 style={txt}>Choisir un programme:</h2>
+                  <select id="program-select" value={selectedProgram} onChange={changeProgram}style={selectStyle}>
+                    <option value="/">Programme</option>
+                    <option>Cotons</option>
+                    <option>Synthetique</option>
+                    <option>Delicat</option>
+                    <option>Laine</option>
+                    <option>Soie</option>
+                    <option>Express 20</option>
+                    <option>Chemise</option>
+                    <option>Foncé / Jean</option>
+                    <option>Eco 40-60</option>
+                    <option>Couette</option>
+                    <option>Imperméabilisation</option>
+                  </select>
+                </div>
+                <div style={Row}>
+                  <h2 style={txt}>Temps avant lancement :</h2>
+                  <input type="time"value={heureCible} onChange={handleTimeChange}></input>
+                </div>
+                <div style={{justifySelf :'center'}}>
+                  <button style={{...greenButton, height:'10%', width:'100%'}} onClick={savePrgm}>Confirmer</button>
+                  </div>
+                </>
+                )}
               </>
               )}
+            </div>
+          ) : (
+            <>
+              <div style={Row}>
+                <h2 style={txt}>ERROR</h2>
+              </div>
             </>
-            )}
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
