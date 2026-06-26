@@ -11,6 +11,33 @@ function Schedule() {
   const {goToDash, goToTable, Logout} = AppNavigation();
   const {fetchTemp, fetchWatt, fetchWashingProg, fetchWashDevices, fetchDevInfo} = Fetches()
 
+  // const WIN = 4;
+  // const [schedule, setSchedule] = useState({
+  //   temp : [],
+  //   watt : [],
+  //   wash : [],
+  //   devices : [],
+  //   devInfo : null,
+  //   mieleConnected : null,
+  //   selectedDevice : '/',
+  //   selectedProgram : '/',
+  //   heureCible : '00:00',
+  //   tempCenter : WIN,
+  //   wattCenter : WIN
+  // })
+  // const { temp, watt, wash, devices, devInfo, mieleConnected, 
+  //   selectedDevice, selectedProgram, 
+  //   heureCible, tempCenter, wattCenter 
+  // } = schedule;
+
+  // const set = (key) => (val) => setSchedule(prev => ({ ...prev, [key]: val }));
+  // const setDevInfo = set('devInfo')
+  // const setDevices = set('devices')
+  // const setTempCenter = set('tempCenter')
+  // const setTemp = set('temp')
+  // const setWatt = set('watt')
+  // const setWash = set('wash')
+
   const [temp, setTemp] = useState([]);
   const [watt, setWatt] = useState([]);
   const [wash, setWash] = useState([]);
@@ -21,13 +48,17 @@ function Schedule() {
   const [selectedProgram, setSelectedProgram] = useState('/');
   const [heureCible, setHeureCible] = useState('00:00')
 
-  const WIN = 4; // ±6 points de chaque côté
+  //  ±4 points de chaque côté
+   const WIN = 4;
   const [tempCenter, setTempCenter] = useState(WIN);
   const [wattCenter, setWattCenter] = useState(WIN);
+  
 
+  // setSchedule(prev => ({...prev, devInfo : e.target.value}))
 
   const changeDevice = (e) =>{
     // console.log("E", e.target.value)
+    // setSchedule(prev => ({...prev, selectedDevice : e.target.value}))
     setSelectedDevice(e.target.value);
     // console.log("target",selectedDevice)
     if (e.target.value !== "/")
@@ -40,11 +71,13 @@ function Schedule() {
   const changeProgram = (e) => {
     // console.log("prgm", e.target.value)
     setSelectedProgram(e.target.value)
+    // setSchedule(prev => ({...prev, selectedProgram : e.target.value}))
   }
 
   const handleTimeChange = (e) => {
     console.log("time", e.target.value)
     setHeureCible(e.target.value)
+    /// setSchedule(prev => ({...prev, heureCible : e.target.value}))
   }
 
   const savePrgm = () => {
@@ -57,25 +90,27 @@ function Schedule() {
       setTemp(data);
       const idx14 = data.findIndex(d => d.time.startsWith('14'));
         setTempCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+        /// setSchedule(prev => ({...prev, tempCenter : idx14 !== -1 ? idx14 : Math.floor(data.length / 2)}))
     });
     fetchWatt(data => {
       setWatt(data);
       const idx14 = data.findIndex(d => d.time.startsWith('14'));
       setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+      /// setSchedule(prev => ({...prev, wattCenter : idx14 !== -1 ? idx14 : Math.floor(data.length / 2)}))
     });
     console.log("getting db Progrm")
     fetchWashingProg(setWash);
     console.log("getting devices")
     const params = new URLSearchParams(window.location.search);
     const mieleResult = params.get('miele');
-    if (mieleResult === 'success')
+    const token = localStorage.getItem('token');
+    console.log("tok", token)
+    if (mieleResult === 'success' || token)
     {
       setMieleConnected(1)
-      console.log("yay")
+      /// setSchedule(prev => ({...prev, mieleConnected : 1}))
       fetchWashDevices(setDevices);
     }
-    else
-      console.log("oooh")
   }, []);
 
   const tempSlice = temp.slice(
@@ -255,7 +290,7 @@ function Schedule() {
           ) : (
             <>
               <div style={Row}>
-                <h2 style={txt}>ERROR</h2>
+                <h2 style={txt}>No machine picked</h2>
               </div>
             </>
           )}
