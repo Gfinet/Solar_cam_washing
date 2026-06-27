@@ -59,20 +59,22 @@ function Table() {
       </div>
 
       <TimeSlider
-        data={temp} center={tempCenter}
-        onCenterChange={setTempCenter} windowSize={WINDOW}
-        label="Météo & Rayonnement"
+        data={watt} center={wattCenter}
+        onCenterChange={setWattCenter} windowSize={WINDOW}
+        label="Électricité panneaux"
       />
+      
       <div style={chartDiv}>
         <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
         <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} />
       </div>
 
       <TimeSlider
-        data={watt} center={wattCenter}
-        onCenterChange={setWattCenter} windowSize={WINDOW}
-        label="Électricité panneaux"
+        data={temp} center={tempCenter}
+        onCenterChange={setTempCenter} windowSize={WINDOW}
+        label="Météo & Rayonnement"
       />
+
       <div style={chartDiv}>
         <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} />
         <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} />
