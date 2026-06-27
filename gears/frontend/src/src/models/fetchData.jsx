@@ -42,8 +42,8 @@ export const Fetches = () => {
       let hour = new Date(data.message[i].time)
       val[i] = {
         time : hour.toLocaleString('fr-BE', { 
-          day: '2-digit',
-          month: '2-digit',
+          // day: '2-digit',
+          // month: '2-digit',
           hour: '2-digit', 
           minute : '2-digit',
           timeZone: 'Europe/Brussels' }),
