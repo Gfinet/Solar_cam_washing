@@ -27,7 +27,7 @@ function Dashboard() {
         </div>
         <div style={rowDiv}>
           <button style={blueButton} onClick={goToCams}>Voir la camera</button>
-          <button style={blueButton} onClick={goToSchedule}>Prevoir une machine</button>
+          {/* <button style={blueButton} onClick={goToSchedule}>Prevoir une machine</button> */}
         </div>
         <button style={{...greyButton, alignSelf: 'center'}} onClick={Logout}>Se Déconnecter</button>
       </div>

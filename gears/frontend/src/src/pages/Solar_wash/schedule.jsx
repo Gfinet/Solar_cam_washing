@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
 import { AppNavigation } from '../../models/navigation';
 import { Fetches } from '../../models/fetchData';
+import { NumberStepper } from '../../models/numberStepper';
 import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton, greenButton } from '../../models/styles';
 
 import '../../App.css'
@@ -52,6 +53,9 @@ function Schedule() {
    const WIN = 4;
   const [tempCenter, setTempCenter] = useState(WIN);
   const [wattCenter, setWattCenter] = useState(WIN);
+
+  const [delaiH, setDelaiH] = useState(0)
+  const [delaiMin, setDelaiMin] = useState(0)
   
 
   // setSchedule(prev => ({...prev, devInfo : e.target.value}))
@@ -74,15 +78,9 @@ function Schedule() {
     // setSchedule(prev => ({...prev, selectedProgram : e.target.value}))
   }
 
-  const handleTimeChange = (e) => {
-    console.log("time", e.target.value)
-    setHeureCible(e.target.value)
-    /// setSchedule(prev => ({...prev, heureCible : e.target.value}))
-  }
-
   const savePrgm = () => {
     if (selectedProgram !== "/")
-      console.log("program", selectedProgram ,"added", heureCible)
+      console.log("program", selectedProgram ,"added in", delaiH, "H", delaiMin)
   }
 
   useEffect(() => {
@@ -276,7 +274,9 @@ function Schedule() {
                 </div>
                 <div style={Row}>
                   <h2 style={txt}>Temps avant lancement :</h2>
-                  <input type="time"value={heureCible} onChange={handleTimeChange}></input>
+                  {/* <input type="number" value={heureCible} onChange={handleTimeChange}></input> */}
+                  <NumberStepper value={delaiH}   onChange={setDelaiH}   max={23} step={1} label="H"   />
+                  <NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
                 </div>
                 <div style={{justifySelf :'center'}}>
                   <button style={{...greenButton, height:'10%', width:'100%'}} onClick={savePrgm}>Confirmer</button>
@@ -288,8 +288,8 @@ function Schedule() {
             </div>
           ) : (
             <>
-              <div style={Row}>
-                <h2 style={txt}>No machine picked</h2>
+              <div style={{...Row, alignSelf:'center'}}>
+                <h2 style={{color: 'white'}}>No machine picked</h2>
               </div>
             </>
           )}
@@ -327,7 +327,7 @@ const washHeaderCell = {
 
 const formDiv = {
   display : 'flex',
-  width : '90%',
+  width : '100%',
   flexDirection: 'column',
   justifyContent: 'center',
   textAlign : 'left'
@@ -336,11 +336,10 @@ const formDiv = {
 const selectStyle = { 
   padding: '8px',
   width: '100%',
-  maxWidth: '300px' 
 }
 
 const Table = {
-  width: '97%',
+  width: '100%',
   backgroundColor:'grey',
   justifyContent: 'space-between',
   borderRadius: '5px',
