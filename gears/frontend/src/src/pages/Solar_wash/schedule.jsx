@@ -104,7 +104,7 @@ function Schedule() {
     const params = new URLSearchParams(window.location.search);
     const mieleResult = params.get('miele');
     const token = localStorage.getItem('token');
-    console.log("tok", token)
+    // console.log("tok", token)
     if (mieleResult === 'success' || token)
     {
       setMieleConnected(1)
@@ -133,7 +133,6 @@ function Schedule() {
 
   const MieleConnect = async () => {
     const token = localStorage.getItem('token');
-    console.log("tok", token)
     const response = await fetch('/api/miele/connect', {
       method: 'GET',
       headers: {
