@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
 import { AppNavigation } from '../../models/navigation';
 import { Fetches } from '../../models/fetchData';
-import { NumberStepper } from '../../models/numberStepper';
-import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton, greenButton } from '../../models/styles';
+import { WashTable } from '../../models/washTable';
+import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton } from '../../models/styles';
 
 import '../../App.css'
 
@@ -12,32 +12,6 @@ function Schedule() {
   const {goToDash, goToTable, Logout} = AppNavigation();
   const {fetchTemp, fetchWatt, fetchWashingProg, fetchWashDevices, fetchDevInfo} = Fetches()
 
-  // const WIN = 4;
-  // const [schedule, setSchedule] = useState({
-  //   temp : [],
-  //   watt : [],
-  //   wash : [],
-  //   devices : [],
-  //   devInfo : null,
-  //   mieleConnected : null,
-  //   selectedDevice : '/',
-  //   selectedProgram : '/',
-  //   heureCible : '00:00',
-  //   tempCenter : WIN,
-  //   wattCenter : WIN
-  // })
-  // const { temp, watt, wash, devices, devInfo, mieleConnected, 
-  //   selectedDevice, selectedProgram, 
-  //   heureCible, tempCenter, wattCenter 
-  // } = schedule;
-
-  // const set = (key) => (val) => setSchedule(prev => ({ ...prev, [key]: val }));
-  // const setDevInfo = set('devInfo')
-  // const setDevices = set('devices')
-  // const setTempCenter = set('tempCenter')
-  // const setTemp = set('temp')
-  // const setWatt = set('watt')
-  // const setWash = set('wash')
 
   const [temp, setTemp] = useState([]);
   const [watt, setWatt] = useState([]);
@@ -46,21 +20,13 @@ function Schedule() {
   const [devInfo, setDevInfo] = useState(null);
   const [mieleConnected, setMieleConnected] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState('/');
-  const [selectedProgram, setSelectedProgram] = useState('/');
-  const [heureCible, setHeureCible] = useState('00:00')
 
   //  ±4 points de chaque côté
-   const WIN = 4;
+  const WIN = 4;
   const [tempCenter, setTempCenter] = useState(WIN);
   const [wattCenter, setWattCenter] = useState(WIN);
 
-  const [delaiH, setDelaiH] = useState(0)
-  const [delaiMin, setDelaiMin] = useState(0)
-  
-
-  // setSchedule(prev => ({...prev, devInfo : e.target.value}))
-
-  const changeDevice = (e) =>{
+  const changeDevice = (e) => {
     // console.log("E", e.target.value)
     // setSchedule(prev => ({...prev, selectedDevice : e.target.value}))
     setSelectedDevice(e.target.value);
@@ -71,17 +37,6 @@ function Schedule() {
       setDevInfo(null)
     console.log("devInfo",devInfo)
   };
-
-  const changeProgram = (e) => {
-    // console.log("prgm", e.target.value)
-    setSelectedProgram(e.target.value)
-    // setSchedule(prev => ({...prev, selectedProgram : e.target.value}))
-  }
-
-  const savePrgm = () => {
-    if (selectedProgram !== "/")
-      console.log("program", selectedProgram ,"added in", delaiH, "H", delaiMin)
-  }
 
   useEffect(() => {
     fetchTemp(data => {
@@ -230,61 +185,8 @@ function Schedule() {
               <div style={Row}>
                 <h2 style={txt}>Status:</h2>
                 <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
-              </div>
-              
-              {(devInfo.state.status.value_raw > 1 &&  devInfo.state.status.value_raw < 8 )&&(
-              <>
-                <div style={Row}>
-                  <h2 style={txt}>Programme :</h2>
-                  <h2 style={txt}>{devInfo.state.ProgramID.value_localized}</h2>
-                </div>
-                {(devInfo.state.status.value_raw === 4 && devInfo.state.startTime[0] > 0) && (
-                //Waiting to start
-                  <div style={Row}>
-                    <h2 style={txt}>Temps avant lancement:</h2>
-                    <h2 style={txt}>{devInfo.state.startTime[0]}h{devInfo.state.startTime[1]}</h2>
-                  </div>
-                )}
-                {(devInfo.state.status.value_raw === 5) && (
-                //Running
-                <div style={Row}>
-                  <h2 style={txt}>Temps restant:</h2>
-                  <h2 style={txt}>{devInfo.state.remainingTime[0]}h{devInfo.state.remainingTime[1]}</h2>
-                </div>
-                )}
-                {(devInfo.state.status.value_raw === 2) && (
-                //On
-                <>
-                <div style={Row}>
-                  <h2 style={txt}>Choisir un programme:</h2>
-                  <select id="program-select" value={selectedProgram} onChange={changeProgram}style={selectStyle}>
-                    <option value="/">Programme</option>
-                    <option>Cotons</option>
-                    <option>Synthetique</option>
-                    <option>Delicat</option>
-                    <option>Laine</option>
-                    <option>Soie</option>
-                    <option>Express 20</option>
-                    <option>Chemise</option>
-                    <option>Foncé / Jean</option>
-                    <option>Eco 40-60</option>
-                    <option>Couette</option>
-                    <option>Imperméabilisation</option>
-                  </select>
-                </div>
-                <div style={Row}>
-                  <h2 style={txt}>Temps avant lancement :</h2>
-                  {/* <input type="number" value={heureCible} onChange={handleTimeChange}></input> */}
-                  <NumberStepper value={delaiH}   onChange={setDelaiH}   max={23} step={1} label="H"   />
-                  <NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
-                </div>
-                <div style={{justifySelf :'center'}}>
-                  <button style={{...greenButton, height:'10%', width:'100%'}} onClick={savePrgm}>Confirmer</button>
-                  </div>
-                </>
-                )}
-              </>
-              )}
+              </div> 
+              <WashTable state={devInfo.state}></WashTable>
             </div>
           ) : (
             <>
@@ -362,30 +264,3 @@ const txt = {
 export default Schedule
 
 
-/*
-Miele washing machine status
-1	Off / Arrêt
-2	On / Marche
-3	Program selected / Programme sélectionné	
-4	Waiting for start / En attente de démarrage	
-5	Running / En cours	
-6	Pause / Pause	
-7	End / Fin	
-8	Failure / Erreur
-9	Programme interrupted / Interrompu
-10	Idle / Inactif
-
-
-ID Programme MieleDescription
-1 Cotons (Cottons)Le programme standard pour le linge de lit, serviettes, t-shirts.
-2 Synthétique / Froissage minimal (Minimum iron)Pour les fibres synthétiques ou mélangées.
-3 Délicat (Delicates)Pour les jupes, chemisiers, textiles fragiles.
-4 Laine (Woollens)Cycle très doux pour éviter le feutrage de la laine (lavable en machine).
-6 Soie (Silks)Pour les textiles très fragiles contenant de la soie.
-7 Express 20 Un cycle ultra-rapide (20 min) pour rafraîchir du linge peu sale.
-8 Chemises (Shirts)Réduit le froissage pour faciliter le repassage.
-9 Foncé / Jeans (Dark garments / Denim)Protège la couleur des jeans et vêtements sombres.
-10 Eco 40-60 Le programme réglementaire européen, optimisé pour l'énergie.
-21 Couettes (Down duvets)Pour les grands articles ou duvets en plumes.
-23 Imperméabilisation (Proofing)Traitement thermique pour réactiver l'effet déperlant (vêtements de sport).
-*/
