@@ -45,7 +45,7 @@ function Table() {
   const chartData = {
         //title       data     valx      valy              unit
     w : {t : "Meteo", d: tempSlice, x:"time", y: "temperature", u:'°'},
-    e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w'},
+    e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w', tt: watt.total},
     r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w/m2'}
   }
 
@@ -66,7 +66,7 @@ function Table() {
       
       <div style={chartDiv}>
         <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
-        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} />
+        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} total={chartData.e.t}/>
       </div>
 
       <TimeSlider

@@ -47,8 +47,9 @@ export const Fetches = () => {
           hour: '2-digit', 
           minute : '2-digit',
           timeZone: 'Europe/Brussels' }),
-        watt : data.message[i].watts
+        watt : data.message[i].watts,
       }
+      val.total = data.message[i].total || 0
     }
     // console.log(val);
     setWatt(val);
