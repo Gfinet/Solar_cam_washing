@@ -21,20 +21,17 @@ function Schedule() {
   const [mieleConnected, setMieleConnected] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState('/');
 
+  // let mieleConnected;
+
   //  ±4 points de chaque côté
   const WIN = 4;
   const [tempCenter, setTempCenter] = useState(WIN);
   const [wattCenter, setWattCenter] = useState(WIN);
 
   const changeDevice = (e) => {
-    // console.log("E", e.target.value)
-    // setSchedule(prev => ({...prev, selectedDevice : e.target.value}))
     setSelectedDevice(e.target.value);
-    // console.log("target",selectedDevice)
-    if (e.target.value !== "/")
-      fetchDevInfo(setDevInfo, e.target.value);
-    else
-      setDevInfo(null)
+    if (e.target.value !== "/") fetchDevInfo(setDevInfo, e.target.value);
+    else                        setDevInfo(null)
     console.log("devInfo",devInfo)
   };
 
@@ -43,27 +40,26 @@ function Schedule() {
       setTemp(data);
       const idx14 = data.findIndex(d => d.time.startsWith('14'));
         setTempCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
-        /// setSchedule(prev => ({...prev, tempCenter : idx14 !== -1 ? idx14 : Math.floor(data.length / 2)}))
     });
     fetchWatt(data => {
       setWatt(data);
       const idx14 = data.findIndex(d => d.time.startsWith('14'));
       setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
-      /// setSchedule(prev => ({...prev, wattCenter : idx14 !== -1 ? idx14 : Math.floor(data.length / 2)}))
     });
     console.log("getting db Progrm")
     fetchWashingProg(setWash);
-    console.log("getting devices")
-    const params = new URLSearchParams(window.location.search);
-    const mieleResult = params.get('miele');
-    const token = localStorage.getItem('token');
-    // console.log("tok", token)
-    if (mieleResult === 'success' || token)
-    {
-      setMieleConnected(1)
-      /// setSchedule(prev => ({...prev, mieleConnected : 1}))
-      fetchWashDevices(setDevices);
+    
+    const checkConnect = async () =>{
+      const connected = await isMieleConnected();
+      if (connected === true) 
+      {
+        console.log("getting devices")
+        setMieleConnected(1);
+        fetchWashDevices(setDevices);
+      }
     }
+    checkConnect()
+    
   }, []);
 
   const tempSlice = temp.slice(
@@ -76,13 +72,24 @@ function Schedule() {
   );
 
   const chartData = {
-        //title       data     valx      valy              unit
+        //title       data          valx      valy              unit               total
     w : {t : "Meteo", d: tempSlice, x:"time", y: "temperature", u:'°'},
-    e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w'},
+    e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w', tt: watt.total},
     r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w/m2'}
   }
   const c = "#fbbf24"
   
+  const isMieleConnected = async () =>{
+    const token = localStorage.getItem('token');
+    const response = await fetch('/api/miele/token', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+    }})
+    const data = await response.json();
+    // console.log("data",data)
+    return data.success
+  }
 
   const MieleConnect = async () => {
     const token = localStorage.getItem('token');
@@ -157,8 +164,21 @@ function Schedule() {
         label="Météo & Rayonnement"
       />
       <div style={chartDiv}>
-        <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
-        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} />
+        <MyBarChart  
+          title={chartData.w.t} 
+          data={chartData.w.d} 
+          valx={chartData.w.x} 
+          valy={chartData.w.y} 
+          unit={chartData.w.u} 
+          color={c} />
+        <MyLineChart 
+          title={chartData.e.t} 
+          data={chartData.e.d} 
+          valx={chartData.e.x} 
+          valy={chartData.e.y} 
+          unit={chartData.e.u} 
+          color={c} 
+          total={chartData.e.tt}/>
       </div>
 
       {(mieleConnected === null) ? (
@@ -186,7 +206,7 @@ function Schedule() {
                 <h2 style={txt}>Status:</h2>
                 <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
               </div> 
-              <WashTable state={devInfo.state}></WashTable>
+              <WashTable state={devInfo.state}/>
             </div>
           ) : (
             <>

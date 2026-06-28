@@ -33,6 +33,7 @@ export default fp (async (server) =>
             const Val = {
                 total : data.result[Sma.Id][Sma.Day]["1"][0].val,
                 instant : data.result[Sma.Id][Sma.Instant]["1"][0].val,
+                total : data.result[Sma.Id][Sma.Day]["1"][0].val,
             }
             return Val
         } catch (error) {
@@ -71,7 +72,11 @@ export default fp (async (server) =>
                     throw Error("Cant connect")
             }
 
-            await server.prisma.Solar_Data.create({data: {Watts: data.instant || 0 }})
+            await server.prisma.Solar_Data.create(
+                {data: {
+                    Watts: data.instant || 0, 
+                    total :data.total || 0 
+                }})
         } 
         catch (error) {
             console.error('Erreur lors du fetch solaire:', error);

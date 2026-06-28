@@ -31,7 +31,8 @@ export default async function modbus(server)
                 return {
                     id : index, 
                     time : record.hour, 
-                    watts : record.Watts
+                    watts : record.Watts,
+                    total : record.total
                 }
             })
 

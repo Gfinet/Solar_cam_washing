@@ -101,6 +101,7 @@ export default async function miele(server) {
             return { success: false, message: "No Data" }
     })
 
+
     server.get('/miele/callback', 
     async (request, reply) =>{
         const {code, state} = request.query
@@ -147,6 +148,21 @@ export default async function miele(server) {
         });
         console.log("Connexion à Miele réussie et sauvegardée !")
         return reply.redirect('/schedule?miele=success');
+    })
+
+    server.get('/miele/token', 
+    { preHandler: [server.auth] },
+    async (request, reply) =>{
+        const userId = request.user.id;
+        const mieleTok = await server.prisma.user.findUnique({
+            where : {id : userId}, 
+            select : {
+                mieleToken : true
+        }})
+        // console.log("TOKMIELE", mieleTok)
+        const success = (mieleTok.mieleToken !== null)
+        return { success: success }
+
     })
 
     server.get('/miele/connect', 
