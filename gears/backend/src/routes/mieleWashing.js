@@ -31,8 +31,8 @@ export default async function miele(server) {
                 "key_localized": "Program name"
             },
             "status": {
-                "value_raw": 2,//"value_raw": 5,
-                "value_localized": "Waiting to start",//"value_localized": "Running",
+                "value_raw": 5,//"value_raw": 5,
+                "value_localized": "Running",//"value_localized": "Waiting to start",
                 "key_localized": "status"
             },
             "programType": {

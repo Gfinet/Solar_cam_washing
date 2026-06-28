@@ -28,7 +28,7 @@ function Cams()
             <div style={actionDiv}>
                 <button style={greenButton} onClick={showMiniWindow}>Ouvrir la porte</button>
                 <dialog style={dialogStyle} ref={fenetreRef}>
-                    <p style={{fontSize: '150%'}}>Ouvrir la porte?</p>
+                    <p style={{fontSize: '150%', textAlign: 'center'}}>Ouvrir la porte?</p>
                     <div style={dialogButtonDiv}>
                         <button style={openButton} onClick={OpenDoor}>oui</button>
                         <button style={noButton}   onClick={closeMiniWindow}>non</button>
