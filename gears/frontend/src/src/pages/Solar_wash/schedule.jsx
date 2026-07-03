@@ -10,7 +10,7 @@ import '../../App.css'
 function Schedule() {
   
   const {goToDash, goToTable, Logout} = AppNavigation();
-  const {fetchTemp, fetchWatt, fetchWashingProg, fetchWashDevices, fetchDevInfo} = Fetches()
+  const {fetchTemp, fetchWatt, fetchDbWashingProg, fetchWashDevices, fetchDevInfo} = Fetches()
 
 
   const [temp, setTemp] = useState([]);
@@ -47,7 +47,7 @@ function Schedule() {
       setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
     });
     console.log("getting db Progrm")
-    fetchWashingProg(setWash);
+    fetchDbWashingProg(setWash);
     
     const checkConnect = async () =>{
       const connected = await isMieleConnected();
@@ -102,6 +102,11 @@ function Schedule() {
     window.location.href = data.url;
   };
 
+  const refreshDevInfo = () => {
+    if (selectedDevice !== '/')
+      fetchDevInfo(setDevInfo, selectedDevice);
+  };
+
   const scheduleProgram = () =>{
 
     console.log("check Connect to Miele")
@@ -111,6 +116,7 @@ function Schedule() {
     console.log("confirmation")
     console.log("program added")
   }
+
   
   return (
     <div style={globalDiv}>
@@ -164,12 +170,12 @@ function Schedule() {
         label="Météo & Rayonnement"
       />
       <div style={chartDiv}>
-        <MyBarChart  
-          title={chartData.w.t} 
-          data={chartData.w.d} 
-          valx={chartData.w.x} 
-          valy={chartData.w.y} 
-          unit={chartData.w.u} 
+        <MyBarChart 
+          title={chartData.r.t} 
+          data={chartData.r.d} 
+          valx={chartData.r.x} 
+          valy={chartData.r.y} 
+          unit={chartData.r.u} 
           color={c} />
         <MyLineChart 
           title={chartData.e.t} 
@@ -206,7 +212,8 @@ function Schedule() {
                 <h2 style={txt}>Status:</h2>
                 <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
               </div> 
-              <WashTable state={devInfo.state}/>
+              <WashTable devInfo={devInfo} onAction={refreshDevInfo} />
+
             </div>
           ) : (
             <>

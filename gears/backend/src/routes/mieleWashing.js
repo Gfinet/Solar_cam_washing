@@ -2,88 +2,6 @@ import 'dotenv/config';
 import { getValidMieleToken } from '../plugins/mieleWashing.js';
 
 export default async function miele(server) {
-    
-    const testDevicesMiele = [{"fabNumber": "000137439624","state": "Off","type": "Oven","deviceName": "","details": "https://api.mcs3.miele.com/v1/devices/000137439624"},{"fabNumber": "000105666767","state": "In use","type": "Dishwasher","deviceName": "","details": "https://api.mcs3.miele.com/v1/devices/000105666767"},{"fabNumber": "000148508574","state": "Waiting to start","type": "Washing machine","deviceName": "","details": "https://api.mcs3.miele.com/v1/devices/000148508574"},{"fabNumber": "007109230215","state": "In use","type": "Refrigerator","deviceName": "","details": "https://api.mcs3.miele.com/v1/devices/007109230215"}]
-    const testDeviceMiele = {
-        "ident": {
-            "type": {
-                "key_localized": "Device type",
-                "value_raw": 1,
-                "value_localized": "Washing machine"
-            },
-            "deviceName": "",
-            "protocolVersion": 4,
-            "deviceIdentLabel": {
-                "fabNumber": "000148508574",
-                "fabIndex": "10",
-                "techType": "WWV980",
-                "matNumber": "10708820",
-                "swids": ["4850","20457","20449","25260","20450","5012","25314","25205","25313","25191"]
-            }
-            ,"xkmIdentLabel": {
-                "techType": "EK037",
-                "releaseVersion": "03QC2"
-            }},
-        "state": {
-            "ProgramID": {
-                "value_raw": 1,
-                "value_localized": "Cottons",
-                "key_localized": "Program name"
-            },
-            "status": {
-                "value_raw": 5,//"value_raw": 5,
-                "value_localized": "Running",//"value_localized": "Waiting to start",
-                "key_localized": "status"
-            },
-            "programType": {
-                "value_raw": 1,
-                "value_localized": "Own programme",
-                "key_localized": "Program type"
-            },
-            "programPhase": {
-                "value_raw": 256,
-                "value_localized": "",
-                "key_localized": "Program phase"
-            },
-            "remainingTime": [2,14],
-            "startTime": [1,34],
-            "targetTemperature": [{"value_raw": 6000,"value_localized": 60,"unit": "Celsius"},{"value_raw": -32768,"value_localized": null,"unit": "Celsius"},{"value_raw": -32768,"value_localized": null,"unit": "Celsius"}],
-            "temperature": [{"value_raw": -32768,"value_localized": null,"unit": "Celsius"},{"value_raw": -32768,"value_localized": null,"unit": "Celsius"},{"value_raw": -32768,"value_localized": null,"unit": "Celsius"}],
-            "signalInfo": false,
-            "signalFailure": false,
-            "signalDoor": false,
-            "remoteEnable": {
-                "fullRemoteControl": true,
-                "smartGrid": true,
-                "mobileStart": false
-            },
-            "ambientLight": null,
-            "light": null,
-            "elapsedTime": [0,0],
-            "spinningSpeed": {
-                "unit": "rpm",
-                "value_raw": 1600,
-                "value_localized": "1600",
-                "key_localized": "Spin speed"
-            },
-            "dryingStep": {
-                "value_raw": null,
-                "value_localized": "",
-                "key_localized": "Drying level"
-            },
-            "ventilationStep": {
-                "value_raw": null,
-                "value_localized": "",
-                "key_localized": "Fan level"
-            },
-            "plateStep": [],
-            "ecoFeedback": {
-                "currentWaterConsumption": {"unit": "l","value": 0},
-                "currentEnergyConsumption": {"unit": "kWh","value": 0},
-                "waterForecast": 0.3,"energyForecast": 0.4},
-                "batteryLevel": null}}
-
-
 
     server.post('/wash/list', async (request, reply) =>{
         const number = request.body
@@ -160,8 +78,7 @@ export default async function miele(server) {
                 mieleToken : true
         }})
         // console.log("TOKMIELE", mieleTok)
-        const success = (mieleTok.mieleToken !== null)
-        return { success: success }
+        return { success: (mieleTok.mieleToken !== null) }
 
     })
 
@@ -200,44 +117,84 @@ export default async function miele(server) {
         });
 
         const devices = await response.json();
-        const washDevices = []
-        devices.forEach(element => {
-            if (element.type === "Washing machine")
-                washDevices.push(element)
-        /*
-        element = {
-            "fabNumber": "000148508574",
-            "state": "Waiting to start",
-            "type": "Washing machine",
-            "deviceName": "",
-            "details": "https://api.mcs3.miele.com/v1/devices/000148508574"
-        }
-        */
-        });
-        return testDevicesMiele;//washDevices;
+        // console.log("WAZIII", devices)
+        if (response.ok) return devices;
+        return [];
     });
 
-    server.get('/miele/device/:deviceId', //?language=fr
+    server.get('/miele/devices/:deviceId', //?language=fr
     { preHandler: [server.auth] },
     async (request, reply) => {
 
         //TODO quand la machine est enregistrée
-        console.log("WAZAAAA")
         const { deviceId } = request.params;
         const userId = request.user.id;
         const tokenData = await getValidMieleToken(userId, server)        
-        
-        // const response = await fetch(`https://api.mcs3.miele.com/v1/device/${deviceId}?language=fr`, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Authorization': `Bearer ${tokenData}`,
-        //         'Content-Type': 'application/json',
-        //         'Accept-Language': 'fr-FR' // Pour avoir les noms des programmes en français !
-        //     }
-        // });
 
-        // const devices = await response.json();
-        return testDeviceMiele;
+        const response = await fetch(`https://api.mcs3.miele.com/v1/devices/${deviceId}?language=fr`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${tokenData}`,
+                'Content-Type': 'application/json',
+                'Accept-Language': 'fr-FR' // Pour avoir les noms des programmes en français !
+            }
+        });
+
+        const devices = await response.json();
+        
+        if (response.ok) return devices; //testDeviceMiele;
+        return []; 
+    });
+
+    server.get('/miele/devices/:deviceId/programs', //?language=fr
+    { preHandler: [server.auth] },
+    async (request, reply) => {
+
+        //TODO quand la machine est enregistrée
+        const { deviceId } = request.params;
+        const userId = request.user.id;
+        const tokenData = await getValidMieleToken(userId, server)        
+
+        const response = await fetch(`https://api.mcs3.miele.com/v1/devices/${deviceId}/programs?language=fr`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${tokenData}`,
+                'Content-Type': 'application/json',
+                'Accept-Language': 'fr-FR' // Pour avoir les noms des programmes en français !
+            }
+        });
+
+        const devices = await response.json();
+        // console.log(response, "\n\n", devices)
+        
+        if (response.ok) return devices; //testDeviceMiele;
+        return []; 
+    });
+    
+
+    server.put('/miele/devices/:deviceId/actions', //?language=fr
+    { preHandler: [server.auth] },
+    async (request, reply) => {
+
+        const { deviceId } = request.params;
+        console.log("BODY",request.body)
+        const userId = request.user.id;
+        const tokenData = await getValidMieleToken(userId, server)        
+
+        const response = await fetch(`https://api.mcs3.miele.com/v1/devices/${deviceId}/actions`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${tokenData}`,
+                'Content-Type': 'application/json',
+                'Accept-Language': 'fr-FR',
+            },
+            body : JSON.stringify(request.body),
+        });
+
+        if (response.status !== 204) await response.json();
+        
+        if (response.status) return { success: true }; //testDeviceMiele;
+        return { success: false }; 
     });
 }
 
