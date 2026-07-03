@@ -2,10 +2,13 @@ import { NumberStepper } from "./numberStepper";
 import { useState, useRef} from 'react'
 import { greenButton, redButton } from "./styles";
 
-export function WashTable({state})
+export function WashTable({devInfo, onAction})
 {
+	const state = devInfo?.state
 	const status = state?.status
 	const machineMode = status?.value_raw;
+	const programs = devInfo?.programs
+	const devId = devInfo?.ident?.deviceIdentLabel?.fabNumber
 	// const startTime = state?.startTime[0] * 60 + state?.startTime[1]
 	
 	const [delaiH, setDelaiH] = useState(0)
@@ -13,7 +16,7 @@ export function WashTable({state})
 
 	const [selectedProgram, setSelectedProgram] = useState('/');
 	const changeProgram = (e) => {
-		// console.log("prgm", e.target.value)
+		console.log("prgm", e.target.value)
 		setSelectedProgram(e.target.value)
 		// setSchedule(prev => ({...prev, selectedProgram : e.target.value}))
 	}
@@ -34,26 +37,45 @@ export function WashTable({state})
     const closeMiniWindow = () => { fenetreRef.current.close() };
 	const PutPause = () =>{ console.log("pause"); closeMiniWindow()}
 
+	const sendAction= async (body) => {
+		const token = localStorage.getItem('token');
+		const response = await fetch(`/api/miele/devices/${devId}/actions`, {
+			method: 'PUT',
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+      		},
+			body : JSON.stringify(body)
+    	})
+		console.log("REsp", response)
+		if (response.ok || response.status === 204) onAction();
+	}
+
+	const turnOn = () => {sendAction({"powerOn": true})}
+	const turnOff = () => {sendAction({"powerOff": true})}
+	const setProgram = () => {sendAction({
+		"programId" : selectedProgram, 
+		"startTime": [delaiH,delaiMin],
+	})}
+
 	switch (machineMode) {
-		case 1: return (<h2 style={txt}>Machine Eteinte</h2>);
-		//Off
+		case 1:// Off/Arret
+			return (<>
+				<h2 style={txt}>Machine Eteinte</h2>
+				<button style={{...greenButton, height:'10%', width:'100%'}} onClick={turnOn}>Allumer</button>
+				<button style={{...redButton, height:'10%', width:'100%'}} onClick={turnOff}>Eteindre</button>
+			</>);
 		case 2://On
 			return (<>
 				<div style={Row}>
 					<h2 style={txt}>Choisir un programme:</h2>
-					<select id="program-select" value={selectedProgram} onChange={changeProgram}style={selectStyle}>
-					<option value="/">Programme</option>
-					<option>Cotons</option>
-					<option>Synthetique</option>
-					<option>Delicat</option>
-					<option>Laine</option>
-					<option>Soie</option>
-					<option>Express 20</option>
-					<option>Chemise</option>
-					<option>Foncé / Jean</option>
-					<option>Eco 40-60</option>
-					<option>Couette</option>
-					<option>Imperméabilisation</option>
+					<select id="program-select" value={selectedProgram} onChange={changeProgram} style={selectStyle}>
+						<option value="/">Programme</option>
+						{programs.map((program) => (
+						<option key={program.program} value={program.programId}> 
+							{program.program}
+						</option>
+						))}
 					</select>
 				</div>
 				<div style={Row}>
@@ -63,7 +85,9 @@ export function WashTable({state})
 					<NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
 				</div>
 				<div style={{justifySelf :'center'}}>
-					<button style={{...greenButton, height:'10%', width:'100%'}} onClick={savePrgm}>Confirmer</button>
+					<button style={{...greenButton, height:'10%', width:'100%'}} 
+					onClick={turnOff} //onClick={setProgram}
+					>Confirmer</button>
 				</div>
 			</>);
 		case 4: //Waiting to start

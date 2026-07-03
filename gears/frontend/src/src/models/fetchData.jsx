@@ -56,7 +56,7 @@ export const Fetches = () => {
   })}
 
   ////Db Washing Prog
-  const fetchWashingProg = (setWash) => {
+  const fetchDbWashingProg = (setWash) => {
     const token = localStorage.getItem('token');
     fetch('/api/wash/list', {
       method: 'POST',
@@ -84,20 +84,29 @@ export const Fetches = () => {
 
   const fetchDevInfo = (setDevInfo, device) => {
     const token = localStorage.getItem('token');
-    fetch(`/api/miele/device/${device}`, {
+    let val = {};
+    fetch(`/api/miele/devices/${device}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
     .then(res =>res.json())
-    .then(data => {setDevInfo(data); console.log("DEV",data)})
+    .then(data => {val = data; console.log("DEV1",val)})
+    fetch(`/api/miele/devices/${device}/programs`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res =>res.json())
+    .then(data => {val.programs = data; setDevInfo(val);console.log("DEV2",val)})
     }
 
   return {
     fetchTemp,
     fetchWatt,
-    fetchWashingProg, 
+    fetchDbWashingProg, 
     fetchWashDevices,
     fetchDevInfo
   };
