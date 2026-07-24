@@ -120,12 +120,7 @@ function Schedule() {
   
   return (
     <div style={globalDiv}>
-      <h1>Bienvenue sur l'espace Parents</h1>
-      <div style={buttonDiv}>
-        <button style={blueButton} onClick={goToDash}>Revenir à l'acceuil</button>
-        <button style={blueButton} onClick={goToTable}>Tableaux de données</button>
-        <button style={greyButton} onClick={Logout}>Se Déconnecter</button>
-      </div>
+      <h1>Bienvenue sur l'espace Machine</h1>
         
       <div style={washHeaderDiv}>
         <span style={{...washHeaderCell, width:'20%'}}>Date</span>
@@ -160,8 +155,7 @@ function Schedule() {
       ))}
 
       <div style={{...buttonDiv, marginTop: '1rem'}}>
-        <button style={blueButton} onClick={MieleConnect}>Conexion a Miele</button>
-        <button style={blueButton} onClick={scheduleProgram}>Programmer une machine</button>
+        <button style={{...blueButton, width : "100%"}} onClick={MieleConnect}>Conexion a Miele</button>
       </div>
 
       <TimeSlider

@@ -19,7 +19,6 @@ function Cams()
 
     return (
         <div style={globalDiv}>
-            <button style={{...blueButton, alignSelf: 'center'}} onClick={goToDash}>Revenir à l'acceuil</button>
             <p style={titleStyle}>🔴 Garage</p>
             <MyCam source={streamGarage}/>
             <p style={titleStyle}>🔴 Sonette</p>

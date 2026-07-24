@@ -4,8 +4,12 @@ webrtc:
     - 100.86.53.87
     - lan
 
+api:
+  listen: ":1984"
+
 streams:
   sonette: 
+    # - "ezviz://${EMAIL}:${MDP_EMAIL}@${NUM_SERIE}"
     - "rtsp://${USER}:${SONETTE_CODE}@${SONETTE_IP}:${PORT}/h264/ch1/main/av_stream"
     # - rtsp://host.docker.internal:8554/camera_test
   garage:

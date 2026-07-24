@@ -51,12 +51,7 @@ function Table() {
 
   return (
     <div style={globalDiv}>
-      <h1>Bienvenue sur l'espace Parents</h1>
-      <div style={buttonDiv}>
-        <button style={blueButton} onClick={goToDash}>Revenir à l'acceuil</button>
-        <button style={blueButton} onClick={goToSchedule}>Prevoir une machine</button>
-        <button style={greyButton} onClick={Logout}>Se Déconnecter</button>
-      </div>
+      <h1>Bienvenue sur l'espace Tableaux</h1>
 
       <TimeSlider
         data={watt} center={wattCenter}
