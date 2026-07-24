@@ -18,11 +18,14 @@ const Layout = () => {
     setMenuOpen(false);
   };
 
+  const goToDash = () => {
+    navigate('/dashboard');
+  }
 
   return (
     <div style={styles.wrapper}>
       <header style={styles.header}>
-        <h1 style={{color:"white"}}>Solar'Cams</h1>
+        <h1 style={{color:"white"}} onClick={goToDash}>Solar'Cams</h1>
         <script src="https://open.ezvizlife.com/sdk/js/4.3/ezuikit.js"></script>
       </header>
       
@@ -46,7 +49,6 @@ const Layout = () => {
       )}
 
       <main style={styles.content}>
-        {/* C'est ici que Login ou Dashboard s'afficheront */}
         <Outlet />
       </main>
     </div>
