@@ -35,7 +35,6 @@ const Layout = () => {
 
       {menuOpen && (
         <>
-          {/* Overlay pour fermer en cliquant ailleurs */}
           <div style={styles.overlay} onClick={() => setMenuOpen(false)} />
           <nav style={styles.menu}>
             <button style={styles.menuItem} onClick={() => goTo('/dashboard')}>🏠 Accueil</button>

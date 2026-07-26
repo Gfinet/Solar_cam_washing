@@ -26,7 +26,7 @@ stop:
 	APP_MODE="dev" docker-compose -f docker-compose.yml -p solar_cam down
 
 add:
-	git add gears/ TCP_serv/ docker-compose.yml Makefile README.md .gitignore
+	git add gears/ TCP_serv/ docker-compose.yml Makefile README.md .gitignore images/
 	git status
 	git commit -m "$(MSG)"
 

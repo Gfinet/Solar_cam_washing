@@ -1,32 +1,65 @@
 # Solar_Cam 🌞📷
 
-Projet personnel de domotique visant à centraliser et visualiser des données issues de panneaux solaires (SMA), de machines à laver connectées (Miele), de caméras de surveillance et d'une sonnette connectée (EZVIZ), accessibles depuis une interface web sécurisée.
+Projet personnel de domotique visant à centraliser et visualiser des données issues de panneaux solaires (SMA), de machines à laver connectées (Miele), de caméras de surveillance (EZVIZ), accessibles depuis une interface web sécurisée via Tailscale.
+
+---
+
+## Aperçu
+
+### Dashboard
+![Dashboard](images/dashboard.png)
+
+### Planning machine (Schedule)
+![Schedule](images/schedule_full.png)
+
+### Contrôle Miele
+![Miele](images/schedule_machine.png)
+
+### Tableaux de données
+![Tableaux](images/tableaux.png)
+
+### Caméras
+![Caméras](images/cams.png)
 
 ---
 
 ## Fonctionnalités
 
-- **Production solaire** : collecte horaire des données de production via l'API SMA (puissance instantanée, tension, production totale) et stockage en base de données
-- **Météo** : récupération automatique des prévisions météo (température, rayonnement solaire) via [Open-Meteo](https://open-meteo.com/) avec mise à jour quotidienne
-- **Caméras EZVIZ** : authentification via l'API EZVIZ et flux vidéo en temps réel via go2rtc
-- **Machine à laver Miele** : intégration prévue (Miele API)
-- **Authentification JWT** : connexion sécurisée avec token JWT (expiration 7 jours), mots de passe hashés avec bcrypt
-- **Notifications push** : infrastructure web-push en place (en cours de développement)
+- **Production solaire** : collecte toutes les minutes via l'API SMA (puissance instantanée, production totale), stockage PostgreSQL
+- **Météo** : prévisions horaires (température, rayonnement solaire) via [Open-Meteo](https://open-meteo.com/), fuseau horaire Europe/Brussels
+- **Graphiques interactifs** : charts Recharts avec slider de fenêtre temporelle centrable sur une heure précise, tooltip au survol, adapté mobile
+- **Caméras EZVIZ** : flux vidéo en temps réel via go2rtc (RTSP → WebRTC/WebSocket proxifié par Nginx)
+- **Machine à laver Miele** : connexion OAuth2, visualisation de l'état (programme, temps restant/avant lancement), sélection de programme, lancement différé avec stepper H/min, mise en pause avec confirmation
+- **Historique lavages** : tableau des derniers programmes (date, type, auteur, statut)
+- **Authentification JWT** : token 7 jours, vérification d'expiration automatique côté frontend, bcrypt
+- **Menu de navigation** : hamburger fixe en haut à droite, présent sur toutes les pages
+- **Notifications push** : infrastructure web-push en place
+
+---
+
+## Pages
+
+| Page | Description |
+|------|-------------|
+| `/dashboard` | Vue d'ensemble avec graphique météo journalier et accès rapide aux pages |
+| `/schedule` | Historique lavages, connexion Miele, sélection machine/programme, graphiques solaires |
+| `/table` | Graphiques détaillés avec sliders : météo, rayonnement, production électrique |
+| `/cams` | Flux vidéo garage et sonnette, bouton d'ouverture de porte avec confirmation |
 
 ---
 
 ## Stack technique
 
-| Couche      | Technologie                              |
-|-------------|------------------------------------------|
-| Frontend    | React + React Router                     |
-| Backend     | Node.js + Fastify                        |
-| ORM         | Prisma v5                                |
-| Base de données | PostgreSQL                           |
-| Reverse proxy | Nginx                                  |
-| VPN / accès distant | Tailscale                        |
-| Flux vidéo  | go2rtc                                   |
-| Conteneurisation | Docker + Docker Compose             |
+| Couche | Technologie |
+|--------|-------------|
+| Frontend | React + React Router + Recharts |
+| Backend | Node.js + Fastify |
+| ORM | Prisma v6 |
+| Base de données | PostgreSQL (Timestamptz) |
+| Reverse proxy | Nginx (SSL, WebSocket) |
+| VPN / accès distant | Tailscale |
+| Flux vidéo | go2rtc (RTSP → WebRTC/WS) |
+| Conteneurisation | Docker + Docker Compose |
 
 ---
 
@@ -36,22 +69,20 @@ Projet personnel de domotique visant à centraliser et visualiser des données i
                     ┌─────────────┐
                     │  Tailscale  │  (VPN – accès distant sécurisé)
                     └──────┬──────┘
-                           │
+                           │ HTTPS 443
                     ┌──────▼──────┐
-                    │    Nginx    │  (reverse proxy)
+                    │    Nginx    │  (reverse proxy SSL)
                     └──────┬──────┘
-               ┌───────────┼───────────┐
-        ┌──────▼──────┐        ┌───────▼──────┐
-        │   Frontend  │        │   go2rtc     │  (flux RTSP/WebRTC)
-        │  (React)    │        └──────────────┘
-        └──────┬──────┘
-        ┌──────▼──────┐
-        │   Backend   │  (Fastify – port 3000)
-        │  (Node.js)  │
-        └──────┬──────┘
-        ┌──────▼──────┐
-        │ PostgreSQL  │  (port 5432)
-        └─────────────┘
+          ┌────────────────┼──────────────────┐
+   ┌──────▼──────┐  ┌──────▼──────┐  ┌────────▼────────┐
+   │   Frontend  │  │   Backend   │  │    go2rtc        │
+   │  (React)    │  │  (Fastify)  │  │  (RTSP→WebRTC)   │
+   └─────────────┘  └──────┬──────┘  └────────┬─────────┘
+                    ┌──────▼──────┐            │ RTSP
+                    │ PostgreSQL  │     ┌──────▼──────┐
+                    └─────────────┘     │  Caméras IP │
+                                        │ 192.168.0.x │
+                                        └─────────────┘
 ```
 
 ---
@@ -60,94 +91,73 @@ Projet personnel de domotique visant à centraliser et visualiser des données i
 
 - [Docker](https://www.docker.com/) et Docker Compose
 - [Make](https://www.gnu.org/software/make/)
-- (Optionnel) Node.js 20+ pour le développement local
+- Compte [Tailscale](https://tailscale.com/) avec auth key
+- Compte développeur [Miele](https://developer.miele.com/) (client_id + secret)
 
 ---
 
-## Installation et lancement
-
-### Avec Docker (recommandé)
+## Installation
 
 ```bash
-# Cloner le dépôt
 git clone <url-du-repo>
-cd MyTranscendance
+cd Solar-Cams
 
-# Lancer en mode développement
-make dev
-
-# Lancer en mode production
-make
+make dev    # développement
+make        # production
 ```
 
 ### Variables d'environnement
 
-Créer un fichier `.env` dans `gears/backend/` (un `.env.example` est disponible) :
-
+**`gears/backend/.env`** :
 ```env
-EZVIZ_KEY=<votre_clé_api_ezviz>
-EZVIZ_SECRET=<votre_secret_ezviz>
-SMA_ID=<identifiant_onduleur_sma>
-APP_MODE=dev
+DATABASE_URL=postgresql://user_admin:<password>@db:5432/db
+JWT_SECRET=<secret>
+MIELE_ID=<client_id>
+MIELE_SECRET=<secret>
+MIELE_REDIRECT_URI=https://<hostname>/api/miele/callback
+SMA_ID=<id_onduleur>
+EZVIZ_KEY=<clé>
+EZVIZ_SECRET=<secret>
+PUSH_PUBLIC_KEY=<clé>
+PUSH_PRIVATE_KEY=<clé>
 ```
 
-Créer un fichier `.env` dans `gears/tailscale/` :
-
+**`gears/go2rtc/.env`** :
 ```env
-TS_AUTHKEY=<votre_clé_auth_tailscale>
+GARAGE_IP=192.168.0.xxx
+GARAGE_CODE=<mdp_rtsp>
+SONETTE_IP=192.168.0.xxx
+SONETTE_CODE=<mdp_rtsp>
+PORT=554
+USER=admin
+```
+
+**`gears/tailscale/.env`** :
+```env
+TS_AUTHKEY=<auth_key>
 ```
 
 ---
 
 ## Commandes Makefile
 
-| Commande     | Description                                      |
-|--------------|--------------------------------------------------|
-| `make`       | Build et démarrage complet (mode prod)           |
-| `make dev`   | Build et démarrage en mode développement         |
-| `make clean` | Arrêt des conteneurs et suppression des images   |
-| `make re`    | Rebuild complet (clean + relance)                |
-| `make stop`  | Arrêt des conteneurs                             |
+| Commande | Description |
+|----------|-------------|
+| `make` | Build et démarrage (prod) |
+| `make dev` | Build et démarrage (dev) |
+| `make clean` | Arrêt + suppression images |
+| `make re` | Rebuild complet |
+| `make stop` | Arrêt des conteneurs |
 
 ---
 
-## Commandes utiles
+## Notes techniques
 
-```bash
-# Inspecter la base de données avec Prisma Studio
-npx prisma studio --url="postgresql://user_admin:mon_password_secret@localhost:5432/db"
+**Timezone** — données météo en `Timestamptz`, affichage en `Europe/Brussels`. API Open-Meteo appelée avec `timezone=UTC`.
 
-# Tester un flux RTSP avec ffmpeg (caméra de test)
-ffmpeg -re -f lavfi -i testsrc=size=1280x720:rate=30 \
-  -c:v libx264 -preset ultrafast -tune zerolatency \
-  -pix_fmt yuv420p -an -g 30 -f rtsp rtsp://localhost:8554/camera_test
+**Caméras** — go2rtc en `network_mode: "service:tailscale"`. En cas de changement d'IP DHCP, mettre à jour `GARAGE_IP` dans `gears/go2rtc/.env`. Faire une réservation DHCP dans le routeur pour fixer les IPs.
 
-# Relancer uniquement le backend (sans rebuild)
-docker-compose restart backend
-```
-
----
-
-## Structure du projet
-
-```
-MyTranscendance/
-├── gears/
-│   ├── backend/        # API Fastify (Node.js)
-│   │   ├── src/
-│   │   │   ├── plugins/    # Intégrations : SMA, EZVIZ, Miele, météo, JWT
-│   │   │   └── routes/     # Endpoints REST
-│   │   └── prisma/         # Schéma de base de données
-│   ├── frontend/       # Interface React
-│   ├── db/             # Dockerfile PostgreSQL
-│   ├── nginx/          # Configuration reverse proxy
-│   ├── tailscale/      # Configuration VPN
-│   └── go2rtc/         # Configuration flux vidéo
-├── TCP_serv/           # Serveur TCP (simulateur)
-├── ffmpeg_serv/        # Outils ffmpeg / MediaMTX
-├── docker-compose.yml
-└── Makefile
-```
+**Miele OAuth2** — `MIELE_REDIRECT_URI` doit être enregistrée dans le [Miele Developer Portal](https://developer.miele.com/).
 
 ---
 

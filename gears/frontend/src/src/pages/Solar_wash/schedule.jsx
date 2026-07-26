@@ -204,7 +204,10 @@ function Schedule() {
                 <h2 style={txt}>Infos:</h2></div>
               <div style={Row}>
                 <h2 style={txt}>Status:</h2>
-                <h2 style={txt}>{devInfo.state.status.value_localized}</h2>
+                {(devInfo.state.status) ? 
+                ( <h2 style={txt}>{devInfo.state.status.value_localized}</h2> ) :
+                ( <h2 style={txt}>ERROR</h2> )
+                }
               </div> 
               <WashTable devInfo={devInfo} onAction={refreshDevInfo} />
 

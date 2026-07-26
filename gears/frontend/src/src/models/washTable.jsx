@@ -4,6 +4,7 @@ import { greenButton, redButton } from "./styles";
 
 export function WashTable({devInfo, onAction})
 {
+	console.log(devInfo, "\n", onAction)
 	const state = devInfo?.state
 	const status = state?.status
 	const machineMode = status?.value_raw;
