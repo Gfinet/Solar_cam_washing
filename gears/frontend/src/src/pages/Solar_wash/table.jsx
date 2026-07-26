@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
-import { MyLineChart, MyBarChart } from '../../models/charts'
+import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
 import { AppNavigation } from '../../models/navigation';
 import { Fetches } from '../../models/fetchData';
+import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton } from '../../models/styles';
 
 import '../../App.css'
+
+
 
 function Table() {
   const {goToDash, goToSchedule, Logout} = AppNavigation();
@@ -11,80 +14,71 @@ function Table() {
   
   const [temp, setTemp] = useState([]);
   const [watt, setWatt] = useState([]);
-  
+
+  const WINDOW = 4; // ±6 points de chaque côté
+  const [tempCenter, setTempCenter] = useState(WINDOW);
+  const [wattCenter, setWattCenter] = useState(WINDOW);
 
   useEffect(() => {
-    fetchTemp(setTemp);
-    fetchWatt(setWatt);
+    fetchTemp(data => {
+      setTemp(data);
+      const idx14 = data.findIndex(d => d.time.startsWith('14'));
+        setTempCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+    });
+    fetchWatt(data => {
+      setWatt(data);
+      const idx14 = data.findIndex(d => d.time.startsWith('14'));
+      setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+    });
   }, []);
+
+  const tempSlice = temp.slice(
+    Math.max(0, tempCenter - WINDOW),
+    Math.min(temp.length, tempCenter + WINDOW + 1)
+  );
+  const wattSlice = watt.slice(
+    Math.max(0, wattCenter - WINDOW),
+    Math.min(watt.length, wattCenter + WINDOW + 1)
+  );
+
+  const c = "#fbbf24"
+  const chartData = {
+        //title       data     valx      valy              unit
+    w : {t : "Meteo", d: tempSlice, x:"time", y: "temperature", u:'°'},
+    e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w', tt: watt.total},
+    r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w/m2'}
+  }
+
   return (
-    
-    <div style={{ padding: '2rem', textAlign: 'center'}}>
-      <h1>Bienvenue sur l'espace Parents</h1>
-      <div style={{display:"flex", gap:"1rem", padding: '1rem', justifyContent: 'center', alignItems: 'center'}}>
-      <button style={styles.button} onClick={goToDash}>Revenir à l'acceuil</button>
-      <button style={styles.button} onClick={goToSchedule}>Prevoir une machine</button>
-      <button style={styles.button} onClick={Logout}>Se Déconnecter</button>
+    <div style={globalDiv}>
+      <h1>Bienvenue sur l'espace Tableaux</h1>
+
+      <TimeSlider
+        data={watt} center={wattCenter}
+        onCenterChange={setWattCenter} windowSize={WINDOW}
+        label="Électricité panneaux"
+      />
+      
+      <div style={chartDiv}>
+        <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
+        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} total={chartData.e.t}/>
       </div>
-      <div style={{display: 'flex', maxWidth: '1400px', margin: '0 auto', flexDirection: 'row' }}>
-          <MyBarChart
-            title="Meteo"
-            data={temp} 
-            valx="time"    
-            valy="temperature"
-            unit='°'
-            color="#fbbf24" 
-          />
-          <MyLineChart
-            title="Electricite des panneaux"
-            data={watt} 
-            valx="time"    
-            valy="watt"
-            unit="w"
-            color="#fbbf24" 
-          />
-      </div>
-      <div style={{display: 'flex', maxWidth: '1400px', margin: '0 auto', flexDirection: 'row' }}>
-          <MyBarChart
-            title="Rayonnement solaire"
-            data={temp} 
-            valx="time"    
-            valy="sun"
-            unit="w/m2"
-            color="#fbbf24" 
-          />
-          <MyBarChart
-            title="Rayonnement solaire"
-            data={temp} 
-            valx="time"    
-            valy="sun"   
-            unit="w/m2"
-            color="#fbbf24" 
-          />
-      </div>
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'row', 
-        gap: '1rem', 
-        maxWidth: '300px', 
-        margin: '0 auto' 
-        }}>
-        
+
+      <TimeSlider
+        data={temp} center={tempCenter}
+        onCenterChange={setTempCenter} windowSize={WINDOW}
+        label="Météo & Rayonnement"
+      />
+
+      <div style={chartDiv}>
+        <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} />
+        <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} />
       </div>
     </div>
   );
 }
 
-const styles = {
-  button: { 
-    padding: '10px', 
-    background: '#007bff', 
-    color: 'white', 
-    border: 'none', 
-    borderRadius: '5px', 
-    cursor: 'pointer',
-    height: '50px'
-  }
-};
+
+
 
 export default Table

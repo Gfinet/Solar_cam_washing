@@ -1,72 +1,113 @@
 export const Fetches = () => {
 
-    const fetchTemp = (setTemp) => {
-      const token = localStorage.getItem('token');
-        fetch('/api/temptoday',{
-      method: 'GET',
+  ////Open-meteo
+  const fetchTemp = (setTemp) => {
+    const token = localStorage.getItem('token');
+      fetch('/api/temptoday',{
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+  }})
+  .then(res => res.json())
+  .then(data => {
+    // console.log(data)
+    const val = Array(data.message.length)
+    for (let i=0; i<data.message.length; i++)
+    {
+      const time = new Date(data.message[i].time)
+      val[i] = {
+        time : time.toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' }), //getUTCHours() + "h",
+        temperature : data.message[i].temp,
+        sun  : data.message[i].SolarRay
+      }
+    }
+    setTemp(val);
+  })}
+
+  ////Sunny-boy Onduleur
+  const fetchWatt = (setWatt) => {
+    const token = localStorage.getItem('token');
+    fetch('/api/mbtoday',{
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+  }})
+  .then(res => res.json())
+  .then(data => {
+    const val = Array(data.message.length)
+    for (let i=0; i<data.message.length; i++)
+    {
+      let hour = new Date(data.message[i].time)
+      val[i] = {
+        time : hour.toLocaleString('fr-BE', { 
+          // day: '2-digit',
+          // month: '2-digit',
+          hour: '2-digit', 
+          minute : '2-digit',
+          timeZone: 'Europe/Brussels' }),
+        watt : data.message[i].watts,
+      }
+      val.total = data.message[i].total || 0
+    }
+    // console.log(val);
+    setWatt(val);
+  })}
+
+  ////Db Washing Prog
+  const fetchDbWashingProg = (setWash) => {
+    const token = localStorage.getItem('token');
+    fetch('/api/wash/list', {
+      method: 'POST',
+      body: 5,
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
-    }})
-    .then(res => res.json())
-    .then(data => {
-      // console.log(data)
-      const val = Array(data.message.length)
-      for (let i=0; i<data.message.length; i++)
-      {
-        const time = new Date(data.message[i].time)
-        val[i] = {
-          time : time.getUTCHours() + "h",
-          temperature : data.message[i].temp,
-          sun  : data.message[i].SolarRay
-        }
       }
-      setTemp(val);
-    })}
+    }).then(res => res.json())
+    .then(data => {setWash(data.message)})
+  }
 
-    const fetchWatt = (setWatt) => {
-      const token = localStorage.getItem('token');
-        fetch('/api/mbtoday',{
+  ////Miele devices
+  const fetchWashDevices = (setDevices) => {
+    const token = localStorage.getItem('token');
+    fetch('/api/miele/devices', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    }})
-    .then(res => res.json())
-    .then(data => {
-      const val = Array(data.message.length)
-      for (let i=0; i<data.message.length; i++)
-      {
-        let hour = data.message[i].time + 2
-        if (hour >= 24)
-          hour = hour -24
-        const timestr = hour + "h";
-        val[i] = {
-          time : timestr,
-          watt : data.message[i].watts
-        }
+        'Authorization': `Bearer ${token}`
       }
-      setWatt(val);
-    })}
-
-   
-
-    const fetchWashingProg = (setWash) => {
-      const token = localStorage.getItem('token');
-      fetch('/api/wash/list', {
-        method: 'POST',
-        body: 5,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        }})
-        .then(res => res.json())
-        .then(data => setWash(data.message))
+    })
+    .then(res =>res.json())
+    .then(data => {setDevices(data)})//; console.log("DEVICES",data)})
     }
 
-    return {
-        fetchTemp,
-        fetchWatt,
-        fetchWashingProg
-    };
+  const fetchDevInfo = (setDevInfo, device) => {
+    const token = localStorage.getItem('token');
+    let val = {};
+    fetch(`/api/miele/devices/${device}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res =>res.json())
+    .then(data => {val = data; console.log("DEV1",val)})
+    fetch(`/api/miele/devices/${device}/programs`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(res =>res.json())
+    .then(data => {val.programs = data; setDevInfo(val);console.log("DEV2",val)})
+    }
+
+  return {
+    fetchTemp,
+    fetchWatt,
+    fetchDbWashingProg, 
+    fetchWashDevices,
+    fetchDevInfo
+  };
 }

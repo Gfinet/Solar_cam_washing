@@ -2,7 +2,7 @@
   "name": "src",
   "version": "1.0.0",
   "type": "module",
-  "description": "Transcendence",
+  "description": "Solar-Cams",
   "main": "./src/app.js",
   "scripts": {
     "start": "node ./src/app.js",
@@ -21,7 +21,8 @@
     "net": "^1.0.2",
     "node-cron": "^4.2.1",
     "openmeteo": "^1.2.3",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",

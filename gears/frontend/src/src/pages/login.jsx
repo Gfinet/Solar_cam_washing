@@ -17,7 +17,6 @@ function Login() {
         e.preventDefault();
         console.log("Tentative de connexion avec :", credentials, JSON.stringify(credentials));
         
-
         try {
             const response = await fetch('/api/login', {
                 method: 'POST',
@@ -26,7 +25,6 @@ function Login() {
                 },
                 body: JSON.stringify(credentials),
             })
-
             const data = await response.json();
 
             if (response.ok && data.success)
@@ -82,12 +80,44 @@ function Login() {
 }
 
 const styles = {
-  title : {display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' },
-  container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' },
-  form: { padding: '2rem', border: '1px solid #ccc', borderRadius: '10px', width: '300px', background: '#000' },
-  inputGroup: { marginBottom: '1rem', textAlign: 'left' },
-  input: { width: '100%', padding: '8px', marginTop: '5px', boxSizing: 'border-box' },
-  button: { width: '100%', padding: '10px', background: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }
+    title : {
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '80vh' 
+    },
+    container: { 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '80vh' 
+        },
+    form: { 
+        padding: '2rem', 
+        border: '1px solid #ccc', 
+        borderRadius: '10px', 
+        width: '300px', 
+        background: '#000' 
+        },
+    inputGroup: { 
+        marginBottom: '1rem', 
+        textAlign: 'left' 
+        },
+    input: { 
+        width: '100%', 
+        padding: '8px', 
+        marginTop: '5px', 
+        boxSizing: 'border-box' 
+        },
+    button: { 
+        width: '100%', 
+        padding: '10px', 
+        background: '#007bff', 
+        color: 'white', 
+        border: 'none', 
+        borderRadius: '5px', 
+        cursor: 'pointer' 
+    },
 };
 
 

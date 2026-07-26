@@ -23,7 +23,7 @@ model User {
 
 model Weather_Forecast {
   id          Int      @id @default(autoincrement())
-  time        DateTime @unique // L'heure précise de la prévision
+  time        DateTime @unique @db.Timestamptz(3) // L'heure précise de la prévision
   temp        Float
   SolarRay    Float?
   updatedAt   DateTime @updatedAt

@@ -6,6 +6,14 @@ export const AppNavigation = () => {
 
     const navigate = useNavigate();
 
+    const ways = [
+        '/dashboard', 
+        '/schedule', 
+        '/table', 
+        '/cams', 
+        '/setPrgm'
+    ]
+
     const goToDash = () => navigate('/dashboard');
     const goToSchedule = () => navigate('/schedule');
     const goToTable = () => navigate('/table');
