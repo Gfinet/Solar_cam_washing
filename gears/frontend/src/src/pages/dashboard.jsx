@@ -7,7 +7,7 @@ import { blueButton, greyButton, rowDiv } from '../models/styles';
 import '../App.css'
 
 function Dashboard() {
-  const {goToTable, goToSchedule, goToCams, Logout} = AppNavigation();
+  const {goToTable, goToSchedule, goToCams, goToFast, Logout} = AppNavigation();
   const {fetchTemp} = Fetches();
 
   const [temp, setTemp] = useState([]);
@@ -27,6 +27,7 @@ function Dashboard() {
         </div>
         <div style={rowDiv}>
           <button style={blueButton} onClick={goToCams}>Voir la camera</button>
+          <button style={blueButton} onClick={goToFast}>Machine rapide</button>
           {/* <button style={blueButton} onClick={goToSchedule}>Prevoir une machine</button> */}
         </div>
         <button style={{...greyButton, alignSelf: 'center'}} onClick={Logout}>Se Déconnecter</button>

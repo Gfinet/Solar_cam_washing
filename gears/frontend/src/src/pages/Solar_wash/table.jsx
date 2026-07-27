@@ -19,16 +19,17 @@ function Table() {
   const [tempCenter, setTempCenter] = useState(WINDOW);
   const [wattCenter, setWattCenter] = useState(WINDOW);
 
+  const Now = new Date().toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' });
   useEffect(() => {
     fetchTemp(data => {
       setTemp(data);
-      const idx14 = data.findIndex(d => d.time.startsWith('14'));
-        setTempCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+      const idxNow = data.findIndex(d => d.time.startsWith(Now.slice(0, 2)));
+      setTempCenter(idxNow !== -1 ? idxNow : Math.floor(data.length / 2));
     });
     fetchWatt(data => {
       setWatt(data);
-      const idx14 = data.findIndex(d => d.time.startsWith('14'));
-      setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+      const idxNow = data.findIndex(d => d.time.startsWith(Now.slice(0, 2)));
+      setWattCenter(idxNow !== -1 ? idxNow : Math.floor(data.length / 2));
     });
   }, []);
 
@@ -46,7 +47,7 @@ function Table() {
         //title       data     valx      valy              unit
     w : {t : "Meteo", d: tempSlice, x:"time", y: "temperature", u:'°'},
     e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w', tt: watt.total},
-    r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w/m2'}
+    r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w'}
   }
 
   return (
@@ -60,8 +61,8 @@ function Table() {
       />
       
       <div style={chartDiv}>
-        <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} />
-        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} total={chartData.e.t}/>
+        <MyBarChart  title={chartData.w.t} data={chartData.w.d} valx={chartData.w.x} valy={chartData.w.y} unit={chartData.w.u} color={c} sep={true}/>
+        <MyLineChart title={chartData.e.t} data={chartData.e.d} valx={chartData.e.x} valy={chartData.e.y} unit={chartData.e.u} color={c} total={chartData.e.tt}/>
       </div>
 
       <TimeSlider
@@ -71,8 +72,8 @@ function Table() {
       />
 
       <div style={chartDiv}>
-        <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} />
-        <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} />
+        <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} sep={true}/>
+        <MyBarChart title={chartData.r.t} data={chartData.r.d} valx={chartData.r.x} valy={chartData.r.y} unit={chartData.r.u} color={c} sep={true}/>
       </div>
     </div>
   );

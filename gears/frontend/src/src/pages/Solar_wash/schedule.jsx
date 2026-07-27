@@ -35,19 +35,26 @@ function Schedule() {
     console.log("devInfo",devInfo)
   };
 
+  const Now = new Date().toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' });
+
   useEffect(() => {
     fetchTemp(data => {
       setTemp(data);
-      const idx14 = data.findIndex(d => d.time.startsWith('14'));
-        setTempCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+      const idxNow = data.findIndex(d => d.time.startsWith(Now.slice(0, 2)));
+      setTempCenter(idxNow !== -1 ? idxNow : Math.floor(data.length / 2));
     });
     fetchWatt(data => {
       setWatt(data);
-      const idx14 = data.findIndex(d => d.time.startsWith('14'));
-      setWattCenter(idx14 !== -1 ? idx14 : Math.floor(data.length / 2));
+      const idxNow = data.findIndex(d => d.time.startsWith(Now.slice(0, 2)));
+      setWattCenter(idxNow !== -1 ? idxNow : Math.floor(data.length / 2));
     });
     console.log("getting db Progrm")
     fetchDbWashingProg(setWash);
+
+  
+  // const idxNow = data.findIndex(d => d.time.startsWith(Now.slice(0, 2)));
+  // setCenter(idxNow !== -1 ? idxNow : Math.floor(data.length / 2));
+  // console.log("N", Now)
     
     const checkConnect = async () =>{
       const connected = await isMieleConnected();
@@ -75,7 +82,7 @@ function Schedule() {
         //title       data          valx      valy              unit               total
     w : {t : "Meteo", d: tempSlice, x:"time", y: "temperature", u:'°'},
     e : {t : "Electricite des panneaux", d: wattSlice, x:"time", y: "watt", u:'w', tt: watt.total},
-    r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w/m2'}
+    r : {t : "Rayonnement solaire", d: tempSlice, x:"time", y: "sun", u:'w'}
   }
   const c = "#fbbf24"
   

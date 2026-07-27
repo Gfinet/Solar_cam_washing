@@ -1,7 +1,7 @@
 // src/Chart.jsx
-import { LabelList, LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { LabelList, LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
-export function MyBarChart({title, data, valx, valy, unit})
+export function MyBarChart({title, data, valx, valy, unit, sep})
 {
   return (
     <div style={styles.chart}>
@@ -20,6 +20,12 @@ export function MyBarChart({title, data, valx, valy, unit})
               formatter={(value) => `${value}${unit}`} 
             />
             </Bar>
+          {sep ? <ReferenceLine 
+            x="00 h" 
+            stroke="red" 
+            strokeDasharray="3 3" 
+            label={{ value: 'Demain', position: 'top', fill: 'red' }} 
+          /> : (<></>)}
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -30,7 +36,7 @@ export function MyLineChart ({title, data, valx, valy, total})
 {
   return (
     <div style={styles.chart}>
-      <h2>{title}<br />- total : {total}wh</h2>
+      <h2>{title}{ total ? (<><br />- total : {total}wh</>) : (<></>)}</h2>
       <ResponsiveContainer height={250}>
         <LineChart data = {data} margin={{ top: 0, right: 0, left: -25, bottom: 25 }}>
           <XAxis dataKey={valx} interval={5} tick={{ fontSize: "15px" }} />

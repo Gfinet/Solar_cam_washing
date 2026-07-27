@@ -19,7 +19,7 @@ export const Fetches = () => {
       val[i] = {
         time : time.toLocaleString('fr-BE', { hour: '2-digit', timeZone: 'Europe/Brussels' }), //getUTCHours() + "h",
         temperature : data.message[i].temp,
-        sun  : data.message[i].SolarRay
+        sun  : data.message[i].SolarRay * 15 / 12
       }
     }
     setTemp(val);

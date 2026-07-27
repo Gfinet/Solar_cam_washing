@@ -22,8 +22,8 @@ export default async function modbus(server)
     server.get('/mbtoday', async (request,reply) =>{
         try {
             const now = new Date()
-            const start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
-            start.setHours(21, 59, 59, 999);
+            const start = new Date(now.getTime() - (12 * 60 * 60 * 1000))
+            // start.setHours(21, 59, 59, 999);
 
             const today = await server.prisma.Solar_Data.findMany({ where: { hour: {gte : start, lte: now}}, orderBy: {hour: 'asc'}})
             // console.log("Waza",start, end, today)
