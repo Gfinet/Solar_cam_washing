@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { getValidMieleToken } from '../plugins/mieleWashing.js';
+import { getValidMieleToken } from '../../plugins/Solar_Wash/mieleWashing.js';
 
 export default async function miele(server) {
 

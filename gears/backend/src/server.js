@@ -4,10 +4,11 @@ import fastifyJwt from '@fastify/jwt';
 import 'dotenv/config';
 
 import prisma from './plugins/prisma.js'
-import mb from './plugins/modbus_solar.js'
-import weather from './plugins/weather.js'
+import mb from './plugins/Solar_Wash/modbus_solar.js'
+import weather from './plugins/Solar_Wash/weather.js'
+import clim from './plugins/Clim/ClimHandler.js' // TODO: trouver l'ID Midea
 import jwt from './plugins/jwt_auth.js'
-import ezviz from './plugins/ezviz_cam.js'
+import ezviz from './plugins/Door_Cams/ezviz_cam.js'
 
 import routes from './routes/index.js'
 
@@ -49,7 +50,7 @@ const serverOn = async () => {
     await server.register(prisma);
     await server.register(mb);
     await server.register(weather);
-    // await server.register(miele);
+    await server.register(clim); // TODO: trouver l'ID Midea
     // await server.register(bcrypt.hash)
     
 
