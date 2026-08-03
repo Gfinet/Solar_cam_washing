@@ -31,7 +31,7 @@ import { Fetches } from '../models/fetchData';
 export function ClimPannel ({data = {}, setClim, clim})
 {
 	const {fetchClim} = Fetches();
-	const {futurTemp, setFuturTemp} = useState('0')
+	const [futurTemp, setFuturTemp] = useState(data?.target | '20')
 	const mode = {
 		"1" : "Auto",
 		"2" : "Cooling", //(froid)
@@ -40,13 +40,11 @@ export function ClimPannel ({data = {}, setClim, clim})
 		"5" : "Fan only",
 	};
 
-	
-
-	const TurnOn = async () => {
+	const Turn = async (on) => {
 		const token = localStorage.getItem('token');
 		const response = await fetch("/api/clim/set", {
 			method: 'PUT',
-      		body: JSON.stringify({running : true}),
+      		body: JSON.stringify({running : on}),
       		headers: {
         		'Authorization': `Bearer ${token}`,
         		'Content-Type': 'application/json',
@@ -54,25 +52,38 @@ export function ClimPannel ({data = {}, setClim, clim})
 		})
 		refreshClimInfo()
 	}
-	const TurnOff = async () => {
-		const token = localStorage.getItem('token');
-		const response = await fetch("/api/clim/set", {
-			method: 'PUT',
-      		body: JSON.stringify({running : false}),
-      		headers: {
-        		'Authorization': `Bearer ${token}`,
-        		'Content-Type': 'application/json',
-      		}
-		})
-		refreshClimInfo()
-	}
+	const TurnOn = async () => {await Turn(true)}
+	const TurnOff = async () => {await Turn(false)}
 
 	const refreshClimInfo = async () => {
 		await fetchClim(setClim);
-		setFuturTemp(clim.target);
+		setFuturTemp(data.target);
+		// console.log("futu", futurTemp)
   	};
 
 	// console.log("DD", data)
+	const sendT = async () => {
+		const token = localStorage.getItem('token');
+		await fetch('/api/clim/set', {
+			method : "PUT",
+			body : JSON.stringify({temperature : futurTemp}),
+			headers: {
+        		'Authorization': `Bearer ${token}`,
+        		'Content-Type': 'application/json',
+      		}
+		})
+		refreshClimInfo()
+	}
+	
+
+	const setT = (up) => {
+		let val = Number(futurTemp);
+		if (up) val++;
+		else	val--;
+		setFuturTemp(val.toString())
+	}
+	const addT = () => {setT(true)}
+	const lowT = () => {setT(false)}
 
 	return (
 		<div style={pannel}>
@@ -89,7 +100,7 @@ export function ClimPannel ({data = {}, setClim, clim})
 			</div>
 			) : (<>
 			<div style={row}>
-				<div style={{...col, border: '1px solid #222'}}>
+				<div style={{...col, width:'15%', border: '1px solid #222'}}>
 					<p>Status:</p>
 					{data?.running === "True" ? 
 						(<button style={{backgroundColor:'#1eb111ff', ...button}}>
@@ -100,7 +111,7 @@ export function ClimPannel ({data = {}, setClim, clim})
 					<p>Mode :</p>
 					<p>{mode[data?.mode]}</p>
 				</div>
-				<div style={col}>
+				<div style={{...col, width:'42%'}}>
 					<div style={row}>
 						<p>C° interieure : </p>
 						<p> {data?.indoor}</p>
@@ -110,19 +121,19 @@ export function ClimPannel ({data = {}, setClim, clim})
 						<p> {data?.outdoor}</p>
 					</div>
 					<div style={row}>
-						<p>C° visée:</p>
+						<p>C° Programmée :</p>
 						<p>{data?.target}</p>
 					</div>
 				</div>
-				<div style={{...col, gap: '0.5rem', border: '1px solid #222'}}>
+				<div style={{...col, width:'33%', gap: '0.5rem', border: '1px solid #222'}}>
 					
-					<button style={{alignSelf : 'end', width : '20%'}}>+</button>
+					<button onClick={addT} style={{alignSelf : 'end', width : '20%'}}>+</button>
 					<div style={row}>
-						<p style={{fontSize: '1rem'}}>C° à viser:</p>
-						<p>{data?.target}</p>
+						<p style={{alignSelf:'start', fontSize: '1rem'}}>Régler sur : </p>
+						<p style={{alignSelf:'end'}}>{futurTemp}°</p>
 					</div>
-					<button style={{alignSelf : 'end', width : '20%'}}>-</button>
-					<button>CONFIRMER TEMPERATURE</button>
+					<button onClick={lowT} style={{alignSelf : 'end', width : '20%'}}>-</button>
+					<button onClick={sendT}>CONFIRMER</button>
 				</div>
 			</div>
 			<div style={{...row, border: '1px solid #222'}}>
@@ -156,7 +167,8 @@ const col = {
   	flexDirection: 'column',
 	alignContent: 'space-evenly',
 	height : '100%',
-	maxHeight: '100%'
+	maxHeight: '100%',
+	// width : '31%'
 }
 
 const row = {
