@@ -1,10 +1,38 @@
 import { NumberStepper } from "./numberStepper";
 import { useState, useRef} from 'react'
-import { greenButton, redButton } from "./styles";
+import { greenButton, redButton } from "../models/styles";
+
+export function WashInfo({devInfo, selectedDevice, onRefresh})
+{
+
+	return (<>
+		{(selectedDevice !== "/" && devInfo?.state !== null) ? 
+		(<div style={Table}>
+			<div style={Row}>
+			<h2 style={txt}>Infos:</h2></div>
+			<div style={Row}>
+			<h2 style={txt}>Status:</h2>
+			{(devInfo?.state?.status) ? 
+			( <h2 style={txt}>{devInfo.state.status.value_localized}</h2> ) :
+			( <h2 style={txt}>ERROR</h2> )
+			}
+			</div> 
+			<WashTable devInfo={devInfo} onAction={onRefresh} />
+
+		</div>) 
+		: 
+		(<>
+			<div style={{...Row, alignSelf:'center'}}>
+			<h2 style={{color: 'white'}}>No machine picked</h2>
+			</div>
+		</>)}
+	</>)
+}
+
 
 export function WashTable({devInfo, onAction})
 {
-	console.log(devInfo, "\n", onAction)
+	// console.log(devInfo, "\n", onAction)
 	const state = devInfo?.state
 	const status = state?.status
 	const machineMode = status?.value_raw;
@@ -125,6 +153,13 @@ export function WashTable({devInfo, onAction})
 				</div>
 			);
 	}
+}
+
+const Table = {
+  width: '100%',
+  backgroundColor:'grey',
+  justifyContent: 'space-between',
+  borderRadius: '5px',
 }
 
 const Row ={

@@ -1,32 +1,56 @@
-import fp from 'fastify-plugin'
-import { createAppliance } from 'node-mideahvac'
+import fp from 'fastify-plugin';
+import { execFile } from 'child_process';
 
+const CLI = 'midea-beautiful-air-cli';
+// const CLI = '/root/.local/bin/midea-beautiful-air-cli';
+const BASE_ARGS_LOCAL = [
+  '--ip',    process.env.CLIM_IP,
+  '--key',   process.env.CLIM_KEY,
+  '--token', process.env.CLIM_TOK,
+];
 
-export default fp ( async (server) =>{
-	async function connectClim() {
+const BASE_ARGS_CLOUD = [
+  '--account', process.env.CLIM_ACCOUNT,
+  '--password', process.env.CLIM_PSWD,
+  '--appkey', '3742e9e5842d4ad59c2db887e12449f9',
+  '--appid',  '1017',
+  '--ip',     process.env.CLIM_IP,
+];
 
-		const appliance = createAppliance({
-			communicationMethod: 0,
-			ip: process.env.CLIM_IP,
-			id: Number(process.env.CLIM_ID),
-			account:  process.env.CLIM_ACCOUNT,
-      		password: process.env.CLIM_PSWD,
-			appkey:   '3742e9e5842d4ad59c2db887e12449f9',
-      		appid:    1017,
+const runCli = (subcommand, extraArgs = []) => {
+	// console.log('CLIM args:', BASE_ARGS_LOCAL); // ← ajoute ça temporairement
+	return new Promise((resolve, reject) => {
+		execFile(CLI, [subcommand, ...BASE_ARGS_LOCAL, ...extraArgs], (err, stdout, stderr) => {
+		if (err) return reject(new Error(stderr || err.message));
+		resolve(stdout);
 		});
+	});
+};
 
-		const status = await appliance.getStatus();
-		console.log('Clim status:', status);
-		server.decorate('clim', appliance);
 
-		// const discovery = new mideaHvac.Discovery()
 
-		// const devices = await discovery.start({
-		// 	account: process.env.CLIM_ACCOUNT,
-		// 	password: process.env.CLIM_PSWD,
-		// 	appname: process.env.CLIM_APP // Précise bien l'application
-		// });
-		console.log('Appareils trouvés :', appliance)
-	}
-	connectClim().catch(err => console.error('Clim connexion échouée:', err.message));
-})
+// Parse la sortie texte en objet
+const parseStatus = (raw) => {
+  const result = {};
+  for (const line of raw.split('\n')) {
+    const match = line.match(/^\s{2}(\w+)\s+=\s+(.+)$/);
+    if (match) result[match[1].trim()] = match[2].trim();
+  }
+  return result;
+};
+
+export default fp(async (server) => {
+  server.decorate('clim', { //{ getStatus, setTemp, setMode, setOn, setOff }
+    getStatus: async () => parseStatus(await runCli('status')),
+	// getToken:  async () => runCli('discover', ['--credentials']),
+    setTemp:   (temp)  => runCli('set', ['--target-temperature', String(temp)]),
+    setMode:   (mode)  => runCli('set', ['--mode', String(mode)]),
+    setOn:     ()      => runCli('set', ['--running', 'true']),
+    setOff:    ()      => runCli('set', ['--running', 'false']),
+  });
+
+  const status = await server.clim.getStatus()
+  		.then(s => console.log('Clim connectée:', s.name, '| temp:', s.indoor, '°C'))
+    	.catch(err => console.warn('Clim inaccessible au démarrage:', err.message));
+//   console.log('Clim connectée:', status.name, '| temp:', status.indoor, '°C');
+});

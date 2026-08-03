@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
-import { AppNavigation } from '../../models/navigation';
+import { MyLineChart, MyBarChart, TimeSlider } from '../../class/charts'
 import { Fetches } from '../../models/fetchData';
-import { WashTable } from '../../models/washTable';
-import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton } from '../../models/styles';
+// import { WashTable } from '../../models/washTable';
+import { globalDiv, chartDiv } from '../../models/styles';
 
 
 function FastMachine ()

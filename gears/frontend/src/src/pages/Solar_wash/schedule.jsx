@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react'
-import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
-import { AppNavigation } from '../../models/navigation';
+import { MyLineChart, MyBarChart, TimeSlider } from '../../class/charts'
 import { Fetches } from '../../models/fetchData';
-import { WashTable } from '../../models/washTable';
+import { WashInfo } from '../../class/washTable';
 import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton } from '../../models/styles';
 
 import '../../App.css'
 
 function Schedule() {
   
-  const {goToDash, goToTable, Logout} = AppNavigation();
   const {fetchTemp, fetchWatt, fetchDbWashingProg, fetchWashDevices, fetchDevInfo} = Fetches()
 
 
@@ -114,16 +112,6 @@ function Schedule() {
       fetchDevInfo(setDevInfo, selectedDevice);
   };
 
-  const scheduleProgram = () =>{
-
-    console.log("check Connect to Miele")
-    console.log("check connect to machine")
-    console.log("selecting programs")
-    console.log("adding program to db")
-    console.log("confirmation")
-    console.log("program added")
-  }
-
   
   return (
     <div style={globalDiv}>
@@ -205,27 +193,7 @@ function Schedule() {
               </option>
             ))}
           </select>
-          {(selectedDevice !== "/" && devInfo !== null) ? (
-            <div style={Table}>
-              <div style={Row}>
-                <h2 style={txt}>Infos:</h2></div>
-              <div style={Row}>
-                <h2 style={txt}>Status:</h2>
-                {(devInfo.state.status) ? 
-                ( <h2 style={txt}>{devInfo.state.status.value_localized}</h2> ) :
-                ( <h2 style={txt}>ERROR</h2> )
-                }
-              </div> 
-              <WashTable devInfo={devInfo} onAction={refreshDevInfo} />
-
-            </div>
-          ) : (
-            <>
-              <div style={{...Row, alignSelf:'center'}}>
-                <h2 style={{color: 'white'}}>No machine picked</h2>
-              </div>
-            </>
-          )}
+          <WashInfo devInfo={devInfo} selectedDevice={selectedDevice} onRefresh={refreshDevInfo}/>
         </div>
       )}
     </div>
@@ -269,27 +237,6 @@ const formDiv = {
 const selectStyle = { 
   padding: '8px',
   width: '100%',
-}
-
-const Table = {
-  width: '100%',
-  backgroundColor:'grey',
-  justifyContent: 'space-between',
-  borderRadius: '5px',
-}
-
-const Row ={
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  width : 'auto',
-  height : 'auto'
-
-}
-
-const txt = {
-  color:'black',
-  fontSize: '15px'
 }
 
 export default Schedule

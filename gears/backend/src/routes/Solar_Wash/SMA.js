@@ -10,7 +10,8 @@ let uri = "v1/devices/14496865/lean"
 export default async function getVal(server)
 {
     server.get('/sma', async (request, reply)=>
-    {  
+    {
+        console.log("GET /sma")
         let data = {};  
         try
         {

@@ -3,6 +3,7 @@ const realTimeRegister = 100;
 export default async function modbus(server)
 {
     server.get('/mb',  async (request, reply)=>{
+        console.log("GET /mb")
         try {
             const response = await server.mb.readInputRegisters(realTimeRegister, 2)
 
@@ -20,6 +21,7 @@ export default async function modbus(server)
     });
 
     server.get('/mbtoday', async (request,reply) =>{
+        console.log("GET /mbtoday")
         try {
             const now = new Date()
             const start = new Date(now.getTime() - (12 * 60 * 60 * 1000))

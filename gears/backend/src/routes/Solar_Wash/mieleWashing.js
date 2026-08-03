@@ -4,6 +4,7 @@ import { getValidMieleToken } from '../../plugins/Solar_Wash/mieleWashing.js';
 export default async function miele(server) {
 
     server.post('/wash/list', async (request, reply) =>{
+        console.log("POST /wash/list")
         const number = request.body
         const line = await server.prisma.washing_Program.findMany( {take: number, orderBy: { time: 'desc'}, include: {author: {select: {username: true}}}})
         if (line)
@@ -22,6 +23,7 @@ export default async function miele(server) {
 
     server.get('/miele/callback', 
     async (request, reply) =>{
+        console.log("GET /miele/callback")
         const {code, state} = request.query
         
 
@@ -71,6 +73,7 @@ export default async function miele(server) {
     server.get('/miele/token', 
     { preHandler: [server.auth] },
     async (request, reply) =>{
+        console.log("GET /miele/token")
         const userId = request.user.id;
         const mieleTok = await server.prisma.user.findUnique({
             where : {id : userId}, 
@@ -85,6 +88,7 @@ export default async function miele(server) {
     server.get('/miele/connect', 
     { preHandler: [server.auth] }, 
     async (request, reply) => {
+        console.log("GET /miele/connect")
         try {
             const stateToken = server.jwt.sign(
             { id: request.user.id, purpose: 'miele-auth' }, 
@@ -104,6 +108,7 @@ export default async function miele(server) {
     server.get('/miele/devices', 
     { preHandler: [server.auth] }, 
     async (request, reply) => {
+        console.log("GET /miele/devices")
         const userId = request.user.id;
         const tokenData = await getValidMieleToken(userId, server)
         
@@ -125,8 +130,7 @@ export default async function miele(server) {
     server.get('/miele/devices/:deviceId', //?language=fr
     { preHandler: [server.auth] },
     async (request, reply) => {
-
-        //TODO quand la machine est enregistrée
+        console.log("GET /miele/devices/:deviceId")
         const { deviceId } = request.params;
         const userId = request.user.id;
         const tokenData = await getValidMieleToken(userId, server)        
@@ -150,7 +154,7 @@ export default async function miele(server) {
     { preHandler: [server.auth] },
     async (request, reply) => {
 
-        //TODO quand la machine est enregistrée
+        console.log("GET /miele/devices/:deviceId/programs")
         const { deviceId } = request.params;
         const userId = request.user.id;
         const tokenData = await getValidMieleToken(userId, server)        
@@ -175,7 +179,7 @@ export default async function miele(server) {
     server.put('/miele/devices/:deviceId/actions', //?language=fr
     { preHandler: [server.auth] },
     async (request, reply) => {
-
+        console.log("GET /miele/devices/:deviceId/actions")
         const { deviceId } = request.params;
         console.log("BODY",request.body)
         const userId = request.user.id;

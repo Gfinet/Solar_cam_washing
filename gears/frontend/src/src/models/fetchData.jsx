@@ -1,7 +1,7 @@
 export const Fetches = () => {
 
   ////Open-meteo
-  const fetchTemp = (setTemp) => {
+  const fetchTemp = async (setTemp) => {
     const token = localStorage.getItem('token');
       fetch('/api/temptoday',{
     method: 'GET',
@@ -26,7 +26,7 @@ export const Fetches = () => {
   })}
 
   ////Sunny-boy Onduleur
-  const fetchWatt = (setWatt) => {
+  const fetchWatt = async (setWatt) => {
     const token = localStorage.getItem('token');
     fetch('/api/mbtoday',{
     method: 'GET',
@@ -56,7 +56,7 @@ export const Fetches = () => {
   })}
 
   ////Db Washing Prog
-  const fetchDbWashingProg = (setWash) => {
+  const fetchDbWashingProg = async (setWash) => {
     const token = localStorage.getItem('token');
     fetch('/api/wash/list', {
       method: 'POST',
@@ -70,7 +70,7 @@ export const Fetches = () => {
   }
 
   ////Miele devices
-  const fetchWashDevices = (setDevices) => {
+  const fetchWashDevices = async (setDevices) => {
     const token = localStorage.getItem('token');
     fetch('/api/miele/devices', {
       method: 'GET',
@@ -82,7 +82,7 @@ export const Fetches = () => {
     .then(data => {setDevices(data)})//; console.log("DEVICES",data)})
     }
 
-  const fetchDevInfo = (setDevInfo, device) => {
+  const fetchDevInfo = async (setDevInfo, device) => {
     const token = localStorage.getItem('token');
     let val = {};
     fetch(`/api/miele/devices/${device}`, {
@@ -103,11 +103,24 @@ export const Fetches = () => {
     .then(data => {val.programs = data; setDevInfo(val);console.log("DEV2",val)})
     }
 
+  const fetchClim = async (setClim) => {
+    const token = localStorage.getItem('token');
+      fetch('/api/clim/status',{
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+      }})
+      .then(res => res.json())
+      .then(data => {setClim(data?.data)})
+  }
+
   return {
     fetchTemp,
     fetchWatt,
     fetchDbWashingProg, 
     fetchWashDevices,
-    fetchDevInfo
+    fetchDevInfo,
+    fetchClim
   };
 }

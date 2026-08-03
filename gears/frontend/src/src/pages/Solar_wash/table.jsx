@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { MyLineChart, MyBarChart, TimeSlider } from '../../models/charts'
+import { MyLineChart, MyBarChart, TimeSlider } from '../../class/charts'
 import { AppNavigation } from '../../models/navigation';
 import { Fetches } from '../../models/fetchData';
 import { globalDiv, buttonDiv, chartDiv, blueButton, greyButton } from '../../models/styles';

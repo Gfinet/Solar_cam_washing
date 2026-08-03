@@ -11,9 +11,9 @@ import Dashboard from './pages/dashboard.jsx';
 
 import Table from './pages/Solar_wash/table.jsx'
 import Schedule from './pages/Solar_wash/schedule.jsx'
+import FastMachine from './pages/Solar_wash/fastMachine.jsx';
 
 import Cams from './pages/Door_cam/Cams.jsx'
-import FastMachine from './pages/Solar_wash/fastMachine.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>

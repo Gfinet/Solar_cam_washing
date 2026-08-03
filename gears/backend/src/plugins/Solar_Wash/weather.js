@@ -14,7 +14,7 @@ export default fp(async (server) => {
         await fetchWeatherData(server);
     }
     else
-    {console.log("already got data")}
+    {console.log("Already got weather data")}
 
     async function fetchWeatherData(server) {
         const LAT=process.env.LAT;
