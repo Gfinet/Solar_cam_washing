@@ -30,6 +30,7 @@ const start = async () => {
 		process.on('message', function (m) { if (m === 'shutdown') exitWhenStopped()})
         
         await server.listen({ port: 3000, host: '0.0.0.0' })
+		// await server.listen(5000, () => console.log('Serveur Push démarré sur le port 5000'));
     } 
     catch (err) 
     {

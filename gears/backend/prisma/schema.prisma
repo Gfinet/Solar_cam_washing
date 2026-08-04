@@ -38,7 +38,7 @@ model Solar_Data {
 
 model Washing_Program {
   id            Int       @id @default(autoincrement())
-  type          Int
+  type          String
   time          DateTime  @default(now()) @db.Timestamptz(3)
   finished      Boolean   @default(false)
   authorId      Int

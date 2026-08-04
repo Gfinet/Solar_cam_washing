@@ -12,9 +12,9 @@ export function WashInfo({devInfo, selectedDevice, onRefresh})
 			<h2 style={txt}>Infos:</h2></div>
 			<div style={Row}>
 			<h2 style={txt}>Status:</h2>
-			{(devInfo?.state?.status) ? 
+			{(devInfo?.state?.status && devInfo?.state?.remoteEnable?.mobileStart) ? 
 			( <h2 style={txt}>{devInfo.state.status.value_localized}</h2> ) :
-			( <h2 style={txt}>ERROR</h2> )
+			( <h2 style={txt}>Option mobile inactive et/ou appuyer sur start</h2> )
 			}
 			</div> 
 			<WashTable devInfo={devInfo} onAction={onRefresh} />
@@ -77,15 +77,28 @@ export function WashTable({devInfo, onAction})
 			body : JSON.stringify(body)
     	})
 		console.log("REsp", response)
-		if (response.ok || response.status === 204) onAction();
+		onAction();
 	}
 
 	const turnOn = () => {sendAction({"powerOn": true})}
 	const turnOff = () => {sendAction({"powerOff": true})}
-	const setProgram = () => {sendAction({
-		"programId" : selectedProgram, 
-		"startTime": [delaiH,delaiMin],
-	})}
+	const setProgram = async () => {
+		if (selectedProgram == "/") {console.log("No prog");return;}
+		const token = localStorage.getItem('token');
+		const response = await fetch(`/api/miele/devices/${devId}/programs`, {
+			method: 'PUT',
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			},
+			body : JSON.stringify({
+				"programId" : parseInt(selectedProgram,10), 
+				"startTime": [delaiH,delaiMin]
+			})
+    	})
+		if (response) console.log("RESP", response)
+		onAction();
+	}
 
 	switch (machineMode) {
 		case 1:// Off/Arret
@@ -115,7 +128,7 @@ export function WashTable({devInfo, onAction})
 				</div>
 				<div style={{justifySelf :'center'}}>
 					<button style={{...greenButton, height:'10%', width:'100%'}} 
-					onClick={turnOff} //onClick={setProgram}
+					onClick={setProgram}
 					>Confirmer</button>
 				</div>
 			</>);
@@ -129,9 +142,18 @@ export function WashTable({devInfo, onAction})
 		case 5: //Running
 			return (<>
 				<div style={Row}>
-                  <h2 style={txt}>Temps restant:</h2>
+                  <h2 style={txt}>Programme en cours:</h2>
+                  <h2 style={txt}>{state?.ProgramID?.value_localized
+}</h2>
+                </div>
+				<div style={Row}>
+                  <h2 style={txt}>Etape:</h2>
+                  <h2 style={txt}>{state?.programPhase?.value_localized}</h2>
+                </div>
+				<div style={Row}>
+                  <h2 style={txt}>Temps total restant:</h2>
                   <h2 style={txt}>{state.remainingTime[0]}h
-					{state.remainingTime[1]}</h2>
+					{state.remainingTime[1] > 10 ? state.remainingTime[1] : "0" + state.remainingTime[1]}</h2>
                 </div>
 				<div style={{...Row, justifyContent:'center'}}>
 					<button style={greenButton} onClick={showMiniWindow}>Pause</button>

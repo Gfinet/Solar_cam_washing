@@ -46,7 +46,7 @@ function Schedule() {
       const idxNow = data.findIndex(d => d.time.startsWith(Now.slice(0, 2)));
       setWattCenter(idxNow !== -1 ? idxNow : Math.floor(data.length / 2));
     });
-    console.log("getting db Progrm")
+    // console.log("getting db Progrm")
     fetchDbWashingProg(setWash);
 
   
@@ -58,13 +58,14 @@ function Schedule() {
       const connected = await isMieleConnected();
       if (connected === true) 
       {
-        console.log("getting devices")
+        // console.log("getting devices")
         setMieleConnected(1);
         fetchWashDevices(setDevices);
       }
     }
     checkConnect()
-    
+    const intervalId = setInterval(() => {refreshDevInfo()}, 30000);
+    return () => clearInterval(intervalId);
   }, []);
 
   const tempSlice = temp.slice(
@@ -72,8 +73,8 @@ function Schedule() {
     Math.min(temp.length, tempCenter + WIN + 1)
   );
   const wattSlice = watt.slice(
-    Math.max(0, wattCenter - WIN),
-    Math.min(watt.length, wattCenter + WIN + 1)
+    Math.max(0, wattCenter - WIN * 12),
+    Math.min(watt.length, wattCenter + WIN * 12 + 1)
   );
 
   const chartData = {
@@ -107,7 +108,7 @@ function Schedule() {
     window.location.href = data.url;
   };
 
-  const refreshDevInfo = () => {
+  const refreshDevInfo = async () => {
     if (selectedDevice !== '/')
       fetchDevInfo(setDevInfo, selectedDevice);
   };
@@ -115,7 +116,7 @@ function Schedule() {
   
   return (
     <div style={globalDiv}>
-      <h1>Bienvenue sur l'espace Machine</h1>
+      <h1 style={{color:'white'}}>Bienvenue sur l'espace Machine</h1>
         
       <div style={washHeaderDiv}>
         <span style={{...washHeaderCell, width:'20%'}}>Date</span>
@@ -123,16 +124,17 @@ function Schedule() {
         <span style={{...washHeaderCell, width:'30%'}}>Autheur</span>
         <span style={{...washHeaderCell, width:'20%', justifyContent:'flex-end'}}>Terminé?</span>
       </div>
-
-      {wash.slice(0, 5).map((program) => (
+      {(wash.length > 0) ? 
+      (<>
+        {wash.slice(0, 5).map((program) => (
         <div key={program.id} style={washRowDiv}>
-          <span style={{ color: '#888', fontSize: '0.9rem' }}>
+          <span style={{ color: '#888', fontSize: '0.65rem' }}>
             {new Date(program.time).toLocaleString('fr-FR', { 
               day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' 
             })}
           </span>
-          <span style={{ fontWeight: 'bold', color: '#555' }}>
-            Type {program.type}
+          <span style={{ fontWeight: 'bold', color: '#555', fontSize:'0.8rem' }}>
+            {program.type}
           </span>
           <span style={{ fontWeight: 'bold', color: '#555' }}>
             {program.author.username}
@@ -147,7 +149,11 @@ function Schedule() {
             {program.finished ? 'Terminé' : 'En cours'}
           </span>
         </div>
-      ))}
+        ))}
+      </>) : 
+      (<p>No Data</p>) 
+      }
+      
 
       <div style={{...buttonDiv, marginTop: '1rem'}}>
         <button style={{...blueButton, width : "100%"}} onClick={MieleConnect}>Conexion a Miele</button>

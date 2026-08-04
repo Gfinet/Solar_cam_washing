@@ -1,7 +1,6 @@
 import fp from "fastify-plugin"
 
-
-export async function getValidMieleToken(userId, server) {
+async function getValidMieleToken(userId, server) {
 	// 1. Chercher le token en BDD
 	const tokenRecord = await server.prisma.miele_Token.findUnique({
 		where: { userId: userId }
@@ -51,6 +50,46 @@ export async function getValidMieleToken(userId, server) {
 	}
 }
 
+const programs = {
+  1:   { name: 'Coton', duration: 135 },
+  3:   { name: 'Synthétique', duration: 105 },
+  4:   { name: 'Fin', duration: 50 },
+  8:   { name: 'Laine', duration: 40 },
+  9:   { name: 'Soie', duration: 35 },
+  21:  { name: 'Vidange / essorage', duration: 15 },
+  22:  { name: 'Voilages', duration: 55 },
+  23:  { name: 'Chemises', duration: 65 },
+  27:  { name: 'Imperméabilisation', duration: 80 },
+  29:  { name: 'Textiles sport', duration: 70 },
+  31:  { name: 'Automatic plus', duration: 90 },
+  37:  { name: 'Textiles outdoor', duration: 75 },
+  39:  { name: 'Oreillers', duration: 120 },
+  52:  { name: 'Rinçage/amidonnage', duration: 20 },
+  53:  { name: 'Vêtements neufs', duration: 50 },
+  69:  { name: 'Coton hygiène', duration: 165 },
+  91:  { name: 'Nettoyage machine', duration: 105 },
+  95:  { name: 'Couette plumes', duration: 120 },
+  122: { name: 'Express 20', duration: 20 },
+  123: { name: 'Foncés / Jeans', duration: 85 },
+  129: { name: 'Textiles matelassés', duration: 110 },
+  146: { name: 'QuickPowerWash', duration: 49 },
+  190: { name: 'ECO 40-60', duration: 210 },
+};
+
+async function savePrgmDb(server, userId, body)
+{
+	// console.log("SAVE",userId, body)
+	const prgm = programs[body.programId].name;
+	const date = new Date()
+	const timeLeft = programs[body.programId].duration + body.startTime[0]*60 + body.startTime[1];
+	// console.log("MOMO", prgm, date)
+	await server.prisma.washing_Program.create({data: {type: prgm, time: date, finished : false, authorId : userId }})
+	//TODO NOTIF at body.startTime[0]*60 + body.startTime[1] + temps du prgm
+}
+
 export default fp(async (server)=>{
-    
+    server.decorate('miele', {
+		getToken: async (userId, server) => getValidMieleToken(userId, server), 
+		saveDb: async (server, userId, body) => savePrgmDb(server, userId, body),
+	})
 })

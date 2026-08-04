@@ -1,6 +1,4 @@
 import fp from 'fastify-plugin'
-import { fetchWeatherApi } from "openmeteo";
-import cron from 'node-cron';
 
 
 export default fp(async (server) => {

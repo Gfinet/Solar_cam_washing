@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import { getValidMieleToken } from '../../plugins/Solar_Wash/mieleWashing.js';
 
 export default async function miele(server) {
 
@@ -110,7 +109,7 @@ export default async function miele(server) {
     async (request, reply) => {
         console.log("GET /miele/devices")
         const userId = request.user.id;
-        const tokenData = await getValidMieleToken(userId, server)
+        const tokenData = await server.miele.getToken(userId, server)
         
         const response = await fetch('https://api.mcs3.miele.com/v1/short/devices?language=fr', {
             method: 'GET',
@@ -124,6 +123,7 @@ export default async function miele(server) {
         const devices = await response.json();
         // console.log("WAZIII", devices)
         if (response.ok) return devices;
+        console.log("Miele error response", response);
         return [];
     });
 
@@ -133,7 +133,7 @@ export default async function miele(server) {
         console.log("GET /miele/devices/:deviceId")
         const { deviceId } = request.params;
         const userId = request.user.id;
-        const tokenData = await getValidMieleToken(userId, server)        
+        const tokenData = await server.miele.getToken(userId, server)        
 
         const response = await fetch(`https://api.mcs3.miele.com/v1/devices/${deviceId}?language=fr`, {
             method: 'GET',
@@ -147,6 +147,7 @@ export default async function miele(server) {
         const devices = await response.json();
         
         if (response.ok) return devices; //testDeviceMiele;
+        console.log("Miele error response", response);
         return []; 
     });
 
@@ -157,7 +158,7 @@ export default async function miele(server) {
         console.log("GET /miele/devices/:deviceId/programs")
         const { deviceId } = request.params;
         const userId = request.user.id;
-        const tokenData = await getValidMieleToken(userId, server)        
+        const tokenData = await server.miele.getToken(userId, server)        
 
         const response = await fetch(`https://api.mcs3.miele.com/v1/devices/${deviceId}/programs?language=fr`, {
             method: 'GET',
@@ -172,6 +173,7 @@ export default async function miele(server) {
         // console.log(response, "\n\n", devices)
         
         if (response.ok) return devices; //testDeviceMiele;
+        if (response.status !== 400) console.log("Miele GET :deviceId/programs error response", response);
         return []; 
     });
     
@@ -179,11 +181,11 @@ export default async function miele(server) {
     server.put('/miele/devices/:deviceId/actions', //?language=fr
     { preHandler: [server.auth] },
     async (request, reply) => {
-        console.log("GET /miele/devices/:deviceId/actions")
+        console.log("PUT /miele/devices/:deviceId/actions")
         const { deviceId } = request.params;
         console.log("BODY",request.body)
         const userId = request.user.id;
-        const tokenData = await getValidMieleToken(userId, server)        
+        const tokenData = await server.miele.getToken(userId, server)        
 
         const response = await fetch(`https://api.mcs3.miele.com/v1/devices/${deviceId}/actions`, {
             method: 'PUT',
@@ -197,7 +199,39 @@ export default async function miele(server) {
 
         if (response.status !== 204) await response.json();
         
-        if (response.status) return { success: true }; //testDeviceMiele;
+        if (response.ok) return { success: true }; //testDeviceMiele;
+        console.log("Miele PUT :deviceId/actions error response", response);
+        return { success: false }; 
+    });
+
+    server.put('/miele/devices/:deviceId/programs', //?language=fr
+    { preHandler: [server.auth] },
+    async (request, reply) => {
+        console.log("PUT /miele/devices/:deviceId/programs")
+        const { deviceId } = request.params;
+        console.log("BODY",request.body)
+        const userId = request.user.id;
+        const tokenData = await server.miele.getToken(userId, server)        
+
+        const response = await fetch(`https://api.mcs3.miele.com/v1/devices/${deviceId}/programs`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${tokenData}`,
+                'Content-Type': 'application/json',
+                'Accept-Language': 'fr-FR',
+            },
+            body : JSON.stringify(request.body),
+        });
+
+        if (response.status !== 204) await response.json();
+        
+        if (response.ok) 
+        {
+            server.miele.saveDb(userId, request.body)
+            return { success: true }; //testDeviceMiele;
+        }
+        server.miele.saveDb(server, userId, request.body)
+        console.log("Miele PUT :deviceId/programs error response", response);
         return { success: false }; 
     });
 }

@@ -31,7 +31,7 @@ import { Fetches } from '../models/fetchData';
 export function ClimPannel ({data = {}, setClim, clim})
 {
 	const {fetchClim} = Fetches();
-	const [futurTemp, setFuturTemp] = useState(data?.target | '20')
+	const [futurTemp, setFuturTemp] = useState('20')
 	const mode = {
 		"1" : "Auto",
 		"2" : "Cooling", //(froid)
@@ -88,51 +88,49 @@ export function ClimPannel ({data = {}, setClim, clim})
 	return (
 		<div style={pannel}>
 			<div style={{...row, border: '1px solid #222'}}>
-				<p>Nom :</p>
-				<p>AirCo</p>
+				<p style={ps}>Nom :</p>
+				<p style={ps}>AirCo</p>
 			</div>
 			{(data?.running === undefined) ? (
 			<div style={row}>
 				<div style={col}>
-					<p>Status :</p>
-					<p>data loading</p>
+					<p style={ps}>Status :</p>
+					<p style={ps}>data loading</p>
 				</div>
 			</div>
 			) : (<>
 			<div style={row}>
-				<div style={{...col, width:'15%', border: '1px solid #222'}}>
-					<p>Status:</p>
+				<div style={{...col, width:'15%', gap:'0.7rem'}}>
+					<div>
+					<p style={ps}>Status:</p>
 					{data?.running === "True" ? 
 						(<button style={{backgroundColor:'#1eb111ff', ...button}}>
 							On</button>): 
 						(<button style={{backgroundColor:'red', ...button}}>
 							Off</button>)
 					}
-					<p>Mode :</p>
-					<p>{mode[data?.mode]}</p>
+					</div>
+					<div>
+						<p style={ps}>Mode:</p>
+						<p style={ps}>{mode[data?.mode]}</p>
+					</div>
 				</div>
 				<div style={{...col, width:'42%'}}>
-					<div style={row}>
-						<p>C° interieure : </p>
-						<p> {data?.indoor}</p>
-					</div>
-					<div style={row}>
-						<p>C° extérieure : </p>
-						<p> {data?.outdoor}</p>
-					</div>
-					<div style={row}>
-						<p>C° Programmée :</p>
-						<p>{data?.target}</p>
-					</div>
+						<p style={ps}>T° interieure : </p>
+						<p style={ps}> {data?.indoor}</p>
+						<p style={ps}>T° extérieure : </p>
+						<p style={ps}> {data?.outdoor}</p>
+						<p style={ps}>T° Programmée :</p>
+						<p style={ps}>{data?.target}</p>
 				</div>
-				<div style={{...col, width:'33%', gap: '0.5rem', border: '1px solid #222'}}>
-					
-					<button onClick={addT} style={{alignSelf : 'end', width : '20%'}}>+</button>
-					<div style={row}>
-						<p style={{alignSelf:'start', fontSize: '1rem'}}>Régler sur : </p>
-						<p style={{alignSelf:'end'}}>{futurTemp}°</p>
+				<div style={{...col, width:'33%', border: '1px solid #222', backgroundColor : '#000000ff'}}>
+						<p style={{...ps, alignSelf:'center'}}>Régler sur : </p>
+						<p style={{...ps, alignSelf:'center', fontSize :'1rem'}}>{futurTemp}°</p>
+				
+					<div style={{...row, gap:'0.7rem'}}>
+						<button onClick={lowT} style={pmbut}>-</button>
+						<button onClick={addT} style={pmbut}>+</button>
 					</div>
-					<button onClick={lowT} style={{alignSelf : 'end', width : '20%'}}>-</button>
 					<button onClick={sendT}>CONFIRMER</button>
 				</div>
 			</div>
@@ -153,6 +151,12 @@ const pannel = {
 	border: '1px solid #333',
 	borderRadius: '8px',
 	overflow: 'hidden',
+	backgroundColor : '#20482aff'
+}
+
+const ps = {
+	color : 'white',
+	fontSize : '1rem'
 }
 
 const button = {
@@ -160,7 +164,17 @@ const button = {
   padding: '10px',
   border: 'none',
   borderRadius: '5px',
+  
 };
+
+const pmbut = {
+	alignSelf : 'center', 
+	width : '50%',
+	height : '35px',
+	backgroundColor : '#484343ff',
+	color: 'white'
+
+}
 
 const col = {
 	display: 'flex',

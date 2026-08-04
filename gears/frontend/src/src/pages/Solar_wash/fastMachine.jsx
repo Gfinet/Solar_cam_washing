@@ -60,7 +60,7 @@ function FastMachine ()
 
 	return (
 		<div style={globalDiv}>
-			<h1>Préparer une machine rapidement</h1>
+			<h1 style={{color:'white'}}>Préparer une machine rapidement</h1>
 
 			<TimeSlider
 				data={temp} center={center}

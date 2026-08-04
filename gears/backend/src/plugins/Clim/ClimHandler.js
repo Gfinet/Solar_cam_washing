@@ -40,17 +40,15 @@ const parseStatus = (raw) => {
 };
 
 export default fp(async (server) => {
-  server.decorate('clim', { //{ getStatus, setTemp, setMode, setOn, setOff }
+  server.decorate('clim', {
     getStatus: async () => parseStatus(await runCli('status')),
-	// getToken:  async () => runCli('discover', ['--credentials']),
     setTemp:   (temp)  => runCli('set', ['--target-temperature', String(temp)]),
     setMode:   (mode)  => runCli('set', ['--mode', String(mode)]),
     setOn:     ()      => runCli('set', ['--running', 'true']),
     setOff:    ()      => runCli('set', ['--running', 'false']),
   });
 
-  const status = await server.clim.getStatus()
+  await server.clim.getStatus()
   		.then(s => console.log('Clim connectée:', s.name, '| temp:', s.indoor, '°C'))
     	.catch(err => console.warn('Clim inaccessible au démarrage:', err.message));
-//   console.log('Clim connectée:', status.name, '| temp:', status.indoor, '°C');
 });

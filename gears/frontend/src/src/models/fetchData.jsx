@@ -51,7 +51,7 @@ export const Fetches = () => {
       }
       val.total = data.message[i].total || 0
     }
-    // console.log(val);
+    // console.log("LEN",val.length);
     setWatt(val);
   })}
 
@@ -92,7 +92,7 @@ export const Fetches = () => {
       }
     })
     .then(res =>res.json())
-    .then(data => {val = data; console.log("DEV1",val)})
+    .then(data => {val = data})
     fetch(`/api/miele/devices/${device}/programs`, {
       method: 'GET',
       headers: {
@@ -100,7 +100,8 @@ export const Fetches = () => {
       }
     })
     .then(res =>res.json())
-    .then(data => {val.programs = data; setDevInfo(val);console.log("DEV2",val)})
+    .then(data => {val.programs = data; setDevInfo(val)})
+    // .then(data => {val.programs = data; setDevInfo(val);console.log("DEV2",val)})
     }
 
   const fetchClim = async (setClim) => {

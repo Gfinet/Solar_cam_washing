@@ -4,6 +4,7 @@ import { ClimPannel } from '../class/climPannel';
 import { AppNavigation } from '../models/navigation';
 import { Fetches } from '../models/fetchData';
 import { blueButton, greyButton, rowDiv, globalDiv } from '../models/styles';
+import { PushButton } from '../class/pushButton';
 
 import '../App.css'
 
@@ -17,12 +18,14 @@ function Dashboard() {
   useEffect(() => {
     fetchTemp(setTemp);
     fetchClim(setClim);
+    const intervalId = setInterval(() => {fetchClim(setClim)}, 10000);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
-    <div style={globalDiv}>
-      <h1>Bienvenue sur l'espace Parents</h1>
-      <MyBarChart data={temp} valx="time" valy="temperature" color="#fbbf24" unit='°' sep={true}/>
+    <div style={{...globalDiv, gap:'0.5rem'}}>
+      <h1 style={{color:'white'}}>Bienvenue sur l'espace Parents</h1>
+      <MyBarChart data={temp} valx="time" valy="temperature" color="#fbbf24" unit='°' sep={true} title={"Prévisions météo"}/>
       <ClimPannel data={clim} setClim={setClim} clim={clim}/>
       <div style={tableDiv}>
         <div style={rowDiv}>
@@ -35,6 +38,7 @@ function Dashboard() {
           {/* <button style={blueButton} onClick={goToSchedule}>Prevoir une machine</button> */}
         </div>
         <button style={{...greyButton, alignSelf: 'center'}} onClick={Logout}>Se Déconnecter</button>
+        <PushButton/>
       </div>
     </div>
   );

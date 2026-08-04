@@ -5,10 +5,14 @@ import 'dotenv/config';
 
 import prisma from './plugins/prisma.js'
 import mb from './plugins/Solar_Wash/modbus_solar.js'
+import miele from './plugins/Solar_Wash/mieleWashing.js'
 import weather from './plugins/Solar_Wash/weather.js'
 import clim from './plugins/Clim/ClimHandler.js' // TODO: trouver l'ID Midea
 import jwt from './plugins/jwt_auth.js'
+import webpush from './plugins/web-push.js'
 import ezviz from './plugins/Door_Cams/ezviz_cam.js'
+
+
 
 import routes from './routes/index.js'
 
@@ -33,9 +37,6 @@ const customStream = {
 
 const serverOn = async () => {
 
-    // const MieleId = process.env.MIELE_ID;
-    // const MieleSecret = process.env.MIELE_SECRET;
-    // const DbUrl = process.env.DATABASE_URL
 
     const server = Fastify({logger: {
       level: 'info',
@@ -50,8 +51,13 @@ const serverOn = async () => {
     await server.register(prisma);
     await server.register(mb);
     await server.register(weather);
+    await server.register(webpush);
+    await server.register(miele); // TODO: trouver l'ID Midea
     await server.register(clim); // TODO: trouver l'ID Midea
     // await server.register(bcrypt.hash)
+
+    
+    
     
 
     // fetchSolarData()
@@ -61,19 +67,7 @@ const serverOn = async () => {
         const mdp = await bcrypt.hash("chocolat", 12)
         await server.prisma.User.create({data: {username: "Parents", password_hash: mdp }})
     }
-    const washProg = await server.prisma.washing_Program.count();
-    if (server.prisma && !washProg)
-    {
-        for (let i = 0; i < 10; i++)
-        {
-            await server.prisma.washing_Program.create({
-                data: {
-                    type: i%3, 
-                    time: new Date(),
-                    authorId: 1,
-                    finished: (i%2 === 0) }})
-        }
-    }
+
 
     server.get('/api', function (request, reply) {
         reply.send({ hello: 'world' })
