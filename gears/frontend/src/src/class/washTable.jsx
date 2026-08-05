@@ -43,13 +43,11 @@ export function WashTable({devInfo, onAction})
 	
 	const [delaiH, setDelaiH] = useState(0)
   	const [delaiMin, setDelaiMin] = useState(0)
+	const [endH, setEndH] = useState(0)
+  	const [endMin, setEndMin] = useState(0)
 
 	const [selectedProgram, setSelectedProgram] = useState('/');
-	const changeProgram = (e) => {
-		console.log("prgm", e.target.value)
-		setSelectedProgram(e.target.value)
-		// setSchedule(prev => ({...prev, selectedProgram : e.target.value}))
-	}
+	const changeProgram = (e) => {setSelectedProgram(e.target.value)}
 
 
 	const fenetreRef = useRef(null);
@@ -75,6 +73,25 @@ export function WashTable({devInfo, onAction})
 	const turnOff = () => {sendAction({"powerOff": true})}
 	const setProgram = async () => {
 		if (selectedProgram == "/") {console.log("No prog");return;}
+		let delH = delaiH;
+		let delMin = delaiMin;
+		if (!timeMode)
+		{
+			const minT = computeEndTime();
+			// console.log(minT, endH, endMin)
+			if (minT[0] * 60 + minT[1] > endH * 60 + endMin) {console.log("impossible time");return;}
+			minT[1] = endMin - minT[1];
+			if (minT[1] < 0)
+			{
+				minT[0]--;
+				minT[1] += 60;
+			}
+			minT[0] = endH - minT[0];
+
+			delH = minT[0];
+			delMin = minT[1];
+		}
+		console.log("prgm", selectedProgram, "in", delH, "h", delMin)
 		const token = localStorage.getItem('token');
 		const response = await fetch(`/api/miele/devices/${devId}/programs`, {
 			method: 'PUT',
@@ -84,7 +101,7 @@ export function WashTable({devInfo, onAction})
 			},
 			body : JSON.stringify({
 				"programId" : parseInt(selectedProgram,10), 
-				"startTime": [delaiH,delaiMin]
+				"startTime": [delH,delMin]
 			})
     	})
 		if (response) console.log("RESP", response)
@@ -106,22 +123,17 @@ export function WashTable({devInfo, onAction})
 
 	const setTime = () =>
 	{
-		console.log(timeMode)
+		// console.log(timeMode)
 		if (!timeMode)
 		{
-			const del = computeStartTime()
+			const del = computeEndTime()
 			console.log("del", Programs[selectedProgram].duration)
-			setDelaiH(del[0])
-			setDelaiMin(del[1])
-		}
-		else
-		{
-			setDelaiH(0)
-			setDelaiMin(0)
+			setEndH(del[0])
+			setEndMin(del[1])
 		}
 	}
 
-	const computeStartTime = () => {
+	const computeEndTime = () => {
 		const Now = new Date();
 		let minTime = Programs[selectedProgram].duration;
 		let minutes = Now.getMinutes();
@@ -174,8 +186,8 @@ export function WashTable({devInfo, onAction})
 						<NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
 					</>) : 
 					(<>
-						<NumberStepper value={delaiH}   onChange={setDelaiH}   max={23} step={1} label="H"   />
-						<NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
+						<NumberStepper value={endH}   onChange={setEndH}   max={23} step={1} label="H"   />
+						<NumberStepper value={endMin} onChange={setEndMin} max={59} step={5} label="min" />
 					</>)}
 				</div>
 				<div style={{justifySelf :'center'}}>
