@@ -1,6 +1,7 @@
 import { NumberStepper } from "./numberStepper";
 import { useState, useRef} from 'react'
 import { greenButton, redButton } from "../models/styles";
+import { useEffect } from "react";
 
 export function WashInfo({devInfo, selectedDevice, onRefresh})
 {
@@ -50,16 +51,6 @@ export function WashTable({devInfo, onAction})
 		// setSchedule(prev => ({...prev, selectedProgram : e.target.value}))
 	}
 
-	const savePrgm = () => {
-		if (selectedProgram !== "/")
-		{
-			console.log("program", selectedProgram ,"added in", delaiH, "H", delaiMin)
-		}
-		else
-		{
-			console.log("Aucun programme choisi")
-		}
-	}
 
 	const fenetreRef = useRef(null);
 	const showMiniWindow  = () => { fenetreRef.current.showModal() };
@@ -100,6 +91,57 @@ export function WashTable({devInfo, onAction})
 		onAction();
 	}
 
+	const [timeMode, setTimeMode] = useState(true)
+	// const switchTime = () => {setTimeMode(!timeMode); setTime()}
+	const switchTime = (e) => {setTimeMode(e.target.value === 'true');};
+
+	useEffect(() => {
+		if (selectedProgram === "/") {
+			setDelaiH(0);
+			setDelaiMin(0);
+			return;
+    	}
+		setTime()
+	}, [selectedProgram, timeMode]);
+
+	const setTime = () =>
+	{
+		console.log(timeMode)
+		if (!timeMode)
+		{
+			const del = computeStartTime()
+			console.log("del", Programs[selectedProgram].duration)
+			setDelaiH(del[0])
+			setDelaiMin(del[1])
+		}
+		else
+		{
+			setDelaiH(0)
+			setDelaiMin(0)
+		}
+	}
+
+	const computeStartTime = () => {
+		const Now = new Date();
+		let minTime = Programs[selectedProgram].duration;
+		let minutes = Now.getMinutes();
+		let hour = Now.getHours();
+
+		hour = Now.getHours() + Math.trunc(minTime / 60);
+		minTime -= Math.trunc(minTime / 60) * 60;
+
+		if (minutes % 5 > 0) 
+			minutes += 5 - (Now.getMinutes() % 5)
+		minutes += minTime //- (minTime % 60)
+		if (minutes >= 60) 
+		{	
+			hour += Math.trunc(minutes / 60) ; 
+			minutes %= 60
+		}
+		return [hour, minutes];
+	}
+
+
 	switch (machineMode) {
 		case 1:// Off/Arret
 			return (<>
@@ -121,10 +163,20 @@ export function WashTable({devInfo, onAction})
 					</select>
 				</div>
 				<div style={Row}>
-					<h2 style={txt}>Temps avant lancement :</h2>
-					{/* <input type="number" value={heureCible} onChange={handleTimeChange}></input> */}
-					<NumberStepper value={delaiH}   onChange={setDelaiH}   max={23} step={1} label="H"   />
-					<NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
+					<select id="id-timeMode" onChange={switchTime} value={timeMode} style={{...selectStyle, fontSize:'0.7rem'}}>
+						<option value="true">Temps avant lancement :</option>
+						<option value="false">Heure de fin:</option>
+					</select>
+					{/* <h2 style={txt}>Temps avant lancement :</h2> */}
+					{timeMode ? 
+					(<>
+						<NumberStepper value={delaiH}   onChange={setDelaiH}   max={23} step={1} label="H"   />
+						<NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
+					</>) : 
+					(<>
+						<NumberStepper value={delaiH}   onChange={setDelaiH}   max={23} step={1} label="H"   />
+						<NumberStepper value={delaiMin} onChange={setDelaiMin} max={59} step={5} label="min" />
+					</>)}
 				</div>
 				<div style={{justifySelf :'center'}}>
 					<button style={{...greenButton, height:'10%', width:'100%'}} 
@@ -217,6 +269,33 @@ const dialogButtonDiv = {
 
 const openButton = { ...greenButton, width: '120px', fontSize: '150%', height: '100px' };
 const noButton   = { ...redButton,   width: '120px', fontSize: '150%', height: '100px' };
+
+const Programs = {
+	"/": { name: "None", duration : 0},
+	1:   { name: 'Coton', duration: 135 },
+	3:   { name: 'Synthétique', duration: 105 },
+	4:   { name: 'Fin', duration: 50 },
+	8:   { name: 'Laine', duration: 40 },
+	9:   { name: 'Soie', duration: 35 },
+	21:  { name: 'Vidange / essorage', duration: 15 },
+	22:  { name: 'Voilages', duration: 55 },
+	23:  { name: 'Chemises', duration: 65 },
+	27:  { name: 'Imperméabilisation', duration: 80 },
+	29:  { name: 'Textiles sport', duration: 70 },
+	31:  { name: 'Automatic plus', duration: 90 },
+	37:  { name: 'Textiles outdoor', duration: 75 },
+	39:  { name: 'Oreillers', duration: 120 },
+	52:  { name: 'Rinçage/amidonnage', duration: 20 },
+	53:  { name: 'Vêtements neufs', duration: 50 },
+	69:  { name: 'Coton hygiène', duration: 165 },
+	91:  { name: 'Nettoyage machine', duration: 105 },
+	95:  { name: 'Couette plumes', duration: 120 },
+	122: { name: 'Express 20', duration: 20 },
+	123: { name: 'Foncés / Jeans', duration: 85 },
+	129: { name: 'Textiles matelassés', duration: 110 },
+	146: { name: 'QuickPowerWash', duration: 49 },
+	190: { name: 'ECO 40-60', duration: 210 },
+};
 
 /*
 Miele washing machine status
