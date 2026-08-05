@@ -1,0 +1,1 @@
+{"logtail":{"client_time":"2026-08-05T00:09:07.842583805Z","proc_id":1585696694,"proc_seq":1927},"v":2,"text":"wg: [U0Qo5] - Receiving keepalive packet\n"}
