@@ -18,6 +18,7 @@ model User {
   password_hash   String
   washingPrograms Washing_Program[]
   mieleToken      Miele_Token?
+  subscriptions   PushSubscription[]
   createdAt       DateTime @default(now())
 }
 
@@ -52,4 +53,17 @@ model Miele_Token {
   expiresAt    DateTime
   userId       Int      @unique
   user         User     @relation(fields: [userId], references: [id])
+}
+
+model PushSubscription {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Champs issus de l'objet web-push
+  endpoint  String   @unique // L'endpoint sert de clé unique pour éviter les doublons
+  p256dh    String
+  auth      String
+  
+  createdAt DateTime @default(now())
 }

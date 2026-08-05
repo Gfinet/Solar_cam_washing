@@ -171,7 +171,7 @@ export function WashTable({devInfo, onAction})
 		default:
 			return (
 				<div style={{...Row, alignSelf:'center'}}>
-					<h2 style={{color: 'white'}}>Error</h2>
+					<button style={{width:'100%'}} onClick={onAction}>Recharger</button>
 				</div>
 			);
 	}

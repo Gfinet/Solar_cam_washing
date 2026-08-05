@@ -82,6 +82,12 @@ async function savePrgmDb(server, userId, body)
 	const prgm = programs[body.programId].name;
 	const date = new Date()
 	const timeLeft = programs[body.programId].duration + body.startTime[0]*60 + body.startTime[1];
+	server.sendNotif({
+      title: 'Lavage terminé 🧺',
+      body: `test ${timeLeft}`,
+      icon: '/favicon.png',
+    })
+	console.log("Notif?")
 	// console.log("MOMO", prgm, date)
 	await server.prisma.washing_Program.create({data: {type: prgm, time: date, finished : false, authorId : userId }})
 	//TODO NOTIF at body.startTime[0]*60 + body.startTime[1] + temps du prgm

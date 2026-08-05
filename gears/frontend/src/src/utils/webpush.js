@@ -30,11 +30,16 @@ export async function subscribeUserToPush() {
 		userVisibleOnly: true,
 		applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY)
 	});
+	console.log("sub", subscription)
+	const token = localStorage.getItem('token');
 
 	// 4. Envoi de l'abonnement à Fastify
 	await fetch('/api/subscribe', {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
+		headers: { 
+			'Content-Type': 'application/json', 
+			'Authorization': `Bearer ${token}`
+		},
 		body: JSON.stringify(subscription)
 	});
 
