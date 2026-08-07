@@ -5,7 +5,7 @@ export default async function auth(server) {
 
     server.post('/login', async (request, reply) => {
         const { username, password } = request.body
-        server.writeLog(server.logFd["Request.log"], "POST /login")
+        server.writeLogs(Fd["Request"], "POST /login")
         const user = await server.prisma.user.findUnique({ where: { username: username }})
         if (user)
         {
@@ -30,4 +30,4 @@ export default async function auth(server) {
 // fastify.bcrypt.hash('password')
 //   .then(hash => fastify.bcrypt.compare('password', hash))
 //   .then(match => console.log(match ? 'Matched!' : 'Not matched!'))
-//   .catch(err => server.writeLog(server.logFd["Error.log"], err.message))
+//   .catch(err => server.writeLogs(Fd["Error"], err.message))

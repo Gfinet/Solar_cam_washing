@@ -16,7 +16,7 @@ export default fp (async (server) =>
     }
     const getValuesSMA = async (sid) => {
         try {
-            server.writeLog(server.logFd["Server.log"], "SID", sid)
+            server.writeLogs(["Server"], "SID", sid)
             if (sid === null) return {err : 1}
             const response = await fetch(`http://192.168.0.194/dyn/getValues.json?sid=${sid}`, {
                 method : 'POST',
@@ -27,8 +27,8 @@ export default fp (async (server) =>
             const data = await response.json();
             
             if (data.err) return data
-            // server.writeLog(server.logFd["Test.log"], "Instant Sma ", data.result[Sma.Id][Sma.Instant]['1'])
-            // server.writeLog(server.logFd["Test.log"], "Day     Sma ", data.result[Sma.Id][Sma.Day]['1'])
+            // server.writeLogs(["Test"], "Instant Sma ", data.result[Sma.Id][Sma.Instant]['1'])
+            // server.writeLogs(["Test"], "Day     Sma ", data.result[Sma.Id][Sma.Day]['1'])
 
             const Val = {
                 total : data.result[Sma.Id][Sma.Day]["1"][0].val,
@@ -37,7 +37,7 @@ export default fp (async (server) =>
             }
             return Val
         } catch (error) {
-            server.writeLog(server.logFd["Error.log"], 'Erreur lors de la connexion SMA:\n\t', error.cause.message);
+            server.writeLogs(["Error"], 'Erreur lors de la connexion SMA:\n\t', error.cause.message);
             return null
         }
     }
@@ -53,7 +53,7 @@ export default fp (async (server) =>
     let sid = null
 
     cron.schedule('*/5 * * * *', async () => {
-        fetchSolarData(server).catch(err => server.writeLog(server.logFd["Error.log"], 'Fetch solaire échoué:', err.cause.message));
+        fetchSolarData(server).catch(err => server.writeLogs(["Error"], 'Fetch solaire échoué:', err.cause.message));
     })
 
     async function fetchSolarData(server)
@@ -79,7 +79,7 @@ export default fp (async (server) =>
                 }})
         } 
         catch (error) {
-            server.writeLog(server.logFd["Error.log"], 'Erreur lors du fetch solaire:', error);
+            server.writeLogs(["Error"], 'Erreur lors du fetch solaire:', error);
         } 
     }
 })

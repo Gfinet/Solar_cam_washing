@@ -179,3 +179,374 @@
 [07/08/2026 02:39:34] FASTIFY: request completed
 [07/08/2026 02:39:41] FASTIFY: incoming request
 [07/08/2026 02:39:41] Parents GET /clim/status
+[07/08/2026 02:39:44] FASTIFY: request completed
+[07/08/2026 02:40:00] SID null
+[07/08/2026 02:40:00] FASTIFY: incoming request
+[07/08/2026 02:40:00] Parents GET /clim/status
+[07/08/2026 02:40:00] SID e60fqRfiR8BigSvH
+[07/08/2026 02:40:04] FASTIFY: incoming request
+[07/08/2026 02:40:04] FASTIFY: incoming request
+[07/08/2026 02:40:04] Parents GET /clim/status
+[07/08/2026 02:40:04] FASTIFY: request completed
+[07/08/2026 02:40:06] FASTIFY: request completed
+[07/08/2026 02:58:03] FASTIFY: incoming request
+[07/08/2026 02:58:03] Parents GET /clim/status
+[07/08/2026 02:58:06] FASTIFY: request completed
+[07/08/2026 02:58:13] FASTIFY: incoming request
+[07/08/2026 02:58:13] Parents GET /clim/status
+[07/08/2026 02:58:16] FASTIFY: request completed
+[07/08/2026 02:58:23] FASTIFY: incoming request
+[07/08/2026 02:58:23] Parents GET /clim/status
+[07/08/2026 02:58:27] FASTIFY: err is not defined
+[07/08/2026 02:58:27] FASTIFY: request completed
+[07/08/2026 04:23:35] FASTIFY: incoming request
+[07/08/2026 04:23:35] Parents GET /clim/status
+[07/08/2026 04:23:45] FASTIFY: err is not defined
+[07/08/2026 04:23:45] FASTIFY: request completed
+[07/08/2026 04:23:45] FASTIFY: incoming request
+[07/08/2026 04:23:45] Parents GET /clim/status
+[07/08/2026 04:23:51] FASTIFY: request completed
+[07/08/2026 04:23:55] FASTIFY: incoming request
+[07/08/2026 04:23:55] Parents GET /clim/status
+[07/08/2026 04:23:58] FASTIFY: request completed
+[07/08/2026 05:58:12] FASTIFY: incoming request
+[07/08/2026 05:58:12] Parents GET /clim/status
+[07/08/2026 05:58:15] FASTIFY: request completed
+[07/08/2026 05:58:22] FASTIFY: incoming request
+[07/08/2026 05:58:22] Parents GET /clim/status
+[07/08/2026 05:58:25] FASTIFY: request completed
+[07/08/2026 05:58:32] FASTIFY: incoming request
+[07/08/2026 05:58:32] Parents GET /clim/status
+[07/08/2026 07:16:05] FASTIFY: request completed
+[07/08/2026 07:16:05] FASTIFY: incoming request
+[07/08/2026 07:16:05] Parents GET /clim/status
+[07/08/2026 07:16:09] FASTIFY: request completed
+[07/08/2026 07:16:14] FASTIFY: incoming request
+[07/08/2026 07:16:14] Parents GET /clim/status
+[07/08/2026 07:16:21] FASTIFY: err is not defined
+[07/08/2026 07:16:21] FASTIFY: request completed
+[07/08/2026 07:16:24] FASTIFY: incoming request
+[07/08/2026 07:16:24] Parents GET /clim/status
+[07/08/2026 07:16:27] FASTIFY: request completed
+[07/08/2026 08:44:27] FASTIFY: incoming request
+[07/08/2026 08:44:27] Parents GET /clim/status
+[07/08/2026 08:44:34] FASTIFY: request completed
+[07/08/2026 08:44:37] FASTIFY: incoming request
+[07/08/2026 08:44:37] Parents GET /clim/status
+[07/08/2026 08:44:41] FASTIFY: request completed
+[07/08/2026 08:44:47] FASTIFY: incoming request
+[07/08/2026 08:44:47] Parents GET /clim/status
+[07/08/2026 10:02:08] FASTIFY: err is not defined
+[07/08/2026 10:02:08] FASTIFY: request completed
+[07/08/2026 10:02:08] FASTIFY: incoming request
+[07/08/2026 10:02:08] Parents GET /clim/status
+[07/08/2026 10:02:19] FASTIFY: err is not defined
+[07/08/2026 10:02:19] FASTIFY: request completed
+[07/08/2026 10:02:19] FASTIFY: incoming request
+[07/08/2026 10:02:19] Parents GET /clim/status
+[07/08/2026 10:02:26] FASTIFY: request completed
+[07/08/2026 10:02:28] FASTIFY: incoming request
+[07/08/2026 10:02:28] Parents GET /clim/status
+[07/08/2026 11:11:55] FASTIFY: incoming request
+[07/08/2026 11:11:55] Parents GET /clim/status
+[07/08/2026 11:11:55] FASTIFY: incoming request
+[07/08/2026 11:11:55] FASTIFY: request completed
+[07/08/2026 11:11:58] FASTIFY: request completed
+[07/08/2026 11:12:05] FASTIFY: incoming request
+[07/08/2026 11:12:05] Parents GET /clim/status
+[07/08/2026 11:12:07] FASTIFY: request completed
+[07/08/2026 11:12:15] FASTIFY: incoming request
+[07/08/2026 11:12:15] Parents GET /clim/status
+[07/08/2026 11:12:18] FASTIFY: request completed
+[07/08/2026 11:12:25] FASTIFY: incoming request
+[07/08/2026 11:12:25] Parents GET /clim/status
+[07/08/2026 11:12:28] FASTIFY: request completed
+[07/08/2026 11:12:35] FASTIFY: incoming request
+[07/08/2026 11:12:35] Parents GET /clim/status
+[07/08/2026 11:12:48] FASTIFY: err is not defined
+[07/08/2026 11:12:48] FASTIFY: request completed
+[07/08/2026 11:12:48] FASTIFY: incoming request
+[07/08/2026 11:12:48] Parents GET /clim/status
+[07/08/2026 11:12:52] FASTIFY: err is not defined
+[07/08/2026 11:12:52] FASTIFY: request completed
+[07/08/2026 11:12:55] FASTIFY: incoming request
+[07/08/2026 11:12:55] Parents GET /clim/status
+[07/08/2026 11:12:57] FASTIFY: request completed
+[07/08/2026 11:13:05] FASTIFY: incoming request
+[07/08/2026 11:13:05] Parents GET /clim/status
+[07/08/2026 11:13:08] FASTIFY: request completed
+[07/08/2026 11:13:08] FASTIFY: incoming request
+[07/08/2026 11:13:08] Parents GET /clim/status
+[07/08/2026 11:13:08] FASTIFY: incoming request
+[07/08/2026 11:13:08] FASTIFY: request completed
+[07/08/2026 11:13:10] FASTIFY: request completed
+[07/08/2026 11:13:19] FASTIFY: incoming request
+[07/08/2026 11:13:19] Parents GET /clim/status
+[07/08/2026 11:13:22] FASTIFY: request completed
+[07/08/2026 11:13:29] FASTIFY: incoming request
+[07/08/2026 11:13:29] Parents GET /clim/status
+[07/08/2026 11:13:31] FASTIFY: request completed
+[07/08/2026 11:13:39] FASTIFY: incoming request
+[07/08/2026 11:13:39] Parents GET /clim/status
+[07/08/2026 11:13:39] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:13:40] FASTIFY: err is not defined
+[07/08/2026 11:13:40] FASTIFY: request completed
+[07/08/2026 11:13:40] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:13:40] Already got weather data
+[07/08/2026 11:13:43] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:13:43] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:13:43] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:13:49] FASTIFY: incoming request
+[07/08/2026 11:13:49] Parents GET /clim/status
+[07/08/2026 11:13:52] FASTIFY: request completed
+[07/08/2026 11:13:59] FASTIFY: incoming request
+[07/08/2026 11:13:59] Parents GET /clim/status
+[07/08/2026 11:14:02] FASTIFY: request completed
+[07/08/2026 11:14:09] FASTIFY: incoming request
+[07/08/2026 11:14:09] Parents GET /clim/status
+[07/08/2026 11:14:11] FASTIFY: request completed
+[07/08/2026 11:14:19] FASTIFY: incoming request
+[07/08/2026 11:14:19] Parents GET /clim/status
+[07/08/2026 11:14:22] FASTIFY: request completed
+[07/08/2026 11:14:29] FASTIFY: incoming request
+[07/08/2026 11:14:29] Parents GET /clim/status
+[07/08/2026 11:14:32] FASTIFY: request completed
+[07/08/2026 11:14:39] FASTIFY: incoming request
+[07/08/2026 11:14:39] Parents GET /clim/status
+[07/08/2026 11:14:42] FASTIFY: request completed
+[07/08/2026 11:14:49] FASTIFY: incoming request
+[07/08/2026 11:14:49] Parents GET /clim/status
+[07/08/2026 11:14:52] FASTIFY: request completed
+[07/08/2026 11:15:00] SID null
+[07/08/2026 11:15:05] SID QAWUxonG3R0G4qXR
+[07/08/2026 11:15:45] FASTIFY: incoming request
+[07/08/2026 11:15:45] Parents GET /clim/status
+[07/08/2026 11:15:47] FASTIFY: request completed
+[07/08/2026 11:16:45] FASTIFY: incoming request
+[07/08/2026 11:16:45] Parents GET /clim/status
+[07/08/2026 11:16:48] FASTIFY: request completed
+[07/08/2026 11:17:45] FASTIFY: incoming request
+[07/08/2026 11:17:45] Parents GET /clim/status
+[07/08/2026 11:17:46] FASTIFY: incoming request
+[07/08/2026 11:17:46] FASTIFY: incoming request
+[07/08/2026 11:17:46] Parents GET /clim/status
+[07/08/2026 11:17:46] FASTIFY: request completed
+[07/08/2026 11:17:53] FASTIFY: request completed
+[07/08/2026 11:17:57] FASTIFY: incoming request
+[07/08/2026 11:17:57] Parents GET /clim/status
+[07/08/2026 11:18:00] FASTIFY: request completed
+[07/08/2026 11:18:07] FASTIFY: incoming request
+[07/08/2026 11:18:07] Parents GET /clim/status
+[07/08/2026 11:18:10] FASTIFY: request completed
+[07/08/2026 11:18:17] FASTIFY: incoming request
+[07/08/2026 11:18:17] Parents GET /clim/status
+[07/08/2026 11:18:19] FASTIFY: request completed
+[07/08/2026 11:18:27] FASTIFY: incoming request
+[07/08/2026 11:18:27] Parents GET /clim/status
+[07/08/2026 11:18:33] FASTIFY: request completed
+[07/08/2026 11:18:37] FASTIFY: incoming request
+[07/08/2026 11:18:37] Parents GET /clim/status
+[07/08/2026 11:18:40] FASTIFY: request completed
+[07/08/2026 11:18:47] FASTIFY: incoming request
+[07/08/2026 11:18:47] Parents GET /clim/status
+[07/08/2026 11:18:49] FASTIFY: request completed
+[07/08/2026 11:18:57] FASTIFY: incoming request
+[07/08/2026 11:18:57] Parents GET /clim/status
+[07/08/2026 11:19:00] FASTIFY: request completed
+[07/08/2026 11:19:09] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:19:09] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:19:10] Already got weather data
+[07/08/2026 11:19:12] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:19:12] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:19:12] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:19:45] FASTIFY: incoming request
+[07/08/2026 11:19:45] Parents GET /clim/status
+[07/08/2026 11:19:49] FASTIFY: err is not defined
+[07/08/2026 11:19:49] FASTIFY: request completed
+[07/08/2026 11:20:00] SID null
+[07/08/2026 11:20:03] SID efjBVQbX2BGX-TbY
+[07/08/2026 11:20:29] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:20:29] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:20:30] Already got weather data
+[07/08/2026 11:20:32] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:20:32] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:20:32] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:20:45] FASTIFY: incoming request
+[07/08/2026 11:20:45] Parents GET /clim/status
+[07/08/2026 11:20:48] FASTIFY: request completed
+[07/08/2026 11:21:45] FASTIFY: incoming request
+[07/08/2026 11:21:45] Parents GET /clim/status
+[07/08/2026 11:21:48] FASTIFY: request completed
+[07/08/2026 11:22:00] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:22:00] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:22:01] Already got weather data
+[07/08/2026 11:22:08] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:22:08] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:22:08] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:22:21] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:22:21] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:22:22] Already got weather data
+[07/08/2026 11:22:24] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:22:24] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:22:24] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:22:45] FASTIFY: incoming request
+[07/08/2026 11:22:45] Parents GET /clim/status
+[07/08/2026 11:22:46] FASTIFY: incoming request
+[07/08/2026 11:22:46] FASTIFY: incoming request
+[07/08/2026 11:22:46] Parents GET /clim/status
+[07/08/2026 11:22:46] FASTIFY: request completed
+[07/08/2026 11:22:50] FASTIFY: request completed
+[07/08/2026 11:22:51] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:22:51] FASTIFY: err is not defined
+[07/08/2026 11:22:51] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:22:52] Already got weather data
+[07/08/2026 11:22:55] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:22:55] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:22:55] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:22:57] FASTIFY: incoming request
+[07/08/2026 11:22:57] Parents GET /clim/status
+[07/08/2026 11:23:00] FASTIFY: request completed
+[07/08/2026 11:23:07] FASTIFY: incoming request
+[07/08/2026 11:23:07] Parents GET /clim/status
+[07/08/2026 11:23:10] FASTIFY: request completed
+[07/08/2026 11:23:17] FASTIFY: incoming request
+[07/08/2026 11:23:17] Parents GET /clim/status
+[07/08/2026 11:23:23] FASTIFY: request completed
+[07/08/2026 11:23:27] FASTIFY: incoming request
+[07/08/2026 11:23:27] Parents GET /clim/status
+[07/08/2026 11:23:30] FASTIFY: request completed
+[07/08/2026 11:23:37] FASTIFY: incoming request
+[07/08/2026 11:23:37] Parents GET /clim/status
+[07/08/2026 11:23:40] FASTIFY: request completed
+[07/08/2026 11:23:44] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:23:44] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:23:45] Already got weather data
+[07/08/2026 11:23:48] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:23:48] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:23:48] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:23:57] FASTIFY: incoming request
+[07/08/2026 11:23:57] Parents GET /clim/status
+[07/08/2026 11:23:59] FASTIFY: request completed
+[07/08/2026 11:24:45] FASTIFY: incoming request
+[07/08/2026 11:24:45] Parents GET /clim/status
+[07/08/2026 11:24:48] FASTIFY: request completed
+[07/08/2026 11:25:00] SID null
+[07/08/2026 11:25:00] SID EiZqp6-hzzthj4e3
+[07/08/2026 11:25:07] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:25:07] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:26:20] Already got weather data
+[07/08/2026 11:26:23] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:26:23] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:26:23] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:26:45] FASTIFY: incoming request
+[07/08/2026 11:26:45] Parents GET /clim/status
+[07/08/2026 11:26:47] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:26:47] FASTIFY: err is not defined
+[07/08/2026 11:26:47] FASTIFY: request completed
+[07/08/2026 11:26:47] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:26:47] Already got weather data
+[07/08/2026 11:26:50] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:26:50] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:26:50] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:27:24] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:27:24] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:27:25] Already got weather data
+[07/08/2026 11:27:32] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:27:32] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:27:32] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:27:45] FASTIFY: incoming request
+[07/08/2026 11:27:45] FASTIFY: Cannot read properties of undefined (reading 'Request')
+[07/08/2026 11:27:45] FASTIFY: request completed
+[07/08/2026 11:27:58] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:27:58] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:27:58] Already got weather data
+[07/08/2026 11:28:01] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:28:01] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:28:01] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:28:45] FASTIFY: incoming request
+[07/08/2026 11:28:45] FASTIFY: Cannot read properties of undefined (reading 'Request')
+[07/08/2026 11:28:45] FASTIFY: request completed
+[07/08/2026 11:29:01] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:29:01] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:29:02] Already got weather data
+[07/08/2026 11:29:04] Clim connectée: 31885837213310 | temp: 25.0 °C
+[07/08/2026 11:29:04] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:29:04] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:29:22] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:29:22] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:35:32] Already got weather data
+[07/08/2026 11:35:35] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:35:35] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:35:37] FASTIFY: incoming request
+[07/08/2026 11:35:37] Parents GET /clim/status
+[07/08/2026 11:35:44] FASTIFY: request completed
+[07/08/2026 11:35:47] FASTIFY: incoming request
+[07/08/2026 11:35:47] Parents GET /clim/status
+[07/08/2026 11:35:49] FASTIFY: request completed
+[07/08/2026 11:35:57] FASTIFY: incoming request
+[07/08/2026 11:35:57] Parents GET /clim/status
+[07/08/2026 11:35:59] FASTIFY: request completed
+[07/08/2026 11:36:09] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:36:09] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:36:10] Already got weather data
+[07/08/2026 11:36:12] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:36:12] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:36:12] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:36:18] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:36:18] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:36:19] Already got weather data
+[07/08/2026 11:36:21] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:36:21] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:36:21] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:36:25] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:36:25] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:36:26] Already got weather data
+[07/08/2026 11:36:34] Already got weather data
+[07/08/2026 11:36:37] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:36:37] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:36:37] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:36:40] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:36:40] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:36:41] Already got weather data
+[07/08/2026 11:36:43] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:36:43] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:36:43] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:36:45] FASTIFY: incoming request
+[07/08/2026 11:36:45] Parents GET /clim/status
+[07/08/2026 11:36:48] FASTIFY: request completed
+[07/08/2026 11:36:51] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:36:51] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:36:52] Already got weather data
+[07/08/2026 11:36:55] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:36:55] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:36:55] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:36:59] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:36:59] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:36:59] Already got weather data
+[07/08/2026 11:37:02] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:37:02] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:37:02] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:37:07] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:37:07] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:37:08] Already got weather data
+[07/08/2026 11:37:10] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:37:10] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:37:10] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:37:31] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:37:31] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:37:32] Already got weather data
+[07/08/2026 11:37:35] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:37:35] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:37:35] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:37:45] FASTIFY: incoming request
+[07/08/2026 11:37:45] Parents GET /clim/status
+[07/08/2026 11:37:48] FASTIFY: request completed
+[07/08/2026 11:38:32] FASTIFY: Stopping Solar's_Cam platform
+[07/08/2026 11:38:32] FASTIFY: Solar's_Cam platform stopped
+[07/08/2026 11:38:33] Already got weather data
+[07/08/2026 11:38:36] Clim connectée: 31885837213310 | temp: 24.5 °C
+[07/08/2026 11:38:36] FASTIFY: Server listening at http://127.0.0.1:3000
+[07/08/2026 11:38:36] FASTIFY: Server listening at http://172.24.0.5:3000
+[07/08/2026 11:38:45] FASTIFY: incoming request
+[07/08/2026 11:38:45] Parents GET /clim/status
+[07/08/2026 11:38:48] FASTIFY: request completed

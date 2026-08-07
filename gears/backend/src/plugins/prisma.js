@@ -10,9 +10,9 @@ export default fp(async (server) => {
     { emit: 'stdout', level: 'error' },] })
   
   prisma.$on('query', (e) => {
-    server.writeLog(server.logFd["Prisma.log"], `PRISMA: ${e.query.substring(0, 100)}`)
-    server.writeLog(server.logFd["Prisma.log"], `-Params: ${e.params}`)
-    server.writeLog(server.logFd["Prisma.log"], `-Duration: ${e.duration}ms`)
+    server.writeLogs(["Prisma"], `PRISMA: ${e.query.substring(0, 100)}`, 
+                                 `-Params: ${e.params}`, 
+                                 `-Duration: ${e.duration}ms`)
   })
   server.decorate('prisma', prisma)
   server.addHook('onClose', async (server) => {

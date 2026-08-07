@@ -78,7 +78,7 @@ const programs = {
 
 async function savePrgmDb(server, userId, body)
 {
-	server.writeLog(server.logFd["Test.log"], "SAVE",userId, body)
+	server.writeLogs(["Test"], "SAVE",userId, body)
 	if (!body) return;
 	const prgm = programs[body.programId].name;
 	const date = new Date()
@@ -86,7 +86,7 @@ async function savePrgmDb(server, userId, body)
 	// server.createNotif(1, body.startTime);
 	server.createNotif(1, [0, 5]);
 
-	server.writeLog(server.logFd["Test.log"], "timeleft", timeLeft)
+	server.writeLogs(["Test"], "timeleft", timeLeft)
 	await server.prisma.washing_Program.create({data: {type: prgm, time: date, finished : false, authorId : userId }})
 	//TODO NOTIF at body.startTime[0]*60 + body.startTime[1] + temps du prgm
 }

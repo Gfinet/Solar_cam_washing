@@ -19,9 +19,9 @@ import util from 'util';
 import routes from './routes/index.js'
 
 
-const logsFile = ["Server.log", "Prisma.log", "Miele.log", "Request.log", "Error.log", "Test.log" ]
+const logsFile = ["Server.log", "Prisma.log", "Miele.log", "Request.log", "Error.log", "Test.log"]
     const logsFd = Object.fromEntries(
-      logsFile.map(name => [name, fs.openSync(path.join(process.cwd(), 'src', 'logs', name), 'a')]))
+      logsFile.map(name => [name.slice(0, -4), fs.openSync(path.join(process.cwd(), 'src', 'logs', name), 'a')]))
 
 const customStream = {
   write: (logString) => {
@@ -34,7 +34,7 @@ const customStream = {
 
     // Formatage manuel du message
     if (log.msg) {
-        fs.writeSync(logsFd["Server.log"], `[${new Date(log.time).toLocaleString('fr-FR', {timeZone: 'Europe/Paris'})}] FASTIFY: ${log.msg}\n`)
+        fs.writeSync(logsFd["Server"], `[${new Date(log.time).toLocaleString('fr-FR', {timeZone: 'Europe/Paris'})}] FASTIFY: ${log.msg}\n`)
     }
   }
 }
@@ -53,13 +53,15 @@ const serverOn = async () => {
     server.decorate('logFd', logsFd);
     // console.log(server.logFd)
 
-    server.decorate('writeLog', (fd, ...args) => {
+    server.decorate('writeLogs', (fds, ...args) => {
+      fds.map(fd => {
         const timestamp = new Date().toLocaleString('fr-FR', {timeZone: 'Europe/Paris'});
         const formattedMessage = util.format(...args);
         const output = `[${timestamp}] ${formattedMessage}\n`;
         
-        fs.writeSync(fd, output);
-    });
+        fs.writeSync(server.logFd[fd], output);
+      });
+    })
 
     await server.register(fastifyJwt, {secret: process.env.JWT_SECRET });
 

@@ -37,7 +37,7 @@ export default fp(async (server) => {
 	server.post('/subscribe',
 	{ preHandler: [server.auth] },
 	async (request, reply) => {
-		server.writeLog(server.logFd["Request.log"], "POST /subscribe (Push)")
+		server.writeLogs(Fd["Request"], "POST /subscribe (Push)")
 		const subscription = request.body;
 		const userId = request.user.id;
 		
@@ -107,7 +107,7 @@ export default fp(async (server) => {
                         where: { id: subi.id }
                     });
                 } else {
-                    server.writeLog(server.logFd["Error.log"], 'Erreur Push:', err);
+                    server.writeLogs(Fd["Error"], 'Erreur Push:', err);
                 }
             }
         });

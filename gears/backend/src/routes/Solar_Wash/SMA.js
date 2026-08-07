@@ -13,7 +13,7 @@ export default async function getVal(server)
     { preHandler: [server.auth] },
     async (request, reply)=>
     {
-        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /sma")
+        server.writeLogs(["Request"], request.user.name, "GET /sma")
         let data = {};  
         try
         {
@@ -33,7 +33,7 @@ export default async function getVal(server)
         } 
         catch (error) 
         {
-            server.writeLog(server.logFd["Error.log"], "Erreur lors de l'appel API :", error);
+            server.writeLogs(["Error"], "Erreur lors de l'appel API :", error);
         }
         return { success: true, message: data }
     })

@@ -5,8 +5,7 @@ export default async function modbus(server)
     server.get('/mb', 
     { preHandler: [server.auth] },
     async (request, reply)=>{
-        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /mb")
-        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /mb")
+        server.writeLogs(["Request", "Server"], request.user.name, "GET /mb")
         try {
             const response = await server.mb.readInputRegisters(realTimeRegister, 2)
 
@@ -18,7 +17,7 @@ export default async function modbus(server)
         }
         catch (err)
         {
-            server.writeLog(server.logFd["Error.log"], "erreur :", err)
+            server.writeLogs(Fd["Error"], "erreur :", err)
             return {success : false, message: 0}
         }
     });
@@ -26,8 +25,7 @@ export default async function modbus(server)
     server.get('/mbtoday',
     { preHandler: [server.auth] },
     async (request,reply) =>{
-        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /mbtoday")
-        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /mbtoday")
+        server.writeLogs(["Request", "Server"], request.user.name, "GET /mbtoday")
         try {
             const now = new Date()
             const start = new Date(now.getTime() - (24 * 60 * 60 * 1000))
@@ -47,7 +45,7 @@ export default async function modbus(server)
             return {success : true, message: sec}
         } 
         catch (error) {
-            server.writeLog(server.logFd["Error.log"], "erreur :", err)
+            server.writeLogs(Fd["Error"], "erreur :", err)
             return {success : false, message: 0}
         }
     })
