@@ -2,8 +2,11 @@ import 'dotenv/config';
 
 export default async function miele(server) {
 
-    server.post('/wash/list', async (request, reply) =>{
-        console.log("POST /wash/list")
+    server.post('/wash/list',
+    { preHandler: [server.auth] },
+    async (request, reply) =>{
+        server.writeLog(server.logFd["Request.log"], request.user.name, "POST /wash/list")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "POST /wash/list")
         const number = request.body
         const line = await server.prisma.washing_Program.findMany( {take: number, orderBy: { time: 'desc'}, include: {author: {select: {username: true}}}})
         if (line)
@@ -11,7 +14,11 @@ export default async function miele(server) {
         else
             return { success: false, message: "No Data" }
     })
-    server.get('/wash/list', async (request, reply) =>{
+    server.get('/wash/list',
+    { preHandler: [server.auth] },
+    async (request, reply) =>{
+        server.writeLog(server.logFd["Request.log"], request.user.name, "POST /wash/list")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "POST /wash/list")
         const line = await server.prisma.washing_Program.findMany( {take: 5, orderBy: { time: 'desc'}, include: {author: {select: {username: true}}}})
         if (line)
             return { success: true, message: line }
@@ -21,8 +28,10 @@ export default async function miele(server) {
 
 
     server.get('/miele/callback', 
+    { preHandler: [server.auth] },
     async (request, reply) =>{
-        console.log("GET /miele/callback")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /miele/callback")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /miele/callback")
         const {code, state} = request.query
         
 
@@ -72,7 +81,8 @@ export default async function miele(server) {
     server.get('/miele/token', 
     { preHandler: [server.auth] },
     async (request, reply) =>{
-        console.log("GET /miele/token")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /miele/token")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /miele/token")
         const userId = request.user.id;
         const mieleTok = await server.prisma.user.findUnique({
             where : {id : userId}, 
@@ -87,7 +97,8 @@ export default async function miele(server) {
     server.get('/miele/connect', 
     { preHandler: [server.auth] }, 
     async (request, reply) => {
-        console.log("GET /miele/connect")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /miele/connect")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /miele/connect")
         try {
             const stateToken = server.jwt.sign(
             { id: request.user.id, purpose: 'miele-auth' }, 
@@ -107,7 +118,8 @@ export default async function miele(server) {
     server.get('/miele/devices', 
     { preHandler: [server.auth] }, 
     async (request, reply) => {
-        console.log("GET /miele/devices")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /miele/devices")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /miele/devices")
         const userId = request.user.id;
         const tokenData = await server.miele.getToken(userId, server)
         
@@ -130,7 +142,8 @@ export default async function miele(server) {
     server.get('/miele/devices/:deviceId', //?language=fr
     { preHandler: [server.auth] },
     async (request, reply) => {
-        console.log("GET /miele/devices/:deviceId")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /miele/devices/:deviceId")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /miele/devices/:deviceId")
         const { deviceId } = request.params;
         const userId = request.user.id;
         const tokenData = await server.miele.getToken(userId, server)        
@@ -155,7 +168,8 @@ export default async function miele(server) {
     { preHandler: [server.auth] },
     async (request, reply) => {
 
-        console.log("GET /miele/devices/:deviceId/programs")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /miele/devices/:deviceId/programs")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /miele/devices/:deviceId/programs")
         const { deviceId } = request.params;
         const userId = request.user.id;
         const tokenData = await server.miele.getToken(userId, server)        
@@ -181,7 +195,8 @@ export default async function miele(server) {
     server.put('/miele/devices/:deviceId/actions', //?language=fr
     { preHandler: [server.auth] },
     async (request, reply) => {
-        console.log("PUT /miele/devices/:deviceId/actions")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "PUT /miele/devices/:deviceId/actions")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "PUT /miele/devices/:deviceId/actions")
         const { deviceId } = request.params;
         console.log("BODY",request.body)
         const userId = request.user.id;
@@ -199,7 +214,12 @@ export default async function miele(server) {
 
         if (response.status !== 204) await response.json();
         
-        if (response.ok) return { success: true }; //testDeviceMiele;
+        if (response.ok) 
+        {
+            // await server.miele.saveDb(server, userId, request.body)
+            return { success: true }; //testDeviceMiele;
+        }
+        await server.miele.saveDb(server, userId, request.body)
         console.log("Miele PUT :deviceId/actions error response", response);
         return { success: false }; 
     });
@@ -207,9 +227,10 @@ export default async function miele(server) {
     server.put('/miele/devices/:deviceId/programs', //?language=fr
     { preHandler: [server.auth] },
     async (request, reply) => {
-        console.log("PUT /miele/devices/:deviceId/programs")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "PUT /miele/devices/:deviceId/programs")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "PUT /miele/devices/:deviceId/programs")
         const { deviceId } = request.params;
-        console.log("BODY",request.body)
+        console.log("BODY",JSON.stringify(request.body))
         const userId = request.user.id;
         const tokenData = await server.miele.getToken(userId, server)        
 
@@ -227,10 +248,9 @@ export default async function miele(server) {
         
         if (response.ok) 
         {
-            server.miele.saveDb(userId, request.body)
+            await server.miele.saveDb(server, userId, request.body)
             return { success: true }; //testDeviceMiele;
         }
-        server.miele.saveDb(server, userId, request.body)
         console.log("Miele PUT :deviceId/programs error response", response);
         return { success: false }; 
     });

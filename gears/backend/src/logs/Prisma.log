@@ -1,0 +1,564 @@
+[07/08/2026 02:07:11] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:07:11] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:07:11] -Duration: 2ms
+[07/08/2026 02:07:15] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:07:15] -Params: ["Parents",1,0]
+[07/08/2026 02:07:15] -Duration: 8ms
+[07/08/2026 02:07:43] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:07:43] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:07:43] -Duration: 5ms
+[07/08/2026 02:07:45] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:07:45] -Params: ["Parents",1,0]
+[07/08/2026 02:07:45] -Duration: 4ms
+[07/08/2026 02:08:25] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:08:25] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:08:25] -Duration: 5ms
+[07/08/2026 02:08:28] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:08:28] -Params: ["Parents",1,0]
+[07/08/2026 02:08:28] -Duration: 3ms
+[07/08/2026 02:08:44] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:08:44] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:08:44] -Duration: 5ms
+[07/08/2026 02:08:50] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:08:50] -Params: ["Parents",1,0]
+[07/08/2026 02:08:50] -Duration: 17ms
+[07/08/2026 02:08:51] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:08:51] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:08:51] -Duration: 6ms
+[07/08/2026 02:08:54] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:08:54] -Params: ["Parents",1,0]
+[07/08/2026 02:08:54] -Duration: 2ms
+[07/08/2026 02:08:56] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:08:56] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:08:56] -Duration: 2ms
+[07/08/2026 02:09:02] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:09:02] -Params: ["Parents",1,0]
+[07/08/2026 02:09:02] -Duration: 8ms
+[07/08/2026 02:09:11] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:09:11] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:09:11] -Duration: 2ms
+[07/08/2026 02:09:14] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:09:14] -Params: ["Parents",1,0]
+[07/08/2026 02:09:14] -Duration: 2ms
+[07/08/2026 02:09:21] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:09:21] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:09:21] -Duration: 2ms
+[07/08/2026 02:09:24] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:09:24] -Params: ["Parents",1,0]
+[07/08/2026 02:09:24] -Duration: 7ms
+[07/08/2026 02:09:29] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:09:29] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:09:29] -Duration: 2ms
+[07/08/2026 02:09:32] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:09:32] -Params: ["Parents",1,0]
+[07/08/2026 02:09:32] -Duration: 2ms
+[07/08/2026 02:09:50] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:09:50] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:09:50] -Duration: 2ms
+[07/08/2026 02:09:53] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:09:53] -Params: ["Parents",1,0]
+[07/08/2026 02:09:53] -Duration: 2ms
+[07/08/2026 02:10:01] PRISMA: INSERT INTO "public"."Solar_Data" ("hour","Watts","total") VALUES ($1,$2,$3) RETURNING "public"."Sol
+[07/08/2026 02:10:01] -Params: ["2026-08-07 00:10:01.371 UTC",0,0]
+[07/08/2026 02:10:01] -Duration: 14ms
+[07/08/2026 02:10:25] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:10:25] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:10:25] -Duration: 2ms
+[07/08/2026 02:10:29] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:10:29] -Params: ["Parents",1,0]
+[07/08/2026 02:10:29] -Duration: 9ms
+[07/08/2026 02:12:03] PRISMA: SELECT 1
+[07/08/2026 02:12:03] -Params: []
+[07/08/2026 02:12:03] -Duration: 3ms
+[07/08/2026 02:12:03] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:12:03] -Params: ["2026-08-06 00:12:03.052 UTC","2026-08-07 00:12:03.052 UTC",0]
+[07/08/2026 02:12:03] -Duration: 26ms
+[07/08/2026 02:12:03] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:12:03] -Params: [5,0]
+[07/08/2026 02:12:03] -Duration: 7ms
+[07/08/2026 02:12:03] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:12:03] -Params: [1,1,0]
+[07/08/2026 02:12:03] -Duration: 5ms
+[07/08/2026 02:12:03] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:12:03] -Params: [1,0]
+[07/08/2026 02:12:03] -Duration: 5ms
+[07/08/2026 02:12:03] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:12:03] -Params: [1,0]
+[07/08/2026 02:12:03] -Duration: 6ms
+[07/08/2026 02:12:03] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:12:03] -Params: ["2026-08-06 12:12:03.060 UTC","2026-08-07 11:12:03.060 UTC",0]
+[07/08/2026 02:12:03] -Duration: 11ms
+[07/08/2026 02:12:03] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:12:03] -Params: [1,1,0]
+[07/08/2026 02:12:03] -Duration: 1ms
+[07/08/2026 02:12:36] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:12:36] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:12:36] -Duration: 4ms
+[07/08/2026 02:12:39] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:12:39] -Params: ["Parents",1,0]
+[07/08/2026 02:12:39] -Duration: 3ms
+[07/08/2026 02:12:43] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:12:43] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:12:43] -Duration: 2ms
+[07/08/2026 02:12:50] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:12:50] -Params: ["Parents",1,0]
+[07/08/2026 02:12:50] -Duration: 2ms
+[07/08/2026 02:14:45] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:14:45] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:14:45] -Duration: 3ms
+[07/08/2026 02:14:48] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:14:48] -Params: ["Parents",1,0]
+[07/08/2026 02:14:48] -Duration: 9ms
+[07/08/2026 02:15:01] PRISMA: SELECT 1
+[07/08/2026 02:15:01] -Params: []
+[07/08/2026 02:15:01] -Duration: 1ms
+[07/08/2026 02:15:01] PRISMA: INSERT INTO "public"."Solar_Data" ("hour","Watts","total") VALUES ($1,$2,$3) RETURNING "public"."Sol
+[07/08/2026 02:15:01] -Params: ["2026-08-07 00:15:01.374 UTC",0,0]
+[07/08/2026 02:15:01] -Duration: 7ms
+[07/08/2026 02:15:29] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:15:29] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:15:29] -Duration: 3ms
+[07/08/2026 02:15:34] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:15:34] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:15:34] -Duration: 2ms
+[07/08/2026 02:15:37] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:15:37] -Params: ["Parents",1,0]
+[07/08/2026 02:15:37] -Duration: 2ms
+[07/08/2026 02:15:56] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:15:56] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:15:56] -Duration: 2ms
+[07/08/2026 02:15:59] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:15:59] -Params: ["Parents",1,0]
+[07/08/2026 02:15:59] -Duration: 6ms
+[07/08/2026 02:16:04] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:16:04] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:16:04] -Duration: 2ms
+[07/08/2026 02:16:07] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:16:07] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:16:07] -Duration: 2ms
+[07/08/2026 02:16:12] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:16:12] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:16:12] -Duration: 2ms
+[07/08/2026 02:16:16] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:16:16] -Params: ["Parents",1,0]
+[07/08/2026 02:16:16] -Duration: 8ms
+[07/08/2026 02:16:18] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:16:18] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:16:18] -Duration: 2ms
+[07/08/2026 02:16:21] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:16:21] -Params: ["Parents",1,0]
+[07/08/2026 02:16:21] -Duration: 2ms
+[07/08/2026 02:16:35] PRISMA: SELECT 1
+[07/08/2026 02:16:35] -Params: []
+[07/08/2026 02:16:35] -Duration: 6ms
+[07/08/2026 02:16:35] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:16:35] -Params: ["2026-08-06 00:16:34.984 UTC","2026-08-07 00:16:34.984 UTC",0]
+[07/08/2026 02:16:35] -Duration: 23ms
+[07/08/2026 02:16:35] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:16:35] -Params: [1,1,0]
+[07/08/2026 02:16:35] -Duration: 8ms
+[07/08/2026 02:16:35] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:16:35] -Params: [1,0]
+[07/08/2026 02:16:35] -Duration: 1ms
+[07/08/2026 02:16:35] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:16:35] -Params: ["2026-08-06 12:16:34.992 UTC","2026-08-07 11:16:34.992 UTC",0]
+[07/08/2026 02:16:35] -Duration: 4ms
+[07/08/2026 02:16:35] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:16:35] -Params: [5,0]
+[07/08/2026 02:16:35] -Duration: 4ms
+[07/08/2026 02:16:35] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:16:35] -Params: [1,0]
+[07/08/2026 02:16:35] -Duration: 0ms
+[07/08/2026 02:16:35] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:16:35] -Params: [1,1,0]
+[07/08/2026 02:16:35] -Duration: 0ms
+[07/08/2026 02:19:23] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:19:23] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:19:23] -Duration: 2ms
+[07/08/2026 02:19:26] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:19:26] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:19:26] -Duration: 1ms
+[07/08/2026 02:19:29] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:19:29] -Params: ["Parents",1,0]
+[07/08/2026 02:19:29] -Duration: 4ms
+[07/08/2026 02:19:36] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:19:36] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:19:36] -Duration: 3ms
+[07/08/2026 02:19:39] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:19:39] -Params: ["Parents",1,0]
+[07/08/2026 02:19:39] -Duration: 2ms
+[07/08/2026 02:20:01] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:20:01] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:20:01] -Duration: 2ms
+[07/08/2026 02:20:04] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:20:04] -Params: ["Parents",1,0]
+[07/08/2026 02:20:04] -Duration: 2ms
+[07/08/2026 02:20:18] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:20:18] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:20:18] -Duration: 2ms
+[07/08/2026 02:20:22] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:20:22] -Params: ["Parents",1,0]
+[07/08/2026 02:20:22] -Duration: 5ms
+[07/08/2026 02:21:10] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:21:10] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:21:10] -Duration: 2ms
+[07/08/2026 02:21:13] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:21:13] -Params: ["Parents",1,0]
+[07/08/2026 02:21:13] -Duration: 2ms
+[07/08/2026 02:21:36] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:21:36] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:21:36] -Duration: 2ms
+[07/08/2026 02:21:38] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:21:38] -Params: ["Parents",1,0]
+[07/08/2026 02:21:38] -Duration: 9ms
+[07/08/2026 02:21:48] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:21:48] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:21:48] -Duration: 2ms
+[07/08/2026 02:21:51] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:21:51] -Params: ["Parents",1,0]
+[07/08/2026 02:21:51] -Duration: 7ms
+[07/08/2026 02:22:03] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:22:03] -Params: ["2026-08-06 00:22:03.043 UTC","2026-08-07 00:22:03.043 UTC",0]
+[07/08/2026 02:22:03] -Duration: 19ms
+[07/08/2026 02:22:03] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:22:03] -Params: [5,0]
+[07/08/2026 02:22:03] -Duration: 4ms
+[07/08/2026 02:22:03] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:22:03] -Params: ["2026-08-06 12:22:03.047 UTC","2026-08-07 11:22:03.047 UTC",0]
+[07/08/2026 02:22:03] -Duration: 5ms
+[07/08/2026 02:22:03] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:22:03] -Params: [1,0]
+[07/08/2026 02:22:03] -Duration: 2ms
+[07/08/2026 02:22:03] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:22:03] -Params: [1,1,0]
+[07/08/2026 02:22:03] -Duration: 4ms
+[07/08/2026 02:22:03] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:22:03] -Params: [1,0]
+[07/08/2026 02:22:03] -Duration: 1ms
+[07/08/2026 02:22:03] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:22:03] -Params: [1,1,0]
+[07/08/2026 02:22:03] -Duration: 0ms
+[07/08/2026 02:23:19] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:23:19] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:23:19] -Duration: 2ms
+[07/08/2026 02:23:22] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:23:22] -Params: ["Parents",1,0]
+[07/08/2026 02:23:22] -Duration: 3ms
+[07/08/2026 02:23:31] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:23:31] -Params: [1,1,0]
+[07/08/2026 02:23:31] -Duration: 29ms
+[07/08/2026 02:23:31] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:23:31] -Params: [1,0]
+[07/08/2026 02:23:31] -Duration: 8ms
+[07/08/2026 02:23:31] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:23:31] -Params: [1,1,0]
+[07/08/2026 02:23:31] -Duration: 3ms
+[07/08/2026 02:23:31] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:23:31] -Params: [5,0]
+[07/08/2026 02:23:31] -Duration: 7ms
+[07/08/2026 02:23:31] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:23:31] -Params: ["2026-08-06 00:23:31.870 UTC","2026-08-07 00:23:31.870 UTC",0]
+[07/08/2026 02:23:31] -Duration: 7ms
+[07/08/2026 02:23:31] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:23:31] -Params: ["2026-08-06 12:23:31.878 UTC","2026-08-07 11:23:31.878 UTC",0]
+[07/08/2026 02:23:31] -Duration: 9ms
+[07/08/2026 02:23:31] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:23:31] -Params: [1,0]
+[07/08/2026 02:23:31] -Duration: 4ms
+[07/08/2026 02:23:41] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:23:41] -Params: [1,1,0]
+[07/08/2026 02:23:41] -Duration: 11ms
+[07/08/2026 02:23:41] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:23:41] -Params: [1,1,0]
+[07/08/2026 02:23:41] -Duration: 14ms
+[07/08/2026 02:25:01] PRISMA: SELECT 1
+[07/08/2026 02:25:01] -Params: []
+[07/08/2026 02:25:01] -Duration: 4ms
+[07/08/2026 02:25:01] PRISMA: INSERT INTO "public"."Solar_Data" ("hour","Watts","total") VALUES ($1,$2,$3) RETURNING "public"."Sol
+[07/08/2026 02:25:01] -Params: ["2026-08-07 00:25:01.659 UTC",0,0]
+[07/08/2026 02:25:01] -Duration: 12ms
+[07/08/2026 02:25:14] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:25:14] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:25:14] -Duration: 5ms
+[07/08/2026 02:25:17] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:25:17] -Params: ["Parents",1,0]
+[07/08/2026 02:25:17] -Duration: 27ms
+[07/08/2026 02:25:38] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:25:38] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:25:38] -Duration: 5ms
+[07/08/2026 02:25:45] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:25:45] -Params: ["Parents",1,0]
+[07/08/2026 02:25:45] -Duration: 3ms
+[07/08/2026 02:26:08] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:26:08] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:26:08] -Duration: 2ms
+[07/08/2026 02:26:11] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:26:11] -Params: ["Parents",1,0]
+[07/08/2026 02:26:11] -Duration: 9ms
+[07/08/2026 02:26:38] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:26:38] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:26:38] -Duration: 2ms
+[07/08/2026 02:27:00] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:27:00] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:27:00] -Duration: 6ms
+[07/08/2026 02:27:03] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:27:03] -Params: ["Parents",1,0]
+[07/08/2026 02:27:03] -Duration: 2ms
+[07/08/2026 02:27:53] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:27:53] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:27:53] -Duration: 2ms
+[07/08/2026 02:27:55] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:27:55] -Params: ["Parents",1,0]
+[07/08/2026 02:27:55] -Duration: 2ms
+[07/08/2026 02:27:59] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:27:59] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:27:59] -Duration: 2ms
+[07/08/2026 02:28:01] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:28:01] -Params: ["Parents",1,0]
+[07/08/2026 02:28:01] -Duration: 9ms
+[07/08/2026 02:28:16] PRISMA: SELECT 1
+[07/08/2026 02:28:16] -Params: []
+[07/08/2026 02:28:16] -Duration: 3ms
+[07/08/2026 02:28:16] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:28:16] -Params: [1,1,0]
+[07/08/2026 02:28:16] -Duration: 6ms
+[07/08/2026 02:28:16] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:28:16] -Params: [1,0]
+[07/08/2026 02:28:16] -Duration: 7ms
+[07/08/2026 02:28:16] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:28:16] -Params: [1,1,0]
+[07/08/2026 02:28:16] -Duration: 1ms
+[07/08/2026 02:28:16] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:28:16] -Params: ["2026-08-06 12:28:16.542 UTC","2026-08-07 11:28:16.542 UTC",0]
+[07/08/2026 02:28:16] -Duration: 9ms
+[07/08/2026 02:28:16] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:28:16] -Params: ["2026-08-06 00:28:16.536 UTC","2026-08-07 00:28:16.536 UTC",0]
+[07/08/2026 02:28:16] -Duration: 9ms
+[07/08/2026 02:28:16] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:28:16] -Params: [5,0]
+[07/08/2026 02:28:16] -Duration: 4ms
+[07/08/2026 02:28:16] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:28:16] -Params: [1,0]
+[07/08/2026 02:28:16] -Duration: 1ms
+[07/08/2026 02:28:19] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:28:19] -Params: [1,1,0]
+[07/08/2026 02:28:19] -Duration: 2ms
+[07/08/2026 02:28:19] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:28:19] -Params: [1,1,0]
+[07/08/2026 02:28:19] -Duration: 2ms
+[07/08/2026 02:28:34] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:28:34] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:28:34] -Duration: 14ms
+[07/08/2026 02:28:36] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:28:36] -Params: ["Parents",1,0]
+[07/08/2026 02:28:36] -Duration: 8ms
+[07/08/2026 02:30:01] PRISMA: SELECT 1
+[07/08/2026 02:30:01] -Params: []
+[07/08/2026 02:30:01] -Duration: 4ms
+[07/08/2026 02:30:02] PRISMA: INSERT INTO "public"."Solar_Data" ("hour","Watts","total") VALUES ($1,$2,$3) RETURNING "public"."Sol
+[07/08/2026 02:30:02] -Params: ["2026-08-07 00:30:01.978 UTC",0,0]
+[07/08/2026 02:30:02] -Duration: 22ms
+[07/08/2026 02:30:53] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:30:53] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:30:53] -Duration: 2ms
+[07/08/2026 02:30:55] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:30:55] -Params: ["Parents",1,0]
+[07/08/2026 02:30:55] -Duration: 2ms
+[07/08/2026 02:31:05] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:31:05] -Params: [1,1,0]
+[07/08/2026 02:31:05] -Duration: 4ms
+[07/08/2026 02:31:05] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:31:05] -Params: [1,0]
+[07/08/2026 02:31:05] -Duration: 2ms
+[07/08/2026 02:31:05] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:31:05] -Params: [1,1,0]
+[07/08/2026 02:31:05] -Duration: 2ms
+[07/08/2026 02:31:05] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:31:05] -Params: ["2026-08-06 00:31:05.548 UTC","2026-08-07 00:31:05.548 UTC",0]
+[07/08/2026 02:31:05] -Duration: 11ms
+[07/08/2026 02:31:05] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:31:05] -Params: ["2026-08-06 12:31:05.550 UTC","2026-08-07 11:31:05.550 UTC",0]
+[07/08/2026 02:31:05] -Duration: 8ms
+[07/08/2026 02:31:05] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:31:05] -Params: [5,0]
+[07/08/2026 02:31:05] -Duration: 7ms
+[07/08/2026 02:31:05] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:31:05] -Params: [1,0]
+[07/08/2026 02:31:05] -Duration: 1ms
+[07/08/2026 02:31:16] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:31:16] -Params: [1,1,0]
+[07/08/2026 02:31:16] -Duration: 6ms
+[07/08/2026 02:31:16] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:31:16] -Params: [1,1,0]
+[07/08/2026 02:31:16] -Duration: 5ms
+[07/08/2026 02:31:49] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:31:49] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:31:49] -Duration: 7ms
+[07/08/2026 02:31:51] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:31:51] -Params: ["Parents",1,0]
+[07/08/2026 02:31:51] -Duration: 2ms
+[07/08/2026 02:32:26] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:32:26] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:32:26] -Duration: 2ms
+[07/08/2026 02:32:29] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:32:29] -Params: ["Parents",1,0]
+[07/08/2026 02:32:29] -Duration: 7ms
+[07/08/2026 02:32:37] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:32:37] -Params: [1,1,0]
+[07/08/2026 02:32:37] -Duration: 12ms
+[07/08/2026 02:32:37] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:32:37] -Params: [1,0]
+[07/08/2026 02:32:37] -Duration: 14ms
+[07/08/2026 02:32:37] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:32:37] -Params: ["2026-08-06 12:32:37.696 UTC","2026-08-07 11:32:37.696 UTC",0]
+[07/08/2026 02:32:37] -Duration: 8ms
+[07/08/2026 02:32:37] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:32:37] -Params: [1,1,0]
+[07/08/2026 02:32:37] -Duration: 0ms
+[07/08/2026 02:32:37] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:32:37] -Params: ["2026-08-06 00:32:37.665 UTC","2026-08-07 00:32:37.665 UTC",0]
+[07/08/2026 02:32:37] -Duration: 8ms
+[07/08/2026 02:32:45] PRISMA: SELECT 1
+[07/08/2026 02:32:45] -Params: []
+[07/08/2026 02:32:45] -Duration: 2ms
+[07/08/2026 02:32:45] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:32:45] -Params: ["2026-08-06 00:32:45.347 UTC","2026-08-07 00:32:45.347 UTC",0]
+[07/08/2026 02:32:45] -Duration: 4ms
+[07/08/2026 02:32:45] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:32:45] -Params: ["2026-08-06 12:32:45.339 UTC","2026-08-07 11:32:45.339 UTC",0]
+[07/08/2026 02:32:45] -Duration: 7ms
+[07/08/2026 02:32:45] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:32:45] -Params: [1,1,0]
+[07/08/2026 02:32:45] -Duration: 2ms
+[07/08/2026 02:32:45] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:32:45] -Params: [1,0]
+[07/08/2026 02:32:45] -Duration: 1ms
+[07/08/2026 02:32:45] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:32:45] -Params: [1,1,0]
+[07/08/2026 02:32:45] -Duration: 0ms
+[07/08/2026 02:33:10] PRISMA: SELECT 1
+[07/08/2026 02:33:10] -Params: []
+[07/08/2026 02:33:10] -Duration: 12ms
+[07/08/2026 02:33:10] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:33:10] -Params: [1,1,0]
+[07/08/2026 02:33:10] -Duration: 6ms
+[07/08/2026 02:33:10] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:33:10] -Params: [1,0]
+[07/08/2026 02:33:10] -Duration: 1ms
+[07/08/2026 02:33:10] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:33:10] -Params: ["2026-08-06 00:33:10.025 UTC","2026-08-07 00:33:10.025 UTC",0]
+[07/08/2026 02:33:10] -Duration: 1ms
+[07/08/2026 02:33:10] PRISMA: SELECT 1
+[07/08/2026 02:33:10] -Params: []
+[07/08/2026 02:33:10] -Duration: 2ms
+[07/08/2026 02:33:10] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:33:10] -Params: ["2026-08-06 12:33:10.028 UTC","2026-08-07 11:33:10.028 UTC",0]
+[07/08/2026 02:33:10] -Duration: 1ms
+[07/08/2026 02:33:10] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:33:10] -Params: [1,1,0]
+[07/08/2026 02:33:10] -Duration: 0ms
+[07/08/2026 02:33:16] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:33:16] -Params: ["2026-08-06 00:33:16.659 UTC","2026-08-07 00:33:16.659 UTC",0]
+[07/08/2026 02:33:16] -Duration: 10ms
+[07/08/2026 02:33:16] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:33:16] -Params: ["2026-08-06 12:33:16.652 UTC","2026-08-07 11:33:16.652 UTC",0]
+[07/08/2026 02:33:16] -Duration: 12ms
+[07/08/2026 02:33:16] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:33:16] -Params: [1,1,0]
+[07/08/2026 02:33:16] -Duration: 0ms
+[07/08/2026 02:33:16] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:33:16] -Params: [1,0]
+[07/08/2026 02:33:16] -Duration: 0ms
+[07/08/2026 02:33:16] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:33:16] -Params: [1,1,0]
+[07/08/2026 02:33:16] -Duration: 0ms
+[07/08/2026 02:35:00] PRISMA: SELECT 1
+[07/08/2026 02:35:00] -Params: []
+[07/08/2026 02:35:00] -Duration: 3ms
+[07/08/2026 02:35:00] PRISMA: INSERT INTO "public"."Solar_Data" ("hour","Watts","total") VALUES ($1,$2,$3) RETURNING "public"."Sol
+[07/08/2026 02:35:00] -Params: ["2026-08-07 00:35:00.661 UTC",0,0]
+[07/08/2026 02:35:00] -Duration: 12ms
+[07/08/2026 02:35:05] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:35:05] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:35:05] -Duration: 4ms
+[07/08/2026 02:35:08] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:35:08] -Params: ["Parents",1,0]
+[07/08/2026 02:35:08] -Duration: 8ms
+[07/08/2026 02:35:09] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:35:09] -Params: [1,1,0]
+[07/08/2026 02:35:09] -Duration: 4ms
+[07/08/2026 02:35:09] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:35:09] -Params: [1,0]
+[07/08/2026 02:35:09] -Duration: 9ms
+[07/08/2026 02:35:09] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:35:09] -Params: ["2026-08-06 00:35:09.596 UTC","2026-08-07 00:35:09.596 UTC",0]
+[07/08/2026 02:35:09] -Duration: 7ms
+[07/08/2026 02:35:09] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:35:09] -Params: ["2026-08-06 12:35:09.616 UTC","2026-08-07 11:35:09.616 UTC",0]
+[07/08/2026 02:35:09] -Duration: 4ms
+[07/08/2026 02:35:09] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:35:09] -Params: [1,1,0]
+[07/08/2026 02:35:09] -Duration: 1ms
+[07/08/2026 02:35:09] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:35:09] -Params: [5,0]
+[07/08/2026 02:35:09] -Duration: 4ms
+[07/08/2026 02:35:09] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:35:09] -Params: [1,0]
+[07/08/2026 02:35:09] -Duration: 1ms
+[07/08/2026 02:35:56] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:35:56] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:35:56] -Duration: 2ms
+[07/08/2026 02:35:59] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:35:59] -Params: ["Parents",1,0]
+[07/08/2026 02:35:59] -Duration: 2ms
+[07/08/2026 02:36:44] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:36:44] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:36:44] -Duration: 5ms
+[07/08/2026 02:36:52] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:36:52] -Params: ["Parents",1,0]
+[07/08/2026 02:36:52] -Duration: 7ms
+[07/08/2026 02:37:18] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:37:18] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:37:18] -Duration: 2ms
+[07/08/2026 02:37:20] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:37:20] -Params: ["Parents",1,0]
+[07/08/2026 02:37:20] -Duration: 8ms
+[07/08/2026 02:37:55] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:37:55] -Params: ["2026-08-07 00:00:00 UTC",0]
+[07/08/2026 02:37:55] -Duration: 2ms
+[07/08/2026 02:37:58] PRISMA: SELECT "public"."User"."id", "public"."User"."username", "public"."User"."password_hash", "public"."
+[07/08/2026 02:37:58] -Params: ["Parents",1,0]
+[07/08/2026 02:37:58] -Duration: 6ms
+[07/08/2026 02:38:27] PRISMA: SELECT 1
+[07/08/2026 02:38:27] -Params: []
+[07/08/2026 02:38:27] -Duration: 1ms
+[07/08/2026 02:38:27] PRISMA: SELECT "public"."User"."id" FROM "public"."User" WHERE ("public"."User"."id" = $1 AND 1=1) LIMIT $2 
+[07/08/2026 02:38:27] -Params: [1,1,0]
+[07/08/2026 02:38:27] -Duration: 6ms
+[07/08/2026 02:38:27] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:38:27] -Params: [1,0]
+[07/08/2026 02:38:27] -Duration: 3ms
+[07/08/2026 02:38:27] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:38:27] -Params: ["2026-08-06 12:38:27.269 UTC","2026-08-07 11:38:27.269 UTC",0]
+[07/08/2026 02:38:27] -Duration: 12ms
+[07/08/2026 02:38:27] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:38:27] -Params: ["2026-08-06 00:38:27.264 UTC","2026-08-07 00:38:27.264 UTC",0]
+[07/08/2026 02:38:27] -Duration: 3ms
+[07/08/2026 02:38:27] PRISMA: SELECT "public"."Washing_Program"."id", "public"."Washing_Program"."type", "public"."Washing_Program
+[07/08/2026 02:38:27] -Params: [5,0]
+[07/08/2026 02:38:27] -Duration: 6ms
+[07/08/2026 02:38:27] PRISMA: SELECT "public"."User"."id", "public"."User"."username" FROM "public"."User" WHERE "public"."User"."
+[07/08/2026 02:38:27] -Params: [1,0]
+[07/08/2026 02:38:27] -Duration: 3ms
+[07/08/2026 02:38:27] PRISMA: SELECT "public"."Miele_Token"."id", "public"."Miele_Token"."accessToken", "public"."Miele_Token"."re
+[07/08/2026 02:38:27] -Params: [1,1,0]
+[07/08/2026 02:38:27] -Duration: 3ms
+[07/08/2026 02:38:29] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:38:29] -Params: ["2026-08-06 12:38:29.327 UTC","2026-08-07 11:38:29.327 UTC",0]
+[07/08/2026 02:38:29] -Duration: 5ms
+[07/08/2026 02:38:29] PRISMA: SELECT "public"."Solar_Data"."id", "public"."Solar_Data"."hour", "public"."Solar_Data"."Watts", "pub
+[07/08/2026 02:38:29] -Params: ["2026-08-06 00:38:29.330 UTC","2026-08-07 00:38:29.330 UTC",0]
+[07/08/2026 02:38:29] -Duration: 2ms
+[07/08/2026 02:38:31] PRISMA: SELECT "public"."Weather_Forecast"."id", "public"."Weather_Forecast"."time", "public"."Weather_Forec
+[07/08/2026 02:38:31] -Params: ["2026-08-06 12:38:31.578 UTC","2026-08-07 11:38:31.578 UTC",0]
+[07/08/2026 02:38:31] -Duration: 2ms

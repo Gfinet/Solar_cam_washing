@@ -58,6 +58,6 @@ if ('serviceWorker' in navigator) {
       console.log('Service Worker enregistré avec succès sur Ecosia:', reg);
     })
     .catch((err) => {
-      console.error('Erreur enregistrement SW sur Ecosia:', err);
+      server.writeLog(server.logFd["Error.log"], 'Erreur enregistrement SW sur Ecosia:', err);
     });
 }

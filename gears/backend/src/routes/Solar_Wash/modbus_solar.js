@@ -2,8 +2,11 @@ const realTimeRegister = 100;
 
 export default async function modbus(server)
 {
-    server.get('/mb',  async (request, reply)=>{
-        console.log("GET /mb")
+    server.get('/mb', 
+    { preHandler: [server.auth] },
+    async (request, reply)=>{
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /mb")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /mb")
         try {
             const response = await server.mb.readInputRegisters(realTimeRegister, 2)
 
@@ -15,13 +18,16 @@ export default async function modbus(server)
         }
         catch (err)
         {
-            console.error("erreur :", err)
+            server.writeLog(server.logFd["Error.log"], "erreur :", err)
             return {success : false, message: 0}
         }
     });
 
-    server.get('/mbtoday', async (request,reply) =>{
-        console.log("GET /mbtoday")
+    server.get('/mbtoday',
+    { preHandler: [server.auth] },
+    async (request,reply) =>{
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /mbtoday")
+        server.writeLog(server.logFd["Server.log"], request.user.name, "GET /mbtoday")
         try {
             const now = new Date()
             const start = new Date(now.getTime() - (24 * 60 * 60 * 1000))
@@ -41,7 +47,7 @@ export default async function modbus(server)
             return {success : true, message: sec}
         } 
         catch (error) {
-            console.error("erreur :", err)
+            server.writeLog(server.logFd["Error.log"], "erreur :", err)
             return {success : false, message: 0}
         }
     })

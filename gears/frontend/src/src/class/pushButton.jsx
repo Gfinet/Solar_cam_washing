@@ -14,7 +14,7 @@ export function PushButton() {
 		} 
 		catch (error) 
 		{
-			console.error(error);
+			server.writeLog(server.logFd["Error.log"], error);
 			alert(error.message);
 		} 
 		finally {setLoading(false);}

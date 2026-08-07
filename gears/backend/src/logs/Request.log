@@ -1,0 +1,16 @@
+[07/08/2026 02:38:27] Parents GET /miele/token
+[07/08/2026 02:38:27] Parents POST /wash/list
+[07/08/2026 02:38:27] Parents GET /mbtoday
+[07/08/2026 02:38:27] Parents GET /temptoday
+[07/08/2026 02:38:27] Parents GET /miele/devices
+[07/08/2026 02:38:29] Parents GET /temptoday
+[07/08/2026 02:38:29] Parents GET /mbtoday
+[07/08/2026 02:38:31] Parents GET /temptoday
+[07/08/2026 02:38:31] Parents GET /clim/status
+[07/08/2026 02:38:41] Parents GET /clim/status
+[07/08/2026 02:38:51] Parents GET /clim/status
+[07/08/2026 02:39:01] Parents GET /clim/status
+[07/08/2026 02:39:11] Parents GET /clim/status
+[07/08/2026 02:39:21] Parents GET /clim/status
+[07/08/2026 02:39:31] Parents GET /clim/status
+[07/08/2026 02:39:41] Parents GET /clim/status

@@ -18,7 +18,6 @@ const BASE_ARGS_CLOUD = [
 ];
 
 const runCli = (subcommand, extraArgs = []) => {
-	// console.log('CLIM args:', BASE_ARGS_LOCAL); // ← ajoute ça temporairement
 	return new Promise((resolve, reject) => {
 		execFile(CLI, [subcommand, ...BASE_ARGS_LOCAL, ...extraArgs], (err, stdout, stderr) => {
 		if (err) return reject(new Error(stderr || err.message));
@@ -49,6 +48,6 @@ export default fp(async (server) => {
   });
 
   await server.clim.getStatus()
-  		.then(s => console.log('Clim connectée:', s.name, '| temp:', s.indoor, '°C'))
+  		.then(s => server.writeLog(server.logFd["Server.log"],'Clim connectée:', s.name, '| temp:', s.indoor, '°C'))
     	.catch(err => console.warn('Clim inaccessible au démarrage:', err.message));
 });

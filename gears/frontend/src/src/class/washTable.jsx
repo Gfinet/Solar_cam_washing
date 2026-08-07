@@ -53,11 +53,11 @@ export function WashTable({devInfo, onAction})
 	const fenetreRef = useRef(null);
 	const showMiniWindow  = () => { fenetreRef.current.showModal() };
     const closeMiniWindow = () => { fenetreRef.current.close() };
-	const PutPause = () =>{ console.log("pause"); closeMiniWindow()}
+	const PutPause = () =>{ sendAction({"stop": true}); closeMiniWindow()}
 
 	const sendAction= async (body) => {
 		const token = localStorage.getItem('token');
-		const response = await fetch(`/api/miele/devices/${devId}/actions`, {
+		const response = await fetch(`/api/miele/devices/${devId}/programs`, {
 			method: 'PUT',
 			headers: {
 				'Authorization': `Bearer ${token}`,
@@ -93,7 +93,7 @@ export function WashTable({devInfo, onAction})
 		}
 		console.log("prgm", selectedProgram, "in", delH, "h", delMin)
 		const token = localStorage.getItem('token');
-		const response = await fetch(`/api/miele/devices/${devId}/programs`, {
+		const response = await fetch(`/api/miele/devices/${devId}/actions`, {
 			method: 'PUT',
 			headers: {
 				'Authorization': `Bearer ${token}`,

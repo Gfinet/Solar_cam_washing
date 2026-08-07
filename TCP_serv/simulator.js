@@ -33,7 +33,7 @@ netServer.listen(5020, '0.0.0.0', () => {
 
 // Gestion des erreurs pour éviter que le simulateur crash
 netServer.on('error', (err) => {
-  console.error('Erreur Serveur TCP:', err)
+  server.writeLog(server.logFd["Error.log"], 'Erreur Serveur TCP:', err)
 })
 
 netServer.on('connection', (socket) => {console.log("connexion from", socket.remoteAddress)})

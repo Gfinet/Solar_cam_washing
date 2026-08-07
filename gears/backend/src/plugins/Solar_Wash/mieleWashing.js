@@ -78,17 +78,15 @@ const programs = {
 
 async function savePrgmDb(server, userId, body)
 {
-	// console.log("SAVE",userId, body)
+	server.writeLog(server.logFd["Test.log"], "SAVE",userId, body)
+	if (!body) return;
 	const prgm = programs[body.programId].name;
 	const date = new Date()
 	const timeLeft = programs[body.programId].duration + body.startTime[0]*60 + body.startTime[1];
-	server.sendNotif({
-      title: 'Lavage terminé 🧺',
-      body: `test ${timeLeft}`,
-      icon: '/favicon.png',
-    })
-	console.log("Notif?")
-	// console.log("MOMO", prgm, date)
+	// server.createNotif(1, body.startTime);
+	server.createNotif(1, [0, 5]);
+
+	server.writeLog(server.logFd["Test.log"], "timeleft", timeLeft)
 	await server.prisma.washing_Program.create({data: {type: prgm, time: date, finished : false, authorId : userId }})
 	//TODO NOTIF at body.startTime[0]*60 + body.startTime[1] + temps du prgm
 }

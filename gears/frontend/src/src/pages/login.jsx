@@ -38,7 +38,7 @@ function Login() {
         } 
         catch (error) {
         // Si le back plante
-            console.error("Erreur réseau :", error);
+            server.writeLog(server.logFd["Error.log"], "Erreur réseau :", error);
             alert("Impossible de contacter le serveur.");
         }
     };

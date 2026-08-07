@@ -9,9 +9,11 @@ let uri = "v1/devices/14496865/lean"
 
 export default async function getVal(server)
 {
-    server.get('/sma', async (request, reply)=>
+    server.get('/sma',
+    { preHandler: [server.auth] },
+    async (request, reply)=>
     {
-        console.log("GET /sma")
+        server.writeLog(server.logFd["Request.log"], request.user.name, "GET /sma")
         let data = {};  
         try
         {
@@ -31,7 +33,7 @@ export default async function getVal(server)
         } 
         catch (error) 
         {
-            console.error("Erreur lors de l'appel API :", error);
+            server.writeLog(server.logFd["Error.log"], "Erreur lors de l'appel API :", error);
         }
         return { success: true, message: data }
     })

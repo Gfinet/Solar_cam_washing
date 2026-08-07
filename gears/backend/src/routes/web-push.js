@@ -1,14 +1,43 @@
 import fp from 'fastify-plugin';
+import cron from 'node-cron';
+
+const notifType = {
+	1 : {
+      title: 'Lavage terminé 🧺',
+      body: "N'oubliez pas d'activer Tailscale",
+      icon: '/favicon.png',
+    },
+}
 
 export default fp(async (server) => {
-	// En production, remplacez ce tableau par un appel à votre BDD
-	// let subscriptions = [];
 
-	// console.log("sub", subscriptions)
-	// 1. Route pour que le client enregistre son abonnement
+	server.decorate('hasPendingNotifs', false);
+
+	const pushTask = cron.schedule("* * * * *", async () => {
+		if (!server.hasPendingNotifs) return;
+		const notifs = await server.prisma.pushNotif.findMany({where : {sendAt : {lte : new Date()}}})
+		for (const one of notifs)
+		{
+			await server.sendNotif(notifType[one.type])
+			await server.prisma.pushNotif.delete({where :{id : one.id}})
+			const prgms = await server.prisma.washing_Program.findMany({where :{time : {lte : one.createdAt}}})
+			for (const program of prgms)
+			{
+				await server.prisma.washing_Program.upsert({
+					where : { id : program.id},
+					update : { finished : true}
+				})
+			}
+		}
+		const check = await server.prisma.pushNotif.findMany();
+		if (check.length == 0) server.hasPendingNotifs = false;
+	}, {scheduled: true, timezone: "Europe/Paris"})
+	pushTask.start()
+
 	server.post('/subscribe',
 	{ preHandler: [server.auth] },
 	async (request, reply) => {
+		server.writeLog(server.logFd["Request.log"], "POST /subscribe (Push)")
 		const subscription = request.body;
 		const userId = request.user.id;
 		
@@ -37,6 +66,22 @@ export default fp(async (server) => {
 		return reply.code(201).send({ success: true, message: 'Abonné avec succès !' });
 	});
 
+	server.decorate('createNotif', async (type, delai) => {
+		server.hasPendingNotifs = true;
+		const Now = new Date();
+		const nextDate = new Date()
+		nextDate.setHours(nextDate.getHours() + delai[0]);
+    	nextDate.setMinutes(nextDate.getMinutes() + delai[1]);
+		await server.prisma.pushNotif.create({
+			data : {
+				createdAt : Now,
+				sendAt : nextDate,
+				type : type
+			}
+
+		})
+	})
+
 	// 2. Fonction réutilisable pour envoyer un Push (décorée sur l'instance Fastify)
 	server.decorate('sendNotif', async (payloadData) => {
 		// console.log("SEND NOTIF", payloadData)
@@ -62,7 +107,7 @@ export default fp(async (server) => {
                         where: { id: subi.id }
                     });
                 } else {
-                    console.error('Erreur Push:', err);
+                    server.writeLog(server.logFd["Error.log"], 'Erreur Push:', err);
                 }
             }
         });
