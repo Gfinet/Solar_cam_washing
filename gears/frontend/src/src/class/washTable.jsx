@@ -1,4 +1,5 @@
 import { NumberStepper } from "./numberStepper";
+import MyMotionDiv from "./myMotionDiv";
 import { useState, useRef} from 'react'
 import { greenButton, redButton } from "../models/styles";
 import { useEffect } from "react";
@@ -159,13 +160,13 @@ export function WashTable({devInfo, onAction})
 
 	switch (machineMode) {
 		case 1:// Off/Arret
-			return (<>
+			return (<MyMotionDiv key="off" style={Row}>
 				<h2 style={txt}>Machine Eteinte</h2>
 				<button style={{...greenButton, height:'10%', width:'100%'}} onClick={turnOn}>Allumer</button>
 				<button style={{...redButton, height:'10%', width:'100%'}} onClick={turnOff}>Eteindre</button>
-			</>);
+			</MyMotionDiv>);
 		case 2://On
-			return (<>
+			return (<MyMotionDiv key="on" style={Row}>
 				<div style={Row}>
 					<h2 style={txt}>Choisir un programme:</h2>
 					<select id="program-select" value={selectedProgram} onChange={changeProgram} style={selectStyle}>
@@ -198,16 +199,17 @@ export function WashTable({devInfo, onAction})
 					onClick={setProgram}
 					>Confirmer</button>
 				</div>
-			</>);
+			</MyMotionDiv>);
 		case 4: //Waiting to start
-			return (
+			return (<MyMotionDiv key="wait" style={Row}>
 				<div style={Row}>
 					<h2 style={txt}>Temps avant lancement:</h2>
 					<h2 style={txt}>{state.startTime[0]}h{state.startTime[1]}</h2>
 				</div>
+			</MyMotionDiv>
 			);
 		case 5: //Running
-			return (<>
+			return (<MyMotionDiv key="run" style={Row}>
 				<div style={Row}>
                   <h2 style={txt}>Programme en cours:</h2>
                   <h2 style={txt}>{state?.ProgramID?.value_localized
@@ -232,7 +234,7 @@ export function WashTable({devInfo, onAction})
 						</div>
 					</dialog>
 				</div>
-			</>);
+			</MyMotionDiv>);
 		// case X:
 		// 	return ();
 		default:

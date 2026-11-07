@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2026-11-07T23:12:47.051174+00:00","last_reported":"2026-11-07T23:12:47.051174+00:00","last_updated":"2026-11-07T23:12:47.051174+00:00","context":{"id":"01M6W4JCEB22363GYPYTC5DYM0","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": null
+    },
+    {
+      "state": {"entity_id":"event.backup_automatic_backup","state":"unknown","attributes":{"event_types":["completed","failed","in_progress"],"event_type":null,"friendly_name":"Backup Sauvegarde automatique"},"last_changed":"2026-11-07T23:12:47.061813+00:00","last_reported":"2026-11-07T23:12:47.061813+00:00","last_updated":"2026-11-07T23:12:47.061813+00:00","context":{"id":"01M6W4JCEN9PF9ZCTJC9DZXNBE","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "last_event_type": null,
+        "last_event_attributes": null
+      },
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "b2588deff6beb4a39d1b9dd0c4dc550d"
+    },
+    {
+      "state": {"entity_id":"person.gfinet","state":"unknown","attributes":{"editable":true,"id":"gfinet","device_trackers":[],"in_zones":[],"user_id":"270ff625b8d94fbbbab9a3c58b82ac8a","friendly_name":"Gfinet"},"last_changed":"2026-11-07T23:12:47.250517+00:00","last_reported":"2026-11-07T23:12:54.446333+00:00","last_updated":"2026-11-07T23:12:54.446333+00:00","context":{"id":"01M6W4JKNEQM7PJMDYYZ638N6J","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "1b7b3481752f5c7bb6cbd72f5782626d"
+    },
+    {
+      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2026-11-07T23:12:47.951041+00:00","last_reported":"2026-11-07T23:12:47.951041+00:00","last_updated":"2026-11-07T23:12:47.951041+00:00","context":{"id":"01M6W4JDAF9RGWA9YA8TC34FPH","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "28d8beddd64a09d473e1f70c0c590bdb"
+    },
+    {
+      "state": {"entity_id":"button.salon_salon_cam_reboot","state":"unknown","attributes":{"device_class":"restart","friendly_name":"Salon_Cam Reboot"},"last_changed":"2026-11-07T23:12:54.407750+00:00","last_reported":"2026-11-07T23:12:54.407750+00:00","last_updated":"2026-11-07T23:12:54.407750+00:00","context":{"id":"01M6W4JKM7FQ4KVX4S6S2P8YVM","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "1db0f7c67fa800c02d88ad631f2bf6e3"
+    },
+    {
+      "state": {"entity_id":"button.salon_salon_cam_set_system_date_and_time","state":"unknown","attributes":{"friendly_name":"Salon_Cam Set System Date and Time"},"last_changed":"2026-11-07T23:12:54.408679+00:00","last_reported":"2026-11-07T23:12:54.408679+00:00","last_updated":"2026-11-07T23:12:54.408679+00:00","context":{"id":"01M6W4JKM8Q0QZ2828PR0C9H8C","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "0230f72c6310f5d7b36ef2545304e758"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.salon_salon_cam_motion_region_detection","state":"on","attributes":{"device_class":"motion","friendly_name":"Salon_Cam Motion Region Detection"},"last_changed":"2026-11-07T23:12:54.410303+00:00","last_reported":"2026-11-07T23:12:54.410303+00:00","last_updated":"2026-11-07T23:12:54.410303+00:00","context":{"id":"01M6W4JKMA1EQQ389NYTGMAYZ3","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "a93680c4fc4f9c3bdd101bc19df47f58"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.salon_salon_cam_image_too_dark","state":"on","attributes":{"device_class":"problem","friendly_name":"Salon_Cam Image Too Dark"},"last_changed":"2026-11-07T23:12:54.410413+00:00","last_reported":"2026-11-07T23:12:54.410413+00:00","last_updated":"2026-11-07T23:12:54.410413+00:00","context":{"id":"01M6W4JKMAEV6VBDWN3EVWWWW7","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "c80de21b43da5bcb5665a232f65fbd21"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.salon_salon_cam_image_too_blurry","state":"on","attributes":{"device_class":"problem","friendly_name":"Salon_Cam Image Too Blurry"},"last_changed":"2026-11-07T23:12:54.410495+00:00","last_reported":"2026-11-07T23:12:54.410495+00:00","last_updated":"2026-11-07T23:12:54.410495+00:00","context":{"id":"01M6W4JKMACN5XQSWMM2QKR27W","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2026-11-07T23:14:09.513929+00:00",
+      "entity_registry_id": "08e480a99debd75717885222b8aeab16"
+    }
+  ]
+}

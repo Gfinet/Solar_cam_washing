@@ -45,7 +45,7 @@ const runCli = (subcommand, extraArgs = []) => {
 
 // Parse la sortie texte en objet
 const parseStatus = (raw) => {
-  console.log("raw", raw)
+  // console.log("raw", raw)
   const result = {};
   for (const line of raw.split('\n')) {
     const match = line.match(/^\s{2}(\w+)\s+=\s+(.+)$/);
