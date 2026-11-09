@@ -1,5 +1,16 @@
 services:
 
+
+    cloudflare:
+        image: cloudflare/cloudflared:latest
+        container_name: cloudflare
+        restart: unless-stopped
+        env_file:
+            - .env
+        command: tunnel run --token ${CLOUD_TOK}
+        networks:
+            - Home_net
+
     homeassistant:
         image: ghcr.io/home-assistant/home-assistant:stable
         container_name: homeassistant
@@ -12,24 +23,25 @@ services:
         environment:
             - TZ=Europe/Paris
         networks:
-            - Solar_Cam
+            - Home_net
 
-    # nginx:
-    #     build:
-    #         context: gears/nginx/.
-    #         dockerfile: Dockerfile
-    #     container_name: nginx
-    #     image: nginx_t:0.0.1 
-    #     restart: on-failure
-    #     # network_mode: "service:tailscale"
-    #     ports:
-    #         - "80:80"
-    #         - "443:443"
-    #     networks:
-    #         - Solar_Cam
-    #     depends_on:
-    #         - backend
-    #         - frontend
+    nginx:
+        build:
+            context: gears/nginx/.
+            dockerfile: Dockerfile
+        container_name: nginx
+        image: nginx_t:0.0.1 
+        restart: on-failure
+        # network_mode: "service:tailscale"
+        ports:
+            - "8080:80"
+            - "4443:443"
+        networks:
+            - Home_net
+            - Solar_Cam
+        depends_on:
+            - backend
+            - frontend
 
     backend:
         build: 
@@ -46,15 +58,15 @@ services:
         image:  backend
         networks:
             - Solar_Cam
-        ports:
-            - "3000:3000"
-            - "5555:5555"
+        # ports:
+        #     - "3000:3000"
+        #     - "5555:5555"
         depends_on:
             - db
             - frontend
         restart: on-failure
-        # expose:
-        #     - "3000"
+        expose:
+            - "3000"
 
     frontend:
         build: 
@@ -69,11 +81,11 @@ services:
         image:  frontend
         networks:
             - Solar_Cam
-        ports:
-            - "5173:5173" 
+        # ports:
+        #     - "5173:5173" 
         restart: on-failure
-        # expose:
-        #     - "5173"
+        expose:
+            - "5173"
 
     db:
         build:
@@ -88,8 +100,10 @@ services:
             - POSTGRES_DB=db
         networks:
             - Solar_Cam
-        ports:
-            - "5432:5432"
+        expose:
+            - "5432"
+        # ports:
+        #     - "5432:5432"
         restart: always
 
     # tailscale:
@@ -106,16 +120,6 @@ services:
     #     networks:
     #         - Solar_Cam
     #     restart: unless-stopped
-
-    cloudflare:
-        image: cloudflare/cloudflared:latest
-        container_name: cloudflare
-        restart: unless-stopped
-        env_file:
-            - .env
-        command: tunnel run --token ${CLOUD_TOK}
-        networks:
-            - Solar_Cam
         
     
     go2rtc:
@@ -128,11 +132,16 @@ services:
             - gears/go2rtc/.env
         volumes:
             - ./gears/go2rtc/go2rtc.yaml:/config/go2rtc.yaml
-        ports:
-            - "1984:1984"
+        expose:
+            - "1984"
+        # ports:
+            # - "1984:1984"
+            # - "8555:8555/udp"
         restart: always
     
 
 networks:
+    Home_net:
+        driver: bridge
     Solar_Cam:
         driver: bridge

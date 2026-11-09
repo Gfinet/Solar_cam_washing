@@ -1,8 +1,10 @@
 webrtc:
   listen: ":8555"
   candidates:
-    - 100.86.53.87
+    - 127.0.0.1
+    # - 100.86.53.87
     - lan
+    - stun:8555
 
 api:
   listen: ":1984"
@@ -16,5 +18,5 @@ streams:
     # - "isapi://${USER}:${GARAGE_CODE}@${GARAGE_IP}:${PORT}/"
 
   salon:
-    - "onvif://${USER}:${SALON_CODE}@${SALON_IP}:${SIMI_PORT}?subtype=PROFILE_20047"
+    - "onvif://${USER}:${SALON_CODE}@${SALON_IP}:${SIM_PORT}"
     # - "rtsp://${SIM_USER}:${SALON_CODE}@${SALON_IP}:${PORT}/live/ch0"

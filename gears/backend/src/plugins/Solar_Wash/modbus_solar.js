@@ -77,12 +77,13 @@ export default async function modbusPlugin(server)
             server.writeLogs(["Error"], 'Erreur lors du fetch solaire:', error);
         } 
     }
-    const task = cron.schedule('*/5 * * * *', async () => {
-        try {
-            fetchSolarData(server).catch(err => server.writeLogs(["Error"], 'Fetch solaire échoué:', err.cause.message));
-        } catch (error) {
-			server.writeLogs(["Server", "Cron"], `Erreur lors de l'exécution du CRON : ${err.message}`)
-	}})
+    // While HA handle modbus, Solar_Cams dont need it
+    // const task = cron.schedule('*/5 * * * *', async () => {
+    //     try {
+    //         fetchSolarData(server).catch(err => server.writeLogs(["Error"], 'Fetch solaire échoué:', err.cause.message));
+    //     } catch (error) {
+	// 		server.writeLogs(["Server", "Cron"], `Erreur lors de l'exécution du CRON : ${err.message}`)
+	// }})
     server.addHook('onClose', (instance, done) => {
         task.stop();
         done();

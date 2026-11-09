@@ -8,9 +8,9 @@ import '../../App.css'
 
 function Cams()
 {
-    const streamGarage  = "/go2rtc/webrtc.html?src=garage&mode=ws";
-    const streamSonette = "/go2rtc/stream.html?src=sonette&mode=ws";
-    const streamSalon = "/go2rtc/stream.html?src=salon&mode=webrtc";
+    const streamGarage  = "/go2rtc/stream.html?src=garage&mode=mse";
+    const streamSonette = "/go2rtc/stream.html?src=sonette&mode=mse";
+    const streamSalon = "/go2rtc/stream.html?src=salon&mode=mse";
     const {goToDash} = AppNavigation();
 
     const fenetreRef = useRef(null);

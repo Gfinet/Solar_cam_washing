@@ -12,6 +12,9 @@ gears/fontend/package-lock.json
 
 gears/db/data/
 gears/nginx/crt/*
+
+gears/backend/src/logs/
+
 .env
 */.env
 */*/.env
@@ -19,20 +22,7 @@ gears/go2rtc/.env
 
 ffmpeg_serv
 
+gears/tailscale/
+
 # Home Assistant
-gears/homeassitant/config/home-assistant_v2.db
-gears/homeassitant/config/home-assistant.log
-gears/homeassitant/config/home-assistant.log.1
-gears/homeassitant/config/.cache/
-gears/homeassitant/config/.cloud/
-gears/homeassitant/config/.ha_run.lock
-gears/homeassitant/config/secrets.yaml
-gears/homeassitant/config/.storage/auth
-gears/homeassitant/config/.storage/auth_provider.homeassistant
-gears/homeassitant/config/.storage/http.auth
-gears/homeassitant/config/.storage/http
-gears/homeassitant/config/tts/
-gears/homeassitant/config/.storage/core.analytics
-gears/homeassitant/config/.storage/core.uuid
-gears/homeassitant/config/.storage/onboarding
-gears/homeassitant/config/.storage/person
+gears/homeassitant/config/*
